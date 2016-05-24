@@ -1,75 +1,44 @@
 import java.io.File;
-import java.io.IOException;
 
-import org.bukkit.configuration.file.YamlConfiguration;
+import com.pciot.terraterma.API.Utils.Saver.Saver;
 
-public class ChatConfig {
+public class ChatConfig extends Saver {
 
-	private File file;
-	private YamlConfiguration yamlConfiguration;
-	
-	public ChatConfig (String path) {
-		
-		file = new File(path);
-		
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public ChatConfig(String path) {
+		super(new File(path));
+		if (!getConfig().isConfigurationSection(ConfigSections.CHAT_FORMAT.getPath())) {
+			set(ConfigSections.CHAT_FORMAT.getDefaultValue(), ConfigSections.CHAT_FORMAT.getPath());
 		}
+		save();
+	}
 
-		yamlConfiguration = YamlConfiguration.loadConfiguration(file);
+	public String getFormat() {
+		return get(String.class, ConfigSections.CHAT_FORMAT.getPath());
+	}
 
-		if (!yamlConfiguration.isConfigurationSection(ConfigSections.CHAT_FORMAT.getPath())) {
-			yamlConfiguration.set(ConfigSections.CHAT_FORMAT.getPath(), ConfigSections.CHAT_FORMAT.getDefaultValue());
-		}
-		
-		saveConfiguration();
+	public void setFormat(String format) {
+		set(format, ConfigSections.CHAT_FORMAT.getPath());
 	}
-	
-	public String getFormat () {
-		return yamlConfiguration.getString(ConfigSections.CHAT_FORMAT.getPath());
-	}
-	
-	public void setFormat (String format) {
-		yamlConfiguration.set(ConfigSections.CHAT_FORMAT.getPath(), format);
-	}
-	
-	public File getFile () {
-		return file;
-	}
-	
-	public YamlConfiguration getYamlConfiguration () {
-		return yamlConfiguration;
-	}
-	
-	public void saveConfiguration () {
-		try {
-			yamlConfiguration.save(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 }
 
 enum ConfigSections {
-	CHAT_FORMAT ("chat.format", "%world% %player%");
-	
+	CHAT_FORMAT("chat.format", "%world% %player%");
+
 	private String path;
 	private Object defaultValue;
-	
-	private ConfigSections (String path, Object defaultValue) {
+
+	private ConfigSections(String path, Object defaultValue) {
 		this.path = path;
 		this.defaultValue = defaultValue;
 	}
-	
+
 	public String getPath() {
 		return path;
 	}
-	
-	public Object getDefaultValue () {
+
+	public Object getDefaultValue() {
 		return defaultValue;
 	}
-			
+
 }
