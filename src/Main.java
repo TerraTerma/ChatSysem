@@ -1,31 +1,71 @@
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.pciot.terraterma.API.Utils.Saver.Saver;
 
 public class Main extends JavaPlugin {
 
-	public static final String VERSION = "1.0";
+	private String configPath;
+	
+	private static String name;
+	private static String version;
 	
 	private Logger logger = getLogger();
 	
 	@Override
 	public void onEnable () {
-
-		boolean hasMultiverse = checkMultiverse();
-		if (!hasMultiverse) logger.info("Couldn't find multiverse.");
 		
-		logger.info(getName() + " " + VERSION + " enabled.");
+		getDataFolder().mkdirs();
+		
+		name = getName();
+		version = getDescription().getVersion();
+		
+		configPath = getDataFolder() + "/config.yml";
+		
+		/*
+		 * Create and load the configuration.
+		 */
+		ChatConfig chatConfig = new ChatConfig(configPath);
+		
+		Saver saver = new Saver(chatConfig.getFile());
+		
+		String format = saver.get(String.class, "chat", "format");
+		
+		ChatFormatter chatFormatter = new ChatFormatter();
+		chatFormatter.setFormat(format);
+		
+		/*
+		 * Attempt to load other necessary plugins.
+		 */
+		Hooker hooker = new Hooker(getServer());
+		
+		if (hooker.attemptMultiverseHook()) {
+			logger.info("Found Multiverse!");
+		}
+		
+		if(hooker.attemptPermissionsHook()) {
+			logger.info("Found Permissions!");
+		}
+		
+		if(hooker.attemptEssentialsHook()) {
+			logger.info("Found Essentials!");
+		}
+		
+		/*
+		 * Register events.
+		 */
+		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
+		
+		logger.info(name + " " + version + " enabled.");
 	}
 	
 	@Override
 	public void onDisable () {
-		logger.info(getName() + " " + VERSION + " disabled.");
+		logger.info(name + " " + version + " disabled.");
 	}
 	
 	@Override
@@ -38,17 +78,9 @@ public class Main extends JavaPlugin {
 		return false;
 	}
 	
-	private boolean checkMultiverse () {
-		final String name = "Multiverse";
-		Server server = getServer();
-		PluginManager pluginManager = server.getPluginManager();
-		Plugin plugin = pluginManager.getPlugin(name);
-		return (plugin != null && plugin.isEnabled());
-	}
-	
 	public String getHelpText () {
 		StringBuilder builder = new StringBuilder();
-		builder.append(getName() + " " + VERSION);
+		builder.append(getName() + " " + version);
 		
 		//TODO finish help
 		
@@ -57,6 +89,14 @@ public class Main extends JavaPlugin {
 	
 	public String colorText (String text) {
 		return ChatColor.translateAlternateColorCodes('&', text);
+	}
+	
+	public static String getPluginName () {
+		return name;
+	}
+	
+	public static String getPluginVersion () {
+		return version;
 	}
 	
 }

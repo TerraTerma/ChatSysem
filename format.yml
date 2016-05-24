@@ -1,0 +1,2 @@
+chat:
+  format: "[%world%] %player%"

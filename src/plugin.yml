@@ -1,0 +1,8 @@
+main: Main
+name: TTChatSystem
+loadbefore: [Core, Multiverse-Core]
+version: 1.0
+commands:
+  chatsystem:
+    description: Main ChatSystem command.
+    aliases: cs
