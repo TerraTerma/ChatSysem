@@ -5,8 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.pciot.terraterma.API.Utils.Saver.Saver;
-
 public class Main extends JavaPlugin {
 
 	private String configPath;
@@ -31,12 +29,8 @@ public class Main extends JavaPlugin {
 		 */
 		ChatConfig chatConfig = new ChatConfig(configPath);
 		
-		Saver saver = new Saver(chatConfig.getFile());
-		
-		String format = saver.get(String.class, "chat", "format");
-		
 		ChatFormatter chatFormatter = new ChatFormatter();
-		chatFormatter.setFormat(format);
+		chatFormatter.setFormat(chatConfig.getFormat());
 		
 		/*
 		 * Attempt to load other necessary plugins.

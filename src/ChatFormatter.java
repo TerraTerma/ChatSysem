@@ -5,7 +5,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatFormatter implements Listener {
 
-	private String format = "%world% %player%";
+	private String format;
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
