@@ -6,17 +6,21 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 public class ChatFormatter implements Listener {
 
 	private String format;
-
+	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
-
+		
 		Player player = event.getPlayer();
-		format.replaceAll("%player%", player.getDisplayName());
-		format.replaceAll("%world%", player.getWorld().getName());
+		String playerName = event.getPlayer().getDisplayName();
+		String worldName = player.getWorld().getName();
+		
+		format.replaceAll("%player%", playerName);
+		format.replaceAll("%world%", worldName);
+		
 		event.setFormat(format);
 	}
-
-	public void setFormat(String format) {
+	
+	public void setFormat (String format) {
 		this.format = format;
 	}
 

@@ -8,75 +8,86 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 
 	private String configPath;
-
+	
 	private static String name;
 	private static String version;
-
+	
 	private Logger logger = getLogger();
-	private static Main MAIN;
-
+	
 	@Override
-	public void onEnable() {
-		MAIN = this;
+	public void onEnable () {		
 		name = getName();
 		version = getDescription().getVersion();
+		
 		configPath = getDataFolder() + "/config.yml";
-		/* Create and load the configuration. */
+		
+		/*
+		 * Create and load the configuration.
+		 */
 		ChatConfig chatConfig = new ChatConfig(configPath);
+		
 		ChatFormatter chatFormatter = new ChatFormatter();
 		chatFormatter.setFormat(chatConfig.getFormat());
-		/* Attempt to load other necessary plugins. */
-		Hooker hooker = new Hooker();
+		
+		/*
+		 * Attempt to load other necessary plugins.
+		 */
+		Hooker hooker = new Hooker(getServer());
+		
 		if (hooker.attemptMultiverseHook()) {
 			logger.info("Found Multiverse!");
 		}
-		if (hooker.attemptPermissionsHook()) {
+		
+		if(hooker.attemptPermissionsHook()) {
 			logger.info("Found Permissions!");
 		}
-		if (hooker.attemptEssentialsHook()) {
+		
+		if(hooker.attemptEssentialsHook()) {
 			logger.info("Found Essentials!");
 		}
-		/* Register events. */
+		
+		/*
+		 * Register events.
+		 */
 		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
+		
 		logger.info(name + " " + version + " enabled.");
 	}
-
+	
 	@Override
-	public void onDisable() {
+	public void onDisable () {
 		logger.info(name + " " + version + " disabled.");
 	}
-
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		
 		if (label.equalsIgnoreCase("chatsystem") || label.equalsIgnoreCase("cs")) {
-
+			
 		}
+		
 		return false;
 	}
-
-	public String getHelpText() {
+	
+	public String getHelpText () {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getName() + " " + version);
-
-		// TODO finish help
-
+		
+		//TODO finish help
+		
 		return builder.toString();
 	}
-
-	public String colorText(String text) {
+	
+	public String colorText (String text) {
 		return ChatColor.translateAlternateColorCodes('&', text);
 	}
-
-	public static String getPluginName() {
+	
+	public static String getPluginName () {
 		return name;
 	}
-
-	public static String getPluginVersion() {
-		return version;
-	}
 	
-	public static Main getPlugin(){
-		return MAIN;
+	public static String getPluginVersion () {
+		return version;
 	}
 
 }
