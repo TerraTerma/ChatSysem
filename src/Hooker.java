@@ -3,7 +3,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 public class Hooker {
-	
+
 	private PluginManager pluginManager;
 	
 	public Hooker (Server server) {
@@ -27,5 +27,5 @@ public class Hooker {
 		if (plugin != null && plugin.isEnabled()) return true;
 		else return false;
 	}
-	
+
 }

@@ -15,10 +15,7 @@ public class Main extends JavaPlugin {
 	private Logger logger = getLogger();
 	
 	@Override
-	public void onEnable () {
-		
-		getDataFolder().mkdirs();
-		
+	public void onEnable () {		
 		name = getName();
 		version = getDescription().getVersion();
 		
@@ -92,5 +89,5 @@ public class Main extends JavaPlugin {
 	public static String getPluginVersion () {
 		return version;
 	}
-	
+
 }

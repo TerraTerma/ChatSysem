@@ -23,5 +23,5 @@ public class ChatFormatter implements Listener {
 	public void setFormat (String format) {
 		this.format = format;
 	}
-	
+
 }
