@@ -13,13 +13,17 @@ public class ChatFormatter implements Listener {
 		Player player = event.getPlayer();
 		String playerName = event.getPlayer().getDisplayName();
 		String worldName = player.getWorld().getName();
-		
+
 		format.replaceAll("%player%", playerName);
 		format.replaceAll("%world%", worldName);
-		
+
 		event.setFormat(format);
 	}
 	
+	/**
+	 * Set the format of chat messages.
+	 * @param format String representation of the chat format.
+	 */
 	public void setFormat (String format) {
 		this.format = format;
 	}

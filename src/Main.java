@@ -69,23 +69,27 @@ public class Main extends JavaPlugin {
 		return false;
 	}
 	
-	public String getHelpText () {
-		StringBuilder builder = new StringBuilder();
-		builder.append(getName() + " " + version);
-		
-		//TODO finish help
-		
-		return builder.toString();
-	}
-	
+	/**
+	 * Color a string of text using color codes.
+	 * @param text The text to color.
+	 * @return String of colored text.
+	 */
 	public String colorText (String text) {
 		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 	
+	/**
+	 * Get the name of the plugin.
+	 * @return
+	 */
 	public static String getPluginName () {
 		return name;
 	}
 	
+	/**
+	 * Get current version of the plugin.
+	 * @return
+	 */
 	public static String getPluginVersion () {
 		return version;
 	}
