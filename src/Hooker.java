@@ -6,6 +6,10 @@ public class Hooker {
 
 	private PluginManager pluginManager;
 	
+	private static boolean hasMultiverse;
+	private static boolean hasPermissions;
+	private static boolean hasEssentials;
+	
 	/**
 	 * Used to check if other plugins are available for instantiation.
 	 * @param server
@@ -19,6 +23,7 @@ public class Hooker {
 	 * @return
 	 */
 	public boolean attemptMultiverseHook () {
+		hasMultiverse = true;
 		return isPresent("Multiverse");
 	}
 	
@@ -27,6 +32,7 @@ public class Hooker {
 	 * @return
 	 */
 	public boolean attemptPermissionsHook () {
+		hasPermissions = true;
 		return isPresent("Permissions");
 	}
 	
@@ -35,7 +41,20 @@ public class Hooker {
 	 * @return
 	 */
 	public boolean attemptEssentialsHook () {
+		hasEssentials = true;
 		return isPresent("Essentials");
+	}
+	
+	public static boolean hasMultiverse () {
+		return hasMultiverse;
+	}
+	
+	public static boolean hasPermissions () {
+		return hasPermissions;
+	}
+	
+	public static boolean hasEssentials () {
+		return hasEssentials;
 	}
 	
 	private boolean isPresent (String pluginName) {

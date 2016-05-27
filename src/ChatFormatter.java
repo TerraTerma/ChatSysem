@@ -11,13 +11,15 @@ public class ChatFormatter implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
 		Player player = event.getPlayer();
-		String playerName = event.getPlayer().getDisplayName();
+		String playerName = event.getPlayer().getName();
 		String worldName = player.getWorld().getName();
+		String message = event.getMessage();
+		
+		String newFormat = format.replaceAll("%player%", playerName);
+		newFormat = newFormat.replaceAll("%world%", worldName);
+		newFormat = newFormat.replaceAll("%message%", message);
 
-		format.replaceAll("%player%", playerName);
-		format.replaceAll("%world%", worldName);
-
-		event.setFormat(format);
+		event.setFormat(newFormat);
 	}
 	
 	/**

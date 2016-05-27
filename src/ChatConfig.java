@@ -1,9 +1,13 @@
 import java.io.File;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import com.pciot.terraterma.API.Utils.Saver.Saver;
 
 public class ChatConfig extends Saver {
 
+	private YamlConfiguration config;
+	
 	/**
 	 * The ChatSystem plugin configuration class that handles
 	 * configuration functions such as saving and loading values.
@@ -12,8 +16,12 @@ public class ChatConfig extends Saver {
 	public ChatConfig(String path) {
 		super(new File(path));
 		
-		if (!getConfig().isConfigurationSection(ConfigSections.CHAT_FORMAT.getPath())) {
-			set(ConfigSections.CHAT_FORMAT.getDefaultValue(), ConfigSections.CHAT_FORMAT.getPath());
+		config = getConfig();
+		
+		for (ConfigSection configSection : ConfigSection.values()) {
+			if (!config.isConfigurationSection(configSection.getPath())) {
+				set(configSection.getDefaultValue(), configSection.getPath());
+			}
 		}
 		
 		save();
@@ -24,7 +32,7 @@ public class ChatConfig extends Saver {
 	 * @return String representation of the chat format.
 	 */
 	public String getFormat() {
-		return get(String.class, ConfigSections.CHAT_FORMAT.getPath());
+		return config.getString(ConfigSection.CHAT_FORMAT.getPath());
 	}
 
 	/**
@@ -32,18 +40,42 @@ public class ChatConfig extends Saver {
 	 * @param format String representation of the chat format.
 	 */
 	public void setFormat(String format) {
-		set(format, ConfigSections.CHAT_FORMAT.getPath());
+		config.set(ConfigSection.CHAT_FORMAT.getPath(), format);
+	}
+	
+	/**
+	 * Get the mention prefix appended to the players name
+	 * when mentioned in chat.
+	 * @return Prefix string.
+	 */
+	public String getMentionPrefix () {
+		return config.getString(ConfigSection.MENTION_PREFIX.getPath());
+	}
+	
+	/**
+	 * Set the mention prefix appended to the playes name
+	 * when mentioned in chat.
+	 * @param prefix The prefix to use.
+	 */
+	public void setMentionPrefix (String prefix) {
+		config.set(ConfigSection.MENTION_PREFIX.getPath(), prefix);
 	}
 
 }
 
-enum ConfigSections {
-	CHAT_FORMAT("chat.format", "%world% %player%");
+enum ConfigSection {
+	CHAT_FORMAT("chat.format", "&7(%world%) &e%player%&f:& d%message%"),
+	MENTION_PREFIX("mention.format", "@");
 
 	private String path;
 	private Object defaultValue;
 
-	private ConfigSections(String path, Object defaultValue) {
+	/**
+	 * The configuration sections and default values used in the chat configuration file.
+	 * @param path
+	 * @param defaultValue
+	 */
+	ConfigSection(String path, Object defaultValue) {
 		this.path = path;
 		this.defaultValue = defaultValue;
 	}
@@ -63,5 +95,4 @@ enum ConfigSections {
 	public Object getDefaultValue() {
 		return defaultValue;
 	}
-
 }

@@ -1,14 +1,13 @@
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	private String configPath;
-	
 	private static String name;
 	private static String version;
 	
@@ -19,15 +18,16 @@ public class Main extends JavaPlugin {
 		name = getName();
 		version = getDescription().getVersion();
 		
-		configPath = getDataFolder() + "/config.yml";
-		
 		/*
 		 * Create and load the configuration.
 		 */
-		ChatConfig chatConfig = new ChatConfig(configPath);
+		ChatConfig chatConfig = new ChatConfig(getDataFolder() + "/config.yml");
 		
 		ChatFormatter chatFormatter = new ChatFormatter();
 		chatFormatter.setFormat(chatConfig.getFormat());
+		
+		MentionEvent mentionEvent = new MentionEvent();
+		mentionEvent.setPrefix(chatConfig.getMentionPrefix());
 		
 		/*
 		 * Attempt to load other necessary plugins.
@@ -49,7 +49,11 @@ public class Main extends JavaPlugin {
 		/*
 		 * Register events.
 		 */
-		getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
+		Server server = getServer();
+		PluginManager manager = server.getPluginManager();
+		
+		manager.registerEvents(chatFormatter, this);
+		manager.registerEvents(mentionEvent, this);
 		
 		logger.info(name + " " + version + " enabled.");
 	}
@@ -67,15 +71,6 @@ public class Main extends JavaPlugin {
 		}
 		
 		return false;
-	}
-	
-	/**
-	 * Color a string of text using color codes.
-	 * @param text The text to color.
-	 * @return String of colored text.
-	 */
-	public String colorText (String text) {
-		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 	
 	/**
