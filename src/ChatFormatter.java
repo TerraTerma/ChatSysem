@@ -5,8 +5,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatFormatter implements Listener {
 
-	private String format;
-	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
@@ -15,19 +13,23 @@ public class ChatFormatter implements Listener {
 		String worldName = player.getWorld().getName();
 		String message = event.getMessage();
 		
-		String newFormat = format.replaceAll("%player%", playerName);
-		newFormat = newFormat.replaceAll("%world%", worldName);
-		newFormat = newFormat.replaceAll("%message%", message);
+		if (!HookerPlugin.MULTIVERSE.isPresent()) return;
+		
+//		MultiverseCore core = Hooker.getMultiverseCore();
+//		MVWorldManager mvwm = core.getMVWorldManager();
+		
+		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
+		
+		String playerColor = (String) ConfigSection.PLAYER_COLOR.getValue();
+		String newFormat = format.replaceAll("%player%", playerColor + playerName);
+		
+		String worldColor = (String) ConfigSection.WORLD_COLOR.getValue();
+		newFormat = newFormat.replaceAll("%world%", worldColor + worldName);
+		
+		String messageColor = (String) ConfigSection.MESSAGE_COLOR.getValue();
+		newFormat = newFormat.replaceAll("%message%", messageColor + message);
 
-		event.setFormat(newFormat);
+		event.setFormat(ChatUtilities.colorText(newFormat));
 	}
 	
-	/**
-	 * Set the format of chat messages.
-	 * @param format String representation of the chat format.
-	 */
-	public void setFormat (String format) {
-		this.format = format;
-	}
-
 }

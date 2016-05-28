@@ -22,27 +22,22 @@ public class Main extends JavaPlugin {
 		 * Create and load the configuration.
 		 */
 		ChatConfig chatConfig = new ChatConfig(getDataFolder() + "/config.yml");
-		
-		ChatFormatter chatFormatter = new ChatFormatter();
-		chatFormatter.setFormat(chatConfig.getFormat());
-		
-		MentionEvent mentionEvent = new MentionEvent();
-		mentionEvent.setPrefix(chatConfig.getMentionPrefix());
+		chatConfig.save();
 		
 		/*
 		 * Attempt to load other necessary plugins.
 		 */
 		Hooker hooker = new Hooker(getServer());
 		
-		if (hooker.attemptMultiverseHook()) {
+		if (hooker.attemptHook(HookerPlugin.MULTIVERSE)) {
 			logger.info("Found Multiverse!");
 		}
 		
-		if(hooker.attemptPermissionsHook()) {
+		if(hooker.attemptHook(HookerPlugin.PERMISSIONS)) {
 			logger.info("Found Permissions!");
 		}
 		
-		if(hooker.attemptEssentialsHook()) {
+		if(hooker.attemptHook(HookerPlugin.ESSENTIALS)) {
 			logger.info("Found Essentials!");
 		}
 		
@@ -52,8 +47,8 @@ public class Main extends JavaPlugin {
 		Server server = getServer();
 		PluginManager manager = server.getPluginManager();
 		
-		manager.registerEvents(chatFormatter, this);
-		manager.registerEvents(mentionEvent, this);
+		manager.registerEvents(new MentionEvent(), this);
+		manager.registerEvents(new ChatFormatter(), this);
 		
 		logger.info(name + " " + version + " enabled.");
 	}

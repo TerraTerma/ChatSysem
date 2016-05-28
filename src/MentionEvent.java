@@ -8,14 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class MentionEvent implements Listener {
+public class MentionEvent extends ChatFormatter implements Listener {
 
-	private String prefix;
-	
-	public void setPrefix (String prefix) {
-		this.prefix = prefix;
-	}
-	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
@@ -30,10 +24,18 @@ public class MentionEvent implements Listener {
 		String playerName = player.getName();
 		
 		Location playerLoc = player.getLocation();
-		player.playSound(playerLoc, Sound.BLOCK_ANVIL_BREAK, 1, 1);
+		player.playSound(playerLoc, Sound.ENTITY_COW_HURT, 0.75f, 1f);
 		
-		String newMessage = message.replace(playerName, ChatUtilities.colorText(prefix + playerName));
-		event.setMessage(newMessage);
+		/*
+		 * To set the message after the mention back
+		 * to the original message color.
+		 */
+
+		String messageColor = (String) ConfigSection.MESSAGE_COLOR.getValue();
+		String mentionPrefix = (String) ConfigSection.MENTION_PREFIX.getValue();
+		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
+		
+		event.setMessage(ChatUtilities.colorText(newMessage));
 	}
 	
 }
