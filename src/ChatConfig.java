@@ -3,18 +3,18 @@ import java.io.IOException;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class ChatConfig {
+public abstract class ChatConfig {
 
-	private YamlConfiguration config;
+	private static YamlConfiguration config;
 	
-	private File file;
+	private static File file;
 	
 	/**
 	 * The ChatSystem plugin configuration class that handles
 	 * configuration functions such as saving and loading values.
 	 * @param path
 	 */
-	public ChatConfig(String path) {
+	public static void load (String path) {
 		file = new File(path);
 		
 		try {
@@ -34,13 +34,13 @@ public class ChatConfig {
 		save();
 
 	}
-
-	public void set (ConfigSection section, Object value) {
+	
+	private static void set (ConfigSection section, Object value) {
 		config.set(section.getPath(), value);
 		section.setValue(value);
 	}
 
-	public void save () {
+	private static void save () {
 		try {
 			config.save(file);
 		} catch (IOException e) {
