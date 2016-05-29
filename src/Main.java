@@ -57,8 +57,6 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable () {
 		
-		chatConfig.save();
-		
 		logger.info(name + " " + version + " disabled.");
 	}
 	
@@ -66,7 +64,8 @@ public class Main extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
 		if (label.equalsIgnoreCase("chatsystem") || label.equalsIgnoreCase("cs")) {
-			
+			sender.sendMessage(ChatUtilities.colorText("&e" + name + " &d" + version));
+			return true;
 		}
 		
 		return false;

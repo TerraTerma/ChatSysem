@@ -24,15 +24,17 @@ public class MentionEvent extends ChatFormatter implements Listener {
 		String playerName = player.getName();
 		
 		Location playerLoc = player.getLocation();
-		player.playSound(playerLoc, Sound.ENTITY_COW_HURT, 0.75f, 1f);
+		String soundName = ConfigSection.MENTION_SOUND.getValue();
+		Sound sound = Sound.valueOf(soundName);
+		player.playSound(playerLoc, sound, 0.75f, 1f);
 		
 		/*
 		 * To set the message after the mention back
 		 * to the original message color.
 		 */
 
-		String messageColor = (String) ConfigSection.MESSAGE_COLOR.getValue();
-		String mentionPrefix = (String) ConfigSection.MENTION_PREFIX.getValue();
+		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
+		String mentionPrefix = ConfigSection.MENTION_PREFIX.getValue();
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		
 		event.setMessage(ChatUtilities.colorText(newMessage));

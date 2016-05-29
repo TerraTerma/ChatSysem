@@ -23,17 +23,17 @@ public class ChatFormatter implements Listener {
 		
 		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
 		
-		String playerColor = (String) ConfigSection.PLAYER_COLOR.getValue();
+		String playerColor = ConfigSection.PLAYER_COLOR.getValue();
 		String newFormat = format.replaceAll("%player%", playerColor + playerName);
 		
 		MultiverseCore mvCore = Hooker.getMultiverseCore();
 		MVWorldManager manager = mvCore.getMVWorldManager();
 		MultiverseWorld world = manager.getMVWorld(player.getWorld());
 		
-		String worldColor = (String) ConfigSection.WORLD_COLOR.getValue();
+		String worldColor = ConfigSection.WORLD_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%world%", worldColor + world.getAlias());
 		
-		String messageColor = (String) ConfigSection.MESSAGE_COLOR.getValue();
+		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%message%", messageColor + message);
 		
 		PermissionUser permUser = PermissionsEx.getUser(player);
