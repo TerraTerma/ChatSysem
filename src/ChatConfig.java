@@ -30,6 +30,8 @@ public class ChatConfig {
 				configSection.setValue(config.get(configSection.getPath()));
 			else set(configSection, configSection.getDefaultValue());
 		}
+		
+		save();
 
 	}
 
@@ -63,7 +65,7 @@ public class ChatConfig {
 }
 
 enum ConfigSection {
-	CHAT_FORMAT("chat.format", "(%world%) %player%: %message%"),
+	CHAT_FORMAT("chat.format", "(%world%) %prefix% %player%: %message%"),
 	WORLD_COLOR("chat.world-color", "&7"),
 	PLAYER_COLOR("chat.player-color", "&e"),
 	MESSAGE_COLOR("chat.message-color", "&d"),

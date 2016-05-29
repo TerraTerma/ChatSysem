@@ -13,6 +13,8 @@ public class Main extends JavaPlugin {
 	
 	private Logger logger = getLogger();
 	
+	private ChatConfig chatConfig;
+	
 	@Override
 	public void onEnable () {		
 		name = getName();
@@ -21,8 +23,7 @@ public class Main extends JavaPlugin {
 		/*
 		 * Create and load the configuration.
 		 */
-		ChatConfig chatConfig = new ChatConfig(getDataFolder() + "/config.yml");
-		chatConfig.save();
+		chatConfig = new ChatConfig(getDataFolder() + "/config.yml");
 		
 		/*
 		 * Attempt to load other necessary plugins.
@@ -55,6 +56,9 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onDisable () {
+		
+		chatConfig.save();
+		
 		logger.info(name + " " + version + " disabled.");
 	}
 	

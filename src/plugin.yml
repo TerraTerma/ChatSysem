@@ -1,6 +1,6 @@
 main: Main
 name: TTChatSystem
-loadbefore: [Core, Multiverse-Core]
+depend: [Multiverse-Core, PermissionsEx, Core]
 version: 1.0
 commands:
   chatsystem:
