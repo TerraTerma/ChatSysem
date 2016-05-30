@@ -9,6 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
+
 public class MentionEvent extends ChatFormatter implements Listener {
 
 	@EventHandler
@@ -28,14 +31,16 @@ public class MentionEvent extends ChatFormatter implements Listener {
 		String soundName = ConfigSection.MENTION_SOUND.getValue();
 		Sound sound = Sound.valueOf(soundName);
 		player.playSound(playerLoc, sound, 0.75f, 1f);
-		
-		/*
-		 * To set the message after the mention back
-		 * to the original message color.
-		 */
 
 		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
-		String mentionPrefix = ConfigSection.MENTION_PREFIX.getValue();
+		
+		Essentials essentials = Hooker.getEssentials();
+		User user = essentials.getUser(player);
+		
+		String mentionPrefix;
+		if (user.isAfk()) mentionPrefix = ConfigSection.MENTION_AFK_PREFIX.getValue();
+		else mentionPrefix = ConfigSection.MENTION_PREFIX.getValue();
+			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		
 		event.setMessage(ChatUtilities.colorText(newMessage));

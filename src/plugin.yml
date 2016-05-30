@@ -1,6 +1,6 @@
 main: main.Main
 name: TTChatSystem
-depend: [Multiverse-Core, PermissionsEx, Core]
+depend: [Essentials, Multiverse-Core, PermissionsEx, Core]
 version: 0.5
 commands:
   chatsystem:

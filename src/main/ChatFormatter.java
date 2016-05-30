@@ -21,9 +21,9 @@ public class ChatFormatter implements Listener {
 		String message = event.getMessage();
 		
 		if (!HookerPlugin.MULTIVERSE.isPresent()) return;
-		
+
 		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
-		
+
 		String playerColor = ConfigSection.PLAYER_COLOR.getValue();
 		String newFormat = format.replaceAll("%player%", playerColor + playerName);
 		

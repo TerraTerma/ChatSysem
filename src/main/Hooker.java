@@ -3,6 +3,7 @@ import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
+import com.earth2me.essentials.Essentials;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -31,7 +32,9 @@ public class Hooker {
 		return (PermissionsEx) getPlugin (HookerPlugin.PERMISSIONS);
 	}
 	
-	//TODO add method for getting essentials plugin
+	public static Essentials getEssentials () {
+		return (Essentials) getPlugin (HookerPlugin.ESSENTIALS);
+	}
 	
 	private boolean isPresent (HookerPlugin hookerPlugin) {
 		Plugin plugin = pluginManager.getPlugin(hookerPlugin.getName());
