@@ -17,7 +17,7 @@ public class ChatFormatter implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
 		Player player = event.getPlayer();
-		String playerName = event.getPlayer().getName();
+		String playerName = event.getPlayer().getDisplayName();
 		String message = event.getMessage();
 		
 		if (!HookerPlugin.MULTIVERSE.isPresent()) return;

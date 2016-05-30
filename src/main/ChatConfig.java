@@ -53,7 +53,7 @@ public abstract class ChatConfig {
 }
 
 enum ConfigSection {
-	CHAT_FORMAT("chat.format", "(%world%) %prefix% %player%: %message%"),
+	CHAT_FORMAT("chat.format", "&8(%world%&8) %prefix% %player%&8: %message%"),
 	WORLD_COLOR("chat.world-color", "&7"),
 	PLAYER_COLOR("chat.player-color", "&e"),
 	MESSAGE_COLOR("chat.message-color", "&d"),
