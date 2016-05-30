@@ -1,3 +1,4 @@
+package main;
 import org.bukkit.ChatColor;
 
 public abstract class ChatUtilities {

@@ -1,3 +1,4 @@
+package main;
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
@@ -5,6 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import games.ChatGameQueue;
+import games.GameUtilities;
+import games.ReactionGame;
 
 public class Main extends JavaPlugin {
 
@@ -22,6 +27,15 @@ public class Main extends JavaPlugin {
 		 * Create and load the configuration.
 		 */
 		ChatConfig.load(getDataFolder() + "/config.yml");
+		
+		/*
+		 * Chat games
+		 */
+		GameUtilities.load(this);
+		
+		ChatGameQueue gameQueue = new ChatGameQueue();
+		gameQueue.addGame(new ReactionGame());
+		gameQueue.start();
 		
 		/*
 		 * Attempt to load other necessary plugins.
@@ -84,5 +98,5 @@ public class Main extends JavaPlugin {
 	public static String getPluginVersion () {
 		return version;
 	}
-
+	
 }
