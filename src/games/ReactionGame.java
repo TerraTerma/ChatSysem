@@ -13,7 +13,7 @@ public class ReactionGame extends ChatGame implements Listener {
 	};
 	
 	public ReactionGame() {
-		super("Reaction", 5);
+		super("Reaction", 2);
 	}
 
 	@Override

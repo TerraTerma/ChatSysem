@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
+
 public class ChatGameQueue {
 
 	private List<ChatGame> chatGames = new ArrayList<>();
@@ -21,8 +23,20 @@ public class ChatGameQueue {
 					return;
 				}
 
-				chatGames.get(random.nextInt(chatGames.size())).start();
-
+				ChatGame chatGame = chatGames.get
+						(random.nextInt(chatGames.size()));
+				
+				int playersOnline = Bukkit.getOnlinePlayers().size();
+				
+				if (playersOnline >= chatGame.getMinimumPlayers())
+					chatGame.start();
+				else {
+					Bukkit.broadcastMessage
+					("There aren't enough players for " + chatGame.getName());
+					
+					return;
+				}
+				
 				System.out.println("Started a new chat game.");
 
 			}
