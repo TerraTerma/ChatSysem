@@ -7,9 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import games.ChatGameQueue;
-import games.GameUtilities;
-import games.ReactionGame;
+import chatgame.ChatGameQueue;
+import chatgame.GameUtilities;
+import chatgame.games.ReactionGame;
 
 public class Main extends JavaPlugin {
 
@@ -19,6 +19,8 @@ public class Main extends JavaPlugin {
 	private static PluginManager manager;
 	
 	private Logger logger = getLogger();
+	
+	private ChatGameQueue chatGameQueue;
 	
 	@Override
 	public void onEnable () {		
@@ -41,32 +43,25 @@ public class Main extends JavaPlugin {
 		
 		manager.registerEvents(reaction, this);
 		
-		ChatGameQueue gameQueue = new ChatGameQueue();
-		gameQueue.addGame(reaction);
-		gameQueue.start();
+		chatGameQueue = new ChatGameQueue();
+		chatGameQueue.addGame(reaction);
+		chatGameQueue.start();
 		
 		/*
 		 * Attempt to load other necessary plugins.
 		 */
 		Hooker hooker = new Hooker(getServer());
 		
-		if (hooker.attemptHook(HookerPlugin.MULTIVERSE)) {
-			logger.info("Found Multiverse!");
-		}
-		
-		if(hooker.attemptHook(HookerPlugin.PERMISSIONS)) {
-			logger.info("Found Permissions!");
-		}
-		
-		if(hooker.attemptHook(HookerPlugin.ESSENTIALS)) {
-			logger.info("Found Essentials!");
-		}
+		if (hooker.attemptHook(HookerPlugin.MULTIVERSE)
+			&& hooker.attemptHook(HookerPlugin.PERMISSIONS)
+			&& hooker.attemptHook(HookerPlugin.ESSENTIALS));
+		else setEnabled(false);
 		
 		/*
 		 * Register events.
 		 */
 		manager.registerEvents(new MentionEvent(), this);
-		manager.registerEvents(new ChatFormatter(), this);
+		manager.registerEvents(new ChatEvent(), this);
 		
 		logger.info(name + " " + version + " enabled.");
 	}
@@ -80,9 +75,8 @@ public class Main extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
-		if (label.equalsIgnoreCase("chatsystem") || label.equalsIgnoreCase("cs")) {
-			sender.sendMessage(ChatUtilities.colorText("&e" + name + " &d" + version));
-			return true;
+		if (label.equalsIgnoreCase("chatsystem")) {
+			sender.sendMessage(name + " " + version);
 		}
 		
 		return false;

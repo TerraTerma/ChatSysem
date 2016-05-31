@@ -1,4 +1,4 @@
-package games;
+package chatgame;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitScheduler;

@@ -4,41 +4,47 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import com.onarandombox.MultiverseCore.MultiverseCore;
-import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
-import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class ChatFormatter implements Listener {
+public class ChatEvent implements Listener {
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
 		Player player = event.getPlayer();
-		String playerName = event.getPlayer().getDisplayName();
+		
+		String nickname = Hooker.getEssentials()
+				.getUser(player)
+				.getNickname();
+		
+		boolean hasNickname = nickname == null;
+		
+		String playerName;
+		
+		if (hasNickname) playerName = nickname;
+		else playerName = player.getDisplayName();
+		
 		String message = event.getMessage();
 		
-		if (!HookerPlugin.MULTIVERSE.isPresent()) return;
-
 		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
 
-		String playerColor = ConfigSection.PLAYER_COLOR.getValue();
-		String newFormat = format.replaceAll("%player%", playerColor + playerName);
+		String newFormat = format.replaceAll("%player%", playerName);
 		
-		MultiverseCore mvCore = Hooker.getMultiverseCore();
-		MVWorldManager manager = mvCore.getMVWorldManager();
-		MultiverseWorld world = manager.getMVWorld(player.getWorld());
-		
+		MultiverseWorld world = Hooker.getMultiverseCore()
+				.getMVWorldManager()
+				.getMVWorld(player.getWorld());
+				
 		String worldColor = ConfigSection.WORLD_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%world%", worldColor + world.getAlias());
 		
 		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%message%", messageColor + message);
 		
-		PermissionUser permUser = PermissionsEx.getUser(player);
-		String prefix = permUser.getPrefix();
+		String prefix = PermissionsEx.getUser(player)
+				.getPrefix();
+		
 		newFormat = newFormat.replace("%prefix%", prefix);
 
 		event.setFormat(ChatUtilities.colorText(newFormat));
