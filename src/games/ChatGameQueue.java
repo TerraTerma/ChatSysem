@@ -32,7 +32,6 @@ public class ChatGameQueue {
 	}
 	
 	public void addGame (ChatGame game) {
-		GameUtilities.registerEvent(game);
 		chatGames.add(game);
 		System.out.println("Registered events for " + game.getName());
 	}

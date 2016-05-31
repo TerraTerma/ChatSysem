@@ -12,7 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 
-public class MentionEvent extends ChatFormatter implements Listener {
+public class MentionEvent implements Listener {
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
@@ -38,8 +38,8 @@ public class MentionEvent extends ChatFormatter implements Listener {
 		User user = essentials.getUser(player);
 		
 		String mentionPrefix;
-		if (user.isAfk()) mentionPrefix = ConfigSection.MENTION_AFK_PREFIX.getValue();
-		else mentionPrefix = ConfigSection.MENTION_PREFIX.getValue();
+		if (user.isAfk()) mentionPrefix = ConfigSection.MENTION_AFK_FORMAT.getValue();
+		else mentionPrefix = ConfigSection.MENTION_FORMAT.getValue();
 			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		

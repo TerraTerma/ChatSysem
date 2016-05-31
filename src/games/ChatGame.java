@@ -1,12 +1,9 @@
 package games;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitTask;
 
-public abstract class ChatGame implements Listener {
+public abstract class ChatGame {
 
 	protected String name = "Chat Game";
 	protected int minPlayers = 2;
@@ -67,14 +64,6 @@ public abstract class ChatGame implements Listener {
 		System.out.println("Called the stop method.");
 	}
 	
-	protected abstract void runEvent (Player player, String message);
-	
-	@EventHandler
-	protected void onPlayerChat (AsyncPlayerChatEvent event) {
-		Player player = event.getPlayer();
-		String message = event.getMessage();
-		player.sendMessage("Went through init method.");
-		runEvent(player, message);
-	}
+	protected abstract void onPlayerChat (AsyncPlayerChatEvent event);
 	
 }

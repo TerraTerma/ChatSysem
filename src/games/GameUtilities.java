@@ -24,8 +24,4 @@ public abstract class GameUtilities {
 		scheduler.cancelTask(id);
 	}
 
-	public static void registerEvent (ChatGame game) {
-		main.getServer().getPluginManager().registerEvents(game, main);
-	}
-	
 }

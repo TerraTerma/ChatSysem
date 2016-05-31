@@ -18,12 +18,6 @@ public abstract class ChatConfig {
 	public static void load (String path) {
 		file = new File(path);
 		
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		config = YamlConfiguration.loadConfiguration(file);
 
 		for (ConfigSection configSection : ConfigSection.values()) {
@@ -57,8 +51,8 @@ enum ConfigSection {
 	WORLD_COLOR("chat.world-color", "&7"),
 	PLAYER_COLOR("chat.player-color", "&e"),
 	MESSAGE_COLOR("chat.message-color", "&d"),
-	MENTION_PREFIX("mention.format", "&b&o@"),
-	MENTION_AFK_PREFIX("mention.afk-prefix", "&3&o@"),
+	MENTION_FORMAT("mention.format", "&b&o@"),
+	MENTION_AFK_FORMAT("mention.afk-prefix", "&3&o@"),
 	MENTION_SOUND("mention.sound", "ENTITY_COW_HURT");
 
 	private String path;

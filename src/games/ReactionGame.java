@@ -1,8 +1,10 @@
 package games;
 
-import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class ReactionGame extends ChatGame {
+public class ReactionGame extends ChatGame implements Listener {
 
 	String[] words = {
 		"testword1",
@@ -15,9 +17,9 @@ public class ReactionGame extends ChatGame {
 	}
 
 	@Override
-	protected void runEvent(Player player, String message) {
-		System.out.println("Went through second method");
-		player.sendMessage("You are playing the " + name + " game!");
+	@EventHandler
+	protected void onPlayerChat(AsyncPlayerChatEvent event) {
+		event.getPlayer().sendMessage("You are in a chat game");
 	}
 	
 }

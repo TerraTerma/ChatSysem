@@ -15,6 +15,8 @@ public class Main extends JavaPlugin {
 
 	private static String name;
 	private static String version;
+	private static Server server;
+	private static PluginManager manager;
 	
 	private Logger logger = getLogger();
 	
@@ -22,6 +24,8 @@ public class Main extends JavaPlugin {
 	public void onEnable () {		
 		name = getName();
 		version = getDescription().getVersion();
+		server = getServer();
+		manager = server.getPluginManager();
 		
 		/*
 		 * Create and load the configuration.
@@ -32,9 +36,13 @@ public class Main extends JavaPlugin {
 		 * Chat games
 		 */
 		GameUtilities.load(this);
+
+		ReactionGame reaction = new ReactionGame ();
+		
+		manager.registerEvents(reaction, this);
 		
 		ChatGameQueue gameQueue = new ChatGameQueue();
-		gameQueue.addGame(new ReactionGame());
+		gameQueue.addGame(reaction);
 		gameQueue.start();
 		
 		/*
@@ -57,9 +65,6 @@ public class Main extends JavaPlugin {
 		/*
 		 * Register events.
 		 */
-		Server server = getServer();
-		PluginManager manager = server.getPluginManager();
-		
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatFormatter(), this);
 		
