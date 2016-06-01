@@ -30,35 +30,16 @@ public class Main extends JavaPlugin {
 		server = getServer();
 		manager = server.getPluginManager();
 		
-		/*
-		 * Create and load the configuration.
-		 */
 		ChatConfig.load(getDataFolder() + "/config.yml");
-		
-		/*
-		 * Attempt to load other necessary plugins.
-		 */
-		Hooker hooker = new Hooker(getServer());
-		
-		if (hooker.attemptHook(HookerPlugin.MULTIVERSE)
-			&& hooker.attemptHook(HookerPlugin.PERMISSIONS)
-			&& hooker.attemptHook(HookerPlugin.ESSENTIALS));
-		else setEnabled(false);
-		
-		/*
-		 * Chat games
-		 */
+		Hooker.load (server);
 		ChatGameHelper.load(this);
 		
 		ReactionGame reaction = new ReactionGame();
 		
 		chatGameQueue = new ChatGameQueue();
 		chatGameQueue.addGame(reaction);
-		chatGameQueue.start();
+		chatGameQueue.startQueue();
 		
-		/*
-		 * Register events.
-		 */
 		ChatGameChatListener chatGameChatListener = new ChatGameChatListener();
 		chatGameChatListener.listenOn(reaction);
 		

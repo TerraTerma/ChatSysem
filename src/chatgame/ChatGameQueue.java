@@ -13,42 +13,31 @@ public class ChatGameQueue {
 
 	private List<ChatGame> chatGames = new ArrayList<>();
 	
-	private final int intermission = 10;
+	private ChatGameIntermission chatGameIntermission;
+	private IntermissionScheduler intermissionScheduler;
+	
+	public ChatGameQueue () {
+		chatGameIntermission = new ChatGameIntermission(this, 300);
+		intermissionScheduler = new IntermissionScheduler(this);
+	}
 
-	public void start() {
-		
-		ChatGameHelper.runTimer (new Runnable() {
-
-			Random random = new Random();
-
-			public void run() {
-
-				if (checkRunningGame()) return;
-
-				ChatGame chatGame = chatGames.get
-						(random.nextInt(chatGames.size()));
-				
-				try {
-					
-					startGame (chatGame);
-					
-				} catch (NotEnoughPlayersException e) {
-					
-					ChatHelper.broadcastRedMessage("There aren't enough players for " + chatGame.getName());
-					
-				}
-				
-			}
-			
-		}, 20 * intermission, 20 * intermission);
-
+	public List<ChatGame> getChatGames () {
+		return chatGames;
+	}
+	
+	public ChatGameIntermission getChatGameIntermission () {
+		return chatGameIntermission;
+	}
+	
+	public void startQueue() {
+		intermissionScheduler.beginMonitor();
 	}
 	
 	public void addGame (ChatGame game) {
 		chatGames.add(game);
 	}
 	
-	public boolean startGame (Class<? extends ChatGame> gameClass) {
+	public boolean forceStartGame (Class<? extends ChatGame> gameClass) {
 		
 		if (checkRunningGame()) return true;
 		
@@ -59,6 +48,7 @@ public class ChatGameQueue {
 		.start();
 		
 		return false;
+		
 	}
 	
 	public void startGame (ChatGame chatGame) throws NotEnoughPlayersException {
@@ -69,6 +59,21 @@ public class ChatGameQueue {
 			throw new NotEnoughPlayersException();
 		
 		chatGame.start();
+	}
+	
+	public void startRandomGame () {
+		
+		Random random = new Random ();
+		
+		ChatGame chatGame = chatGames.get
+				(random.nextInt(chatGames.size()));
+		
+		try {
+			startGame (chatGame);
+		} catch (NotEnoughPlayersException e) {
+			ChatHelper.broadcastRedMessage("There aren't enough players for " + chatGame.getName());
+		}
+		
 	}
 	
 	public boolean checkRunningGame () {

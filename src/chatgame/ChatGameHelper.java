@@ -16,8 +16,12 @@ public abstract class ChatGameHelper {
 		scheduler = Bukkit.getScheduler();
 	}
 	
-	public static BukkitTask runTimer (Runnable runnable, long start, long interval) {
+	public static BukkitTask runRepeatingTask (Runnable runnable, long start, long interval) {
 		return scheduler.runTaskTimer(main, runnable, start, interval);
+	}
+	
+	public static BukkitTask runDelayedTask (Runnable runnable, long delay) {
+		return scheduler.runTaskLater(main, runnable, delay);
 	}
 	
 	public static void cancelTask (int id) {

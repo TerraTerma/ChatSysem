@@ -38,14 +38,12 @@ public abstract class ChatGame {
 	
 	protected void start () {
 		running = true;
-		gameTask = ChatGameHelper.runTimer(new ChatGameRunnable(this), 20, 20);
+		gameTask = ChatGameHelper.runRepeatingTask(new ChatGameRunnable(this), 20, 20);
 	}
 	
 	protected void stop () {
 		running = false;
 		gameTask.cancel();
-		
-		System.out.println("Called the stop method.");
 	}
 	
 	protected Player player;
@@ -54,8 +52,6 @@ public abstract class ChatGame {
 	protected void onPlayerChat (AsyncPlayerChatEvent event) {
 		player = event.getPlayer();
 		message = event.getMessage();
-		
-		System.out.println("Chat game chat method.");
 	}
 	
 }

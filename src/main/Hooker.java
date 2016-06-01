@@ -16,12 +16,8 @@ public class Hooker {
 	 * Used to check if other plugins are available for instantiation.
 	 * @param server
 	 */
-	public Hooker (Server server) {
+	public static void load (Server server) {
 		pluginManager = server.getPluginManager();
-	}
-	
-	public boolean attemptHook (HookerPlugin hookerPlugin) {
-		return isPresent(hookerPlugin);
 	}
 	
 	public static MultiverseCore getMultiverseCore () {
@@ -36,19 +32,11 @@ public class Hooker {
 		return (Essentials) getPlugin (HookerPlugin.ESSENTIALS);
 	}
 	
-	private boolean isPresent (HookerPlugin hookerPlugin) {
-		Plugin plugin = pluginManager.getPlugin(hookerPlugin.getName());
-		if (plugin != null && plugin.isEnabled())  {
-			hookerPlugin.setPresent(true);
-			return true;
-		}
-		else return false;
-	}
-	
 	private static Plugin getPlugin (HookerPlugin hookerPlugin) {
-		Plugin plugin = pluginManager.getPlugin(hookerPlugin.getName());
-		if (plugin != null && plugin.isEnabled()) return plugin;
-		else return null;
+		Plugin plugin = pluginManager
+				.getPlugin(hookerPlugin.getName());
+		
+		return plugin;
 	}
 
 }
@@ -60,7 +48,6 @@ enum HookerPlugin {
 	ESSENTIALS("Essentials");
 	
 	private String name;
-	private boolean present;
 	
 	HookerPlugin (String name) {
 		this.name = name;
@@ -68,14 +55,6 @@ enum HookerPlugin {
 	
 	public String getName() {
 		return name;
-	}
-	
-	public boolean isPresent () {
-		return present;
-	}
-	
-	public void setPresent (boolean present) {
-		this.present = present;
 	}
 	
 }

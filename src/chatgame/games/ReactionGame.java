@@ -20,7 +20,7 @@ public class ReactionGame extends ChatGame {
 	private ReactionGameConfiguration reactionGameConfiguration;
 	
 	public ReactionGame() {
-		super("Reaction", 1, 60);
+		super("Reaction", 2, 60);
 		
 		reactionGameConfiguration = new ReactionGameConfiguration();
 		
@@ -40,22 +40,22 @@ public class ReactionGame extends ChatGame {
 		
 		currentWord = words.get(randomIndex);
 		
-		ChatHelper.broadcastAquaMessage("Whoever types the word \"" + currentWord + "\" the fastest wins!");
+		ChatHelper.broadcastAquaMessage("Whoever types the word \"" + currentWord + "\" first wins!");
 	}
 	
 	@Override
 	protected void stop () {
 		super.stop();
 		
-		if (!guessed) ChatHelper.broadcastRedMessage("Nobody typed the word \"" + currentWord + "\" in time.");
+		if (!guessed)
+			ChatHelper.broadcastRedMessage("Nobody typed the word \"" + currentWord + "\" in time.");
+		else guessed = false;
 		
 	}
 
 	@Override
 	protected void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
-		
-		System.out.println("ReactionGame chat method.");
 		
 		if (!message.equalsIgnoreCase(currentWord)) return;
 		
