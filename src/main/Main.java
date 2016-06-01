@@ -8,7 +8,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import chatgame.ChatGameQueue;
-import chatgame.GameUtilities;
+import chatgame.ChatGameChatListener;
+import chatgame.ChatGameHelper;
 import chatgame.games.ReactionGame;
 
 public class Main extends JavaPlugin {
@@ -35,19 +36,6 @@ public class Main extends JavaPlugin {
 		ChatConfig.load(getDataFolder() + "/config.yml");
 		
 		/*
-		 * Chat games
-		 */
-		GameUtilities.load(this);
-
-		ReactionGame reaction = new ReactionGame ();
-		
-		manager.registerEvents(reaction, this);
-		
-		chatGameQueue = new ChatGameQueue();
-		chatGameQueue.addGame(reaction);
-		chatGameQueue.start();
-		
-		/*
 		 * Attempt to load other necessary plugins.
 		 */
 		Hooker hooker = new Hooker(getServer());
@@ -58,10 +46,25 @@ public class Main extends JavaPlugin {
 		else setEnabled(false);
 		
 		/*
+		 * Chat games
+		 */
+		ChatGameHelper.load(this);
+		
+		ReactionGame reaction = new ReactionGame();
+		
+		chatGameQueue = new ChatGameQueue();
+		chatGameQueue.addGame(reaction);
+		chatGameQueue.start();
+		
+		/*
 		 * Register events.
 		 */
+		ChatGameChatListener chatGameChatListener = new ChatGameChatListener();
+		chatGameChatListener.listenOn(reaction);
+		
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
+		manager.registerEvents(chatGameChatListener, this);
 		
 		logger.info(name + " " + version + " enabled.");
 	}

@@ -43,7 +43,7 @@ public class MentionEvent implements Listener {
 			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		
-		event.setMessage(ChatUtilities.colorText(newMessage));
+		event.setMessage(ChatHelper.colorText(newMessage));
 	}
 	
 }

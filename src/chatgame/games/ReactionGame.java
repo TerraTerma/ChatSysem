@@ -3,16 +3,16 @@ package chatgame.games;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
 import chatgame.configs.ReactionGameConfiguration;
+import main.ChatHelper;
 
-public class ReactionGame extends ChatGame implements Listener {
+public class ReactionGame extends ChatGame {
 
+	private boolean guessed;
+	
 	private List<String> words;
 	
 	private String currentWord;
@@ -20,7 +20,7 @@ public class ReactionGame extends ChatGame implements Listener {
 	private ReactionGameConfiguration reactionGameConfiguration;
 	
 	public ReactionGame() {
-		super("Reaction", 1, 30);
+		super("Reaction", 1, 60);
 		
 		reactionGameConfiguration = new ReactionGameConfiguration();
 		
@@ -31,6 +31,8 @@ public class ReactionGame extends ChatGame implements Listener {
 	protected void start() {
 		super.start();
 		
+		ChatHelper.broadcastDarkAquaMessage(getName() + ":");
+		
 		int wordListSize = words.size();
 		
 		Random random = new Random();
@@ -38,18 +40,31 @@ public class ReactionGame extends ChatGame implements Listener {
 		
 		currentWord = words.get(randomIndex);
 		
-		Bukkit.broadcastMessage("Say the word " + currentWord + " as fast as you can!");
+		ChatHelper.broadcastAquaMessage("Whoever types the word \"" + currentWord + "\" the fastest wins!");
+	}
+	
+	@Override
+	protected void stop () {
+		super.stop();
+		
+		if (!guessed) ChatHelper.broadcastRedMessage("Nobody typed the word \"" + currentWord + "\" in time.");
+		
 	}
 
-
-	@Override @EventHandler
+	@Override
 	protected void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
 		
-		if (message.equalsIgnoreCase(currentWord)) {
-			Bukkit.broadcastMessage(player.getName() + " won the reaction!");
+		System.out.println("ReactionGame chat method.");
+		
+		if (!message.equalsIgnoreCase(currentWord)) return;
+		
+			ChatHelper.broadcastGreenMessage(player.getName() + " won the reaction!");
+			
+			guessed = true;
+			
 			stop();
-		}
+		
 	}
 	
 }

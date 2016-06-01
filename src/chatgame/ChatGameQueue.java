@@ -6,6 +6,9 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 
+import exceptions.NotEnoughPlayersException;
+import main.ChatHelper;
+
 public class ChatGameQueue {
 
 	private List<ChatGame> chatGames = new ArrayList<>();
@@ -14,33 +17,27 @@ public class ChatGameQueue {
 
 	public void start() {
 		
-		GameUtilities.runTimer (new Runnable() {
+		ChatGameHelper.runTimer (new Runnable() {
 
 			Random random = new Random();
 
 			public void run() {
 
-				if (chatGames.stream().anyMatch(e -> e.isRunning())) {
-					System.out.println("There is already a chat game running.");
-					return;
-				}
+				if (checkRunningGame()) return;
 
 				ChatGame chatGame = chatGames.get
 						(random.nextInt(chatGames.size()));
 				
-				int playersOnline = Bukkit.getOnlinePlayers().size();
-				
-				if (playersOnline >= chatGame.getMinimumPlayers())
-					chatGame.start();
-				else {
-					Bukkit.broadcastMessage
-					("There aren't enough players for " + chatGame.getName());
+				try {
 					
-					return;
+					startGame (chatGame);
+					
+				} catch (NotEnoughPlayersException e) {
+					
+					ChatHelper.broadcastRedMessage("There aren't enough players for " + chatGame.getName());
+					
 				}
 				
-				System.out.println("Started a new chat game.");
-
 			}
 			
 		}, 20 * intermission, 20 * intermission);
@@ -49,7 +46,6 @@ public class ChatGameQueue {
 	
 	public void addGame (ChatGame game) {
 		chatGames.add(game);
-		System.out.println("Registered events for " + game.getName());
 	}
 	
 	public boolean startGame (Class<? extends ChatGame> gameClass) {
@@ -63,6 +59,16 @@ public class ChatGameQueue {
 		.start();
 		
 		return false;
+	}
+	
+	public void startGame (ChatGame chatGame) throws NotEnoughPlayersException {
+		
+		int playersOnline = Bukkit.getOnlinePlayers().size();
+	
+		if (playersOnline < chatGame.getMinimumPlayers())
+			throw new NotEnoughPlayersException();
+		
+		chatGame.start();
 	}
 	
 	public boolean checkRunningGame () {

@@ -14,23 +14,26 @@ public class ChatEvent implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		
 		Player player = event.getPlayer();
+		String message = event.getMessage();
+		String playerName;
 		
-		String nickname = Hooker.getEssentials()
+		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
+		String newFormat;
+		
+		playerName = Hooker.getEssentials()
 				.getUser(player)
 				.getNickname();
 		
-		boolean hasNickname = nickname == null;
-		
-		String playerName;
-		
-		if (hasNickname) playerName = nickname;
-		else playerName = player.getDisplayName();
-		
-		String message = event.getMessage();
-		
-		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
-
-		String newFormat = format.replaceAll("%player%", playerName);
+		try {
+			
+			newFormat = format.replaceAll("%player%", playerName);
+			
+		} catch (NullPointerException e) {
+			
+			playerName = player.getDisplayName();
+			newFormat = format.replaceAll("%player%", playerName);
+			
+		}
 		
 		MultiverseWorld world = Hooker.getMultiverseCore()
 				.getMVWorldManager()
@@ -47,7 +50,7 @@ public class ChatEvent implements Listener {
 		
 		newFormat = newFormat.replace("%prefix%", prefix);
 
-		event.setFormat(ChatUtilities.colorText(newFormat));
+		event.setFormat(ChatHelper.colorText(newFormat));
 	}
 	
 }

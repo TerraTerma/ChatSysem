@@ -6,13 +6,13 @@ import org.bukkit.scheduler.BukkitTask;
 
 import main.Main;
 
-public abstract class GameUtilities {
+public abstract class ChatGameHelper {
 
 	private static Main main;
 	private static BukkitScheduler scheduler;
 	
 	public static void load (Main main) {
-		GameUtilities.main = main;
+		ChatGameHelper.main = main;
 		scheduler = Bukkit.getScheduler();
 	}
 	
