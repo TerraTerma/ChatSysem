@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 
+import chatgame.games.ChatGame;
 import exceptions.NotEnoughPlayersException;
 import main.ChatHelper;
 
@@ -17,7 +18,7 @@ public class ChatGameQueue {
 	private IntermissionScheduler intermissionScheduler;
 	
 	public ChatGameQueue () {
-		chatGameIntermission = new ChatGameIntermission(this, 300);
+		chatGameIntermission = new ChatGameIntermission(this, 10);
 		intermissionScheduler = new IntermissionScheduler(this);
 	}
 

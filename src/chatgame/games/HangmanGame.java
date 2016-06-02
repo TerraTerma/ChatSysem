@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import chatgame.ChatGame;
+import main.ChatHelper;
 
 public class HangmanGame extends ChatGame implements Listener {
 
@@ -15,10 +15,19 @@ public class HangmanGame extends ChatGame implements Listener {
 	@Override
 	public void start () {
 		super.start();
+		
+		ChatHelper.broadcastYellowMessage(getName() + ":");
+	}
+	
+	@Override
+	public void stop () {
+		super.stop();
+		
+		ChatHelper.broadcastYellowMessage(getName() + " has ended.");
 	}
 
 	@Override @EventHandler
-	protected void onPlayerChat(AsyncPlayerChatEvent event) {
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
 	}
 

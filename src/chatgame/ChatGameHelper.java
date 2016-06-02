@@ -24,8 +24,4 @@ public abstract class ChatGameHelper {
 		return scheduler.runTaskLater(main, runnable, delay);
 	}
 	
-	public static void cancelTask (int id) {
-		scheduler.cancelTask(id);
-	}
-
 }

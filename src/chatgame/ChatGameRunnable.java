@@ -1,5 +1,7 @@
 package chatgame;
 
+import chatgame.games.ChatGame;
+
 public class ChatGameRunnable implements Runnable {
 
 	private ChatGame chatGame;
@@ -7,7 +9,7 @@ public class ChatGameRunnable implements Runnable {
 	private int runTime = 0;
 	private int maxTime = 0;
 	
-	protected ChatGameRunnable (ChatGame chatGame) {
+	public ChatGameRunnable (ChatGame chatGame) {
 		this.chatGame = chatGame;
 		this.maxTime = chatGame.getMaximumTime();
 	}

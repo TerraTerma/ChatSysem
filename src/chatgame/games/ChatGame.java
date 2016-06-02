@@ -1,10 +1,14 @@
-package chatgame;
+package chatgame.games;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitTask;
 
-public abstract class ChatGame {
+import chatgame.ChatGameHelper;
+import chatgame.ChatGameRunnable;
+
+public abstract class ChatGame implements Listener {
 
 	private String name;
 	
@@ -20,36 +24,36 @@ public abstract class ChatGame {
 		this.maxTime = maxTime;
 	}
 	
-	protected String getName () {
+	public String getName () {
 		return name;
 	}
 	
-	protected int getMinimumPlayers () {
+	public int getMinimumPlayers () {
 		return minPlayers;
 	}
 	
-	protected int getMaximumTime () {
+	public int getMaximumTime () {
 		return maxTime;
 	}
 	
-	protected boolean isRunning () {
+	public boolean isRunning () {
 		return running;
 	}
 	
-	protected void start () {
+	public void start () {
 		running = true;
 		gameTask = ChatGameHelper.runRepeatingTask(new ChatGameRunnable(this), 20, 20);
 	}
 	
-	protected void stop () {
+	public void stop () {
 		running = false;
 		gameTask.cancel();
 	}
 	
-	protected Player player;
-	protected String message;
+	public Player player;
+	public String message;
 	
-	protected void onPlayerChat (AsyncPlayerChatEvent event) {
+	public void onPlayerChat (AsyncPlayerChatEvent event) {
 		player = event.getPlayer();
 		message = event.getMessage();
 	}

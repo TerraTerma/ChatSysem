@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import chatgame.games.ChatGame;
+
 public class ChatGameChatListener implements Listener {
 
 	private List<ChatGame> chatGames = new ArrayList<>();

@@ -5,7 +5,6 @@ import java.util.Random;
 
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import chatgame.ChatGame;
 import chatgame.configs.ReactionGameConfiguration;
 import main.ChatHelper;
 
@@ -20,7 +19,7 @@ public class ReactionGame extends ChatGame {
 	private ReactionGameConfiguration reactionGameConfiguration;
 	
 	public ReactionGame() {
-		super("Reaction", 2, 60);
+		super("Reaction", 1, 60);
 		
 		reactionGameConfiguration = new ReactionGameConfiguration();
 		
@@ -28,7 +27,7 @@ public class ReactionGame extends ChatGame {
 	}
 	
 	@Override
-	protected void start() {
+	public void start() {
 		super.start();
 		
 		ChatHelper.broadcastDarkAquaMessage(getName() + ":");
@@ -44,7 +43,7 @@ public class ReactionGame extends ChatGame {
 	}
 	
 	@Override
-	protected void stop () {
+	public void stop () {
 		super.stop();
 		
 		if (!guessed)
@@ -54,7 +53,7 @@ public class ReactionGame extends ChatGame {
 	}
 
 	@Override
-	protected void onPlayerChat(AsyncPlayerChatEvent event) {
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
 		
 		if (!message.equalsIgnoreCase(currentWord)) return;
