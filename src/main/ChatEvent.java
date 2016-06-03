@@ -7,6 +7,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
+import utilities.ChatHelper;
 
 public class ChatEvent implements Listener {
 

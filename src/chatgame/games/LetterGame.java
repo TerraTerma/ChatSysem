@@ -5,7 +5,7 @@ import java.util.Random;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
-import main.ChatHelper;
+import utilities.ChatHelper;
 
 public class LetterGame extends ChatGame {
 

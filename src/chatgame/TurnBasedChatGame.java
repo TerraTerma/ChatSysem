@@ -6,7 +6,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import main.ChatHelper;
+import utilities.ChatHelper;
 
 public class TurnBasedChatGame extends ChatGame {
 
@@ -28,6 +28,7 @@ public class TurnBasedChatGame extends ChatGame {
 	
 	@Override
 	public void stop () {
+		super.stop();
 		joinedPlayers.clear();
 	}
 	
@@ -43,6 +44,9 @@ public class TurnBasedChatGame extends ChatGame {
 		joinedPlayers.stream()
 		.forEach(e -> e.sendMessage(message));
 	}
+	
+	//TODO Make this into an event handler.
+	public void onPlayerJoin () {}
 	
 	@Override
 	public void onPlayerChat(AsyncPlayerChatEvent event) {

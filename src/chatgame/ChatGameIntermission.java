@@ -2,6 +2,8 @@ package chatgame;
 
 import org.bukkit.scheduler.BukkitTask;
 
+import utilities.ChatGameHelper;
+
 public class ChatGameIntermission implements Runnable {
 
 	private final int intermission;

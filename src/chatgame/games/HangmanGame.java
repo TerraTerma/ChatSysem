@@ -1,13 +1,15 @@
 package chatgame.games;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.TurnBasedChatGame;
 import chatgame.configs.HangmanGameConfiguration;
-import main.ChatHelper;
+import utilities.ChatHelper;
+import utilities.ListHelper;
 
 public class HangmanGame extends TurnBasedChatGame {
 
@@ -16,7 +18,7 @@ public class HangmanGame extends TurnBasedChatGame {
 	
 	private char[] phraseChars;
 	private char[] correctChars;
-	private char[] guessedChars;
+	private List<Character> guessedChars;
 	
 	private final int tries = 5;
 	private int currentTries;
@@ -37,13 +39,13 @@ public class HangmanGame extends TurnBasedChatGame {
 		
 		currentTries = tries;
 		
-		currentPhrase = phrases.get
-				((int) Math.random() * phrases.size());
+		currentPhrase = ListHelper.selectRandom(phrases);
 
 		int length = currentPhrase.length();
 		
 		phraseChars = new char[length];
 		correctChars = new char[length];
+		guessedChars = new ArrayList<>();
 		currentPhrase.getChars(0, length, phraseChars, 0);
 		
 		System.out.println("The current phrase is " + currentPhrase);
@@ -57,6 +59,21 @@ public class HangmanGame extends TurnBasedChatGame {
 		
 		ChatHelper.broadcastPinkMessage(getName() + " has ended.");
 	}
+	
+	public char[] getCharBoard () {
+		for (int i = 0; i < phraseChars.length; i++)
+			if (guessedChars.contains(phraseChars[i]))
+				correctChars[i] = phraseChars[i];
+			else if (phraseChars[i] == ' ')
+				correctChars[i] = ' ';
+			else if (correctChars[i] == 0)
+				correctChars[i] = '_';
+		return correctChars;
+	}
+	
+	public String getStringBoard () {
+		return String.valueOf(getCharBoard());
+	}
 
 	@Override
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
@@ -64,22 +81,23 @@ public class HangmanGame extends TurnBasedChatGame {
 	
 		//TODO Finish hangman game.
 		
-		char typedChar = message.charAt(0);
+		char[] messageChars = new char[message.length()];
+		message.getChars(0, messageChars.length, messageChars, 0);
 		
-		for (int i = 0; i < phraseChars.length; i++) {
-			if (typedChar == phraseChars[i]) {
-				correctChars[i] = typedChar;
-			}
+		if (messageChars.length == 1)
+			guessedChars.add(messageChars[0]);
+		
+		if (Arrays.equals(getCharBoard(), phraseChars)) {
+			sendAll (player.getName() + " guessed the final letter.");
+			stop();
+		}
+			
+		if (Arrays.equals(messageChars, phraseChars)) {
+			sendAll (player.getName() + " guessed the word right!");
+			stop();
 		}
 		
-		StringBuilder builder = new StringBuilder();
-		
-		for (int i = 0; i < correctChars.length; i++)
-			if (correctChars[i] != 0)
-				builder.append(correctChars[i]);
-			else builder.append("_");
-		
-		sendAll (builder.toString());
+		sendAll (getStringBoard());
 	}
 
 }

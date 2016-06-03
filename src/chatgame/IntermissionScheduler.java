@@ -2,6 +2,8 @@ package chatgame;
 
 import java.util.List;
 
+import utilities.ChatGameHelper;
+
 public class IntermissionScheduler implements Runnable {
 	
 	private ChatGameQueue chatGameQueue;

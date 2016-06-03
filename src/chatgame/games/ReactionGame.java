@@ -7,7 +7,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
 import chatgame.configs.ReactionGameConfiguration;
-import main.ChatHelper;
+import utilities.ChatHelper;
+import utilities.ListHelper;
 
 public class ReactionGame extends ChatGame {
 
@@ -34,6 +35,8 @@ public class ReactionGame extends ChatGame {
 		ChatHelper.broadcastDarkAquaMessage(getName() + ":");
 		
 		int wordListSize = words.size();
+		
+		currentWord = ListHelper.selectRandom(words);
 		
 		Random random = new Random();
 		int randomIndex = random.nextInt(wordListSize);

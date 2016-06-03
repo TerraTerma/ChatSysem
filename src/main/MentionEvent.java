@@ -12,6 +12,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 
+import utilities.ChatHelper;
+
 public class MentionEvent implements Listener {
 
 	@EventHandler

@@ -7,7 +7,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 
 import exceptions.NotEnoughPlayersException;
-import main.ChatHelper;
+import utilities.ChatHelper;
 
 public class ChatGameQueue {
 

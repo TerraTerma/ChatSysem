@@ -7,12 +7,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import chatgame.ChatGameHelper;
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
 import chatgame.games.HangmanGame;
 import chatgame.games.LetterGame;
 import chatgame.games.ReactionGame;
+import utilities.ChatGameHelper;
 
 public class Main extends JavaPlugin {
 
