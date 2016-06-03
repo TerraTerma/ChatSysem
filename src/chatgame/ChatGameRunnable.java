@@ -1,7 +1,5 @@
 package chatgame;
 
-import chatgame.games.ChatGame;
-
 public class ChatGameRunnable implements Runnable {
 
 	private ChatGame chatGame;

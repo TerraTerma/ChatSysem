@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import chatgame.ChatGame;
 import main.ChatHelper;
 
 public class LetterGame extends ChatGame {
@@ -15,7 +16,7 @@ public class LetterGame extends ChatGame {
 			"abcdefghijklmnopqrstuvwxyz";
 	
 	public LetterGame() {
-		super("Guess The Letter", 2, 60);
+		super("Guess The Letter", 1, 60);
 	}
 
 	@Override

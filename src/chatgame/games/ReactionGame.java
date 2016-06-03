@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import chatgame.ChatGame;
 import chatgame.configs.ReactionGameConfiguration;
 import main.ChatHelper;
 

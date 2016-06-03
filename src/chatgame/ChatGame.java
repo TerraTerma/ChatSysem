@@ -1,12 +1,9 @@
-package chatgame.games;
+package chatgame;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitTask;
-
-import chatgame.ChatGameHelper;
-import chatgame.ChatGameRunnable;
 
 public abstract class ChatGame implements Listener {
 

@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import chatgame.ChatGameHelper;
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
+import chatgame.games.HangmanGame;
 import chatgame.games.LetterGame;
 import chatgame.games.ReactionGame;
 
@@ -36,7 +37,7 @@ public class Main extends JavaPlugin {
 		ChatGameRegistry chatGameRegistry = new ChatGameRegistry(this);
 		chatGameRegistry.registerGame(new ReactionGame());
 		chatGameRegistry.registerGame(new LetterGame());
-		chatGameRegistry.close();
+		chatGameRegistry.registerGame(new HangmanGame());
 
 		ChatGameQueue chatGameQueue = new ChatGameQueue();
 		chatGameRegistry.fillQueue(chatGameQueue);

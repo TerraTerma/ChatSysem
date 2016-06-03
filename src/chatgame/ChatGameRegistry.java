@@ -3,10 +3,10 @@ package chatgame;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import chatgame.games.ChatGame;
 import main.Main;
 
 public class ChatGameRegistry {
@@ -33,16 +33,16 @@ public class ChatGameRegistry {
 		
 		chatGames.add(chatGame);
 		chatGameChatListener.listenOn(chatGame);
+		
+		HandlerList.unregisterAll(chatGameChatListener);
+		
+		registerEvents (chatGameChatListener, main);
 	}
 	
 	private void registerEvents (Listener listener, JavaPlugin javaPlugin) {
 		main.getServer()
 		.getPluginManager()
 		.registerEvents(listener, javaPlugin);
-	}
-	
-	public void close () {
-		registerEvents(chatGameChatListener, main);
 	}
 	
 }

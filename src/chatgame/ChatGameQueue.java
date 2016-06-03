@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 
-import chatgame.games.ChatGame;
 import exceptions.NotEnoughPlayersException;
 import main.ChatHelper;
 
