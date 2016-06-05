@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.TurnBasedChatGame;
@@ -88,16 +89,16 @@ public class HangmanGame extends TurnBasedChatGame {
 			guessedChars.add(messageChars[0]);
 		
 		if (Arrays.equals(getCharBoard(), phraseChars)) {
-			sendAll (player.getName() + " guessed the final letter.");
+			sendAll (ChatColor.GREEN, player.getName() + " guessed the final letter.");
 			stop();
 		}
 			
 		if (Arrays.equals(messageChars, phraseChars)) {
-			sendAll (player.getName() + " guessed the word right!");
+			sendAll (ChatColor.GREEN, " guessed the word right!");
 			stop();
 		}
 		
-		sendAll (getStringBoard());
+		sendAll (ChatColor.YELLOW, getStringBoard());
 	}
 
 }

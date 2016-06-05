@@ -3,6 +3,7 @@ package chatgame;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -40,9 +41,9 @@ public class TurnBasedChatGame extends ChatGame {
 				"You joined " + getName());
 	}
 	
-	public void sendAll (String message) {
+	public void sendAll (ChatColor chatColor, String message) {
 		joinedPlayers.stream()
-		.forEach(e -> e.sendMessage(message));
+		.forEach(e -> e.sendMessage(chatColor + message));
 	}
 	
 	//TODO Make this into an event handler.

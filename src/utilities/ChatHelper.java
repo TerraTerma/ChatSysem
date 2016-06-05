@@ -1,4 +1,6 @@
 package utilities;
+import java.util.Collection;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -126,4 +128,75 @@ public abstract class ChatHelper {
 		player.sendMessage(ChatColor.DARK_GRAY + message);
 	}
 	
+	
+	public static void sendGreenMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendGreenMessage(e, message));
+	}
+	
+	public static void sendAquaMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendAquaMessage(e, message));
+	}
+	
+	public static void sendRedMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendRedMessage(e, message));
+	}
+	
+	public static void sendPinkMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendPinkMessage(e, message));
+	}
+	
+	public static void sendYellowMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendYellowMessage(e, message));
+	}
+	
+	public static void sendBlackMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendBlackMessage(e, message));
+	}
+	
+	public static void sendDarkBlueMessage (Collection<Player> player, String  message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkBlueMessage(e, message));
+	}
+	
+	public static void sendDarkGreenMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkGreenMessage(e, message));
+	}
+	
+	public static void sendDarkAquaMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkAquaMessage(e, message));
+	}
+	
+	public static void sendDarkRedMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkRedMessage(e, message));
+	}
+	
+	public static void sendDarkPurpleMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkPurpleMessage(e, message));
+	}
+	
+	public static void sendGoldMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendGoldMessage(e, message));
+	}
+	
+	public static void sendGrayMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendGrayMessage(e, message));
+	}
+	
+	public static void sendDarkGrayMessage (Collection<Player> player, String message) {
+		player.stream()
+		.forEach(e -> ChatHelper.sendDarkGrayMessage(e, message));
+	}
+
 }
