@@ -5,6 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitTask;
 
+import event.ChatGameWinEvent;
+import event.handlers.ChatGameWinHandler;
 import utilities.ChatGameHelper;
 
 public abstract class ChatGame implements Listener {
@@ -16,6 +18,7 @@ public abstract class ChatGame implements Listener {
 	private boolean running;
 	
 	private BukkitTask gameTask;
+	private Player recentWinner;
 	
 	public ChatGame (String name, int minPlayers, int maxTime) {
 		this.name = name;
@@ -35,6 +38,18 @@ public abstract class ChatGame implements Listener {
 		return maxTime;
 	}
 	
+	public Player getRecentWinner () {
+		return recentWinner;
+	}
+	
+	public void setWinner (Player winner) {
+		this.recentWinner = winner;
+		ChatGameWinEvent chatGameWinEvent = new ChatGameWinEvent();
+		chatGameWinEvent.setPlayer(player);
+		chatGameWinEvent.setChatGame(this);
+		ChatGameWinHandler.fireEvent(chatGameWinEvent);
+	}
+	
 	public boolean isRunning () {
 		return running;
 	}
@@ -46,6 +61,7 @@ public abstract class ChatGame implements Listener {
 	
 	public void stop () {
 		running = false;
+		recentWinner = null;
 		gameTask.cancel();
 	}
 	

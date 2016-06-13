@@ -1,4 +1,4 @@
-package main;
+package event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -6,6 +6,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
+import main.ConfigSection;
+import main.Hooker;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
 
@@ -18,7 +20,7 @@ public class ChatEvent implements Listener {
 		String message = event.getMessage();
 		String playerName;
 		
-		String format = (String) ConfigSection.CHAT_FORMAT.getValue();
+		String format = ConfigSection.CHAT_FORMAT.getValue();
 		String newFormat;
 		
 		playerName = Hooker.getEssentials()

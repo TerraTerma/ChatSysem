@@ -1,8 +1,11 @@
 main: main.Main
 name: TTChatSystem
-depend: [Essentials, Multiverse-Core, PermissionsEx]
+depend: [Essentials, Multiverse-Core, PermissionsEx, Reward-API]
 version: 0.7
 commands:
   chatsystem:
     description: Main ChatSystem command.
     aliases: cs
+  cgreward:
+    description: Give yourself a chatgame reward.
+    aliases: cgr

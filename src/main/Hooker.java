@@ -16,7 +16,7 @@ public class Hooker {
 	 * Used to check if other plugins are available for instantiation.
 	 * @param server
 	 */
-	public static void load (Server server) {
+	public Hooker (Server server) {
 		pluginManager = server.getPluginManager();
 	}
 	

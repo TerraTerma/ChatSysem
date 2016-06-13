@@ -55,11 +55,7 @@ public class LetterGame extends ChatGame {
 		if (guessedChar != currentLetter)
 			ChatHelper.sendRedMessage(player, "Nope!");
 		
-		else {
-			ChatHelper.broadcastGreenMessage(player.getName()
-					+ " guessed right!");
-			stop();
-		}
+		else setWinner(player);
 		
 	}
 	

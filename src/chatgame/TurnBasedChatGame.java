@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import utilities.ChatHelper;
 
-public class TurnBasedChatGame extends ChatGame {
+public abstract class TurnBasedChatGame extends ChatGame {
 
 	private List<Player> joinedPlayers;
 	

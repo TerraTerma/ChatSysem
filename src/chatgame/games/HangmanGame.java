@@ -21,8 +21,8 @@ public class HangmanGame extends TurnBasedChatGame {
 	private char[] correctChars;
 	private List<Character> guessedChars;
 	
-	private final int tries = 5;
-	private int currentTries;
+//	private final int tries = 5;
+//	private int currentTries;
 	
 	private HangmanGameConfiguration hangmanGameConfiguration;
 	
@@ -38,7 +38,7 @@ public class HangmanGame extends TurnBasedChatGame {
 	public void start () {
 		super.start();
 		
-		currentTries = tries;
+//		currentTries = tries;
 		
 		currentPhrase = ListHelper.selectRandom(phrases);
 
@@ -52,13 +52,6 @@ public class HangmanGame extends TurnBasedChatGame {
 		System.out.println("The current phrase is " + currentPhrase);
 		
 		ChatHelper.broadcastPinkMessage(getName() + " has started.");
-	}
-	
-	@Override
-	public void stop () {
-		super.stop();
-		
-		ChatHelper.broadcastPinkMessage(getName() + " has ended.");
 	}
 	
 	public char[] getCharBoard () {
@@ -90,12 +83,11 @@ public class HangmanGame extends TurnBasedChatGame {
 		
 		if (Arrays.equals(getCharBoard(), phraseChars)) {
 			sendAll (ChatColor.GREEN, player.getName() + " guessed the final letter.");
-			stop();
+			setWinner(player);
 		}
 			
 		if (Arrays.equals(messageChars, phraseChars)) {
-			sendAll (ChatColor.GREEN, " guessed the word right!");
-			stop();
+			setWinner(player);
 		}
 		
 		sendAll (ChatColor.YELLOW, getStringBoard());

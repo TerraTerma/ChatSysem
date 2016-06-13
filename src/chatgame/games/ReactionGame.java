@@ -61,13 +61,8 @@ public class ReactionGame extends ChatGame {
 		super.onPlayerChat(event);
 		
 		if (!message.equalsIgnoreCase(currentWord)) return;
-		
-			ChatHelper.broadcastGreenMessage(player.getName() + " won the reaction!");
-			
+			setWinner(player);
 			guessed = true;
-			
-			stop();
-		
 	}
 	
 }

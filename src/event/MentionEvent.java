@@ -1,4 +1,4 @@
-package main;
+package event;
 import java.util.Optional;
 
 import org.bukkit.Bukkit;
@@ -12,6 +12,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 
+import main.ConfigSection;
+import main.Hooker;
 import utilities.ChatHelper;
 
 public class MentionEvent implements Listener {
