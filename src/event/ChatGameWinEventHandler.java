@@ -7,7 +7,6 @@ import chatgame.ChatGame;
 import event.listeners.ChatGameWinListener;
 import logan.reward_api.main.Reward;
 import logan.reward_api.main.RewardStore;
-import logan.reward_api.main.RewardType;
 import utilities.ChatHelper;
 
 public class ChatGameWinEventHandler implements ChatGameWinListener {
@@ -20,12 +19,16 @@ public class ChatGameWinEventHandler implements ChatGameWinListener {
 		
 		ChatHelper.sendGreenMessage(player, "You won the chat game " + chatGame.getName() + "!");
 		
-		new Reward(player)
+		
+		Reward reward = new Reward(player)
 		.setMaterial(Material.COAL)
 		.setAmount(8)
 		.setDisplayName("Chat game reward")
-		.setLore("Coal...")
-		.give(player);
+		.setLore("Coal...");
+		
+		RewardStore.put(reward);
+		
+		ChatHelper.sendPinkMessage(player, "Mine a block to get your reward.");
 
 		chatGame.stop();
 		

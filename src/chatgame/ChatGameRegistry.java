@@ -11,24 +11,24 @@ import main.Main;
 
 public class ChatGameRegistry {
 
-	private Main main;
-	private List<ChatGame> chatGames;
+	private static Main main;
+	private static List<ChatGame> chatGames;
 	
-	private ChatGameChatListener chatGameChatListener;
+	private static ChatGameChatListener chatGameChatListener;
 	
 	public ChatGameRegistry (Main main) {
-		this.main = main;
+		ChatGameRegistry.main = main;
 		chatGames = new ArrayList<>();
 		
 		chatGameChatListener = new ChatGameChatListener();
 	}
 	
-	public void fillQueue (ChatGameQueue chatGameQueue) {
+	public static void fillQueue (ChatGameQueue chatGameQueue) {
 		chatGames.stream()
 		.forEach(e -> chatGameQueue.addGame(e));
 	}
 	
-	public void registerGame (ChatGame chatGame) {
+	public static void registerGame (ChatGame chatGame) {
 		registerEvents(chatGame, main);
 		
 		chatGames.add(chatGame);
@@ -39,7 +39,7 @@ public class ChatGameRegistry {
 		registerEvents (chatGameChatListener, main);
 	}
 	
-	private void registerEvents (Listener listener, JavaPlugin javaPlugin) {
+	private static void registerEvents (Listener listener, JavaPlugin javaPlugin) {
 		main.getServer()
 		.getPluginManager()
 		.registerEvents(listener, javaPlugin);

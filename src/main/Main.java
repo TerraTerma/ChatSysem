@@ -11,7 +11,6 @@ import chatgame.games.HangmanGame;
 import chatgame.games.LetterGame;
 import chatgame.games.ReactionGame;
 import command.CommandHandler;
-import event.BreakEvent;
 import event.ChatEvent;
 import event.ChatGameWinEventHandler;
 import event.MentionEvent;
@@ -38,18 +37,17 @@ public class Main extends JavaPlugin {
 		new Hooker(server);
 		new ChatGameHelper(this);
 		
-		ChatGameRegistry chatGameRegistry = new ChatGameRegistry(this);
-		chatGameRegistry.registerGame(new ReactionGame());
-		chatGameRegistry.registerGame(new LetterGame());
-		chatGameRegistry.registerGame(new HangmanGame());
+		new ChatGameRegistry(this);
+		ChatGameRegistry.registerGame(new ReactionGame());
+		ChatGameRegistry.registerGame(new LetterGame());
+		ChatGameRegistry.registerGame(new HangmanGame());
 
 		ChatGameQueue chatGameQueue = new ChatGameQueue();
-		chatGameRegistry.fillQueue(chatGameQueue);
+		ChatGameRegistry.fillQueue(chatGameQueue);
 		chatGameQueue.startQueue();
 		
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
-		manager.registerEvents(new BreakEvent(), this);
 		
 		new ChatGameWinHandler();
 		ChatGameWinHandler.addListener(new ChatGameWinEventHandler());

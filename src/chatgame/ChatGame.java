@@ -7,6 +7,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import event.ChatGameWinEvent;
 import event.handlers.ChatGameWinHandler;
+import event.listeners.ChatGameWinListener;
 import utilities.ChatGameHelper;
 
 public abstract class ChatGame implements Listener {
@@ -44,10 +45,15 @@ public abstract class ChatGame implements Listener {
 	
 	public void setWinner (Player winner) {
 		this.recentWinner = winner;
+		
 		ChatGameWinEvent chatGameWinEvent = new ChatGameWinEvent();
 		chatGameWinEvent.setPlayer(player);
 		chatGameWinEvent.setChatGame(this);
 		ChatGameWinHandler.fireEvent(chatGameWinEvent);
+	}
+	
+	public void addWinListener (ChatGameWinListener listener) {
+		ChatGameWinHandler.addListener(listener);
 	}
 	
 	public boolean isRunning () {
