@@ -8,4 +8,5 @@ commands:
     aliases: cs
   cgreward:
     description: Give yourself a chatgame reward.
+    permissions: cs.cgreward
     aliases: cgr

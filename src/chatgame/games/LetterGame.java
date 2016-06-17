@@ -5,6 +5,8 @@ import java.util.Random;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
+import chatgame.event.ChatGameWinEvent;
+import chatgame.event.handler.WinEventHandler;
 import utilities.ChatHelper;
 
 public class LetterGame extends ChatGame {
@@ -55,7 +57,7 @@ public class LetterGame extends ChatGame {
 		if (guessedChar != currentLetter)
 			ChatHelper.sendRedMessage(player, "Nope!");
 		
-		else setWinner(player);
+		else WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
 		
 	}
 	

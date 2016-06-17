@@ -7,6 +7,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
 import chatgame.configs.ReactionGameConfiguration;
+import chatgame.event.ChatGameWinEvent;
+import chatgame.event.handler.WinEventHandler;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
@@ -61,8 +63,8 @@ public class ReactionGame extends ChatGame {
 		super.onPlayerChat(event);
 		
 		if (!message.equalsIgnoreCase(currentWord)) return;
-			setWinner(player);
 			guessed = true;
+			WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
 	}
 	
 }

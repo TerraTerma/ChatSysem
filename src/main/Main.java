@@ -7,14 +7,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
+import chatgame.event.handler.ChatGameHandler;
 import chatgame.games.HangmanGame;
 import chatgame.games.LetterGame;
 import chatgame.games.ReactionGame;
 import command.CommandHandler;
 import event.ChatEvent;
-import event.ChatGameWinEventHandler;
 import event.MentionEvent;
-import event.handlers.ChatGameWinHandler;
 import utilities.ChatGameHelper;
 
 public class Main extends JavaPlugin {
@@ -37,20 +36,24 @@ public class Main extends JavaPlugin {
 		new Hooker(server);
 		new ChatGameHelper(this);
 		
+		ReactionGame reactionGame = new ReactionGame();
+		LetterGame letterGame = new LetterGame();
+		HangmanGame hangmanGame = new HangmanGame();
+		
 		new ChatGameRegistry(this);
-		ChatGameRegistry.registerGame(new ReactionGame());
-		ChatGameRegistry.registerGame(new LetterGame());
-		ChatGameRegistry.registerGame(new HangmanGame());
-
+		ChatGameRegistry.registerGame(reactionGame);
+		ChatGameRegistry.registerGame(letterGame);
+		ChatGameRegistry.registerGame(hangmanGame);
+		
 		ChatGameQueue chatGameQueue = new ChatGameQueue();
 		ChatGameRegistry.fillQueue(chatGameQueue);
 		chatGameQueue.startQueue();
 		
+		ChatGameEvents events = new ChatGameEvents();
+		ChatGameHandler.addListener(events);
+		
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
-		
-		new ChatGameWinHandler();
-		ChatGameWinHandler.addListener(new ChatGameWinEventHandler());
 		
 		CommandHandler commandHandler = new CommandHandler();
 		getCommand("cgreward").setExecutor(commandHandler);
