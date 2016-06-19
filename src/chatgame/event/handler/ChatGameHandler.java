@@ -21,6 +21,4 @@ public class ChatGameHandler {
 		listeners.remove(listener);
 	}
 	
-	
-	
 }

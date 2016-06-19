@@ -2,15 +2,18 @@ package chatgame.letter;
 
 import java.util.Random;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import chatgame.ChatGame;
+import chatgame.TurnBasedChatGame;
+import chatgame.event.ChatGameEndEvent;
 import chatgame.event.ChatGameWinEvent;
+import chatgame.event.handler.EndEventHandler;
 import chatgame.event.handler.WinEventHandler;
+import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
-import utilities.PlayerBooleanArray;
 
-public class LetterGame extends ChatGame {
+public class LetterGame extends TurnBasedChatGame {
 
 	private char currentLetter;
 	private int guesses;
@@ -18,12 +21,8 @@ public class LetterGame extends ChatGame {
 	private final String alphabet = 
 			"abcdefghijklmnopqrstuvwxyz";
 	
-	private PlayerBooleanArray booleanPair;
-	
 	public LetterGame() {
-		super("Guess The Letter", 1, 60);
-		
-		booleanPair = new PlayerBooleanArray(false);
+		super("Guess The Letter", 1, 1, 60);
 	}
 
 	@Override
@@ -50,18 +49,22 @@ public class LetterGame extends ChatGame {
 		
 		guesses = 0;
 		
-		booleanPair.clear();
 	}
 
 	@Override
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
 		
-		if (!booleanPair.contains(player)) booleanPair.add(player);
-		
-		if (booleanPair.isTrue(player)) {
-			ChatHelper.sendRedMessage(player, "You can't guesse again.");
+		if (!getPlayers().contains(player)) {
+			System.out.println("Returning");
 			return;
+		}
+		
+		Player player = null;
+		try {
+			player = getNextPlayer();
+		} catch (EmptyQueueException e) {
+			EndEventHandler.fireEvent(new ChatGameEndEvent(this));
 		}
 		
 		char guessedChar = message.charAt(0);
@@ -70,7 +73,7 @@ public class LetterGame extends ChatGame {
 		
 		if (guessedChar != currentLetter) {
 			ChatHelper.sendRedMessage(player, "Nope!");
-			if (booleanPair.isFalse(player)) booleanPair.toggle(player);
+//			removePlayer(player);
 		}
 		
 		else WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));

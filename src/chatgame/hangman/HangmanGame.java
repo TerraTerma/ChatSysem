@@ -7,9 +7,9 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import chatgame.TurnBasedChatGame;
 import chatgame.event.ChatGameWinEvent;
 import chatgame.event.handler.WinEventHandler;
-import chatgame.turnbased.TurnBasedChatGame;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
@@ -72,7 +72,10 @@ public class HangmanGame extends TurnBasedChatGame {
 		//TODO Finish hangman game.
 		//TODO Adjust for turn-based gameplay.
 		
-		if (!getJoinedPlayers().contains(player)) return;
+		if (!getPlayers().contains(player)) {
+			System.out.println("Returning.");
+			return;
+		}
 		
 		char[] messageChars = new char[message.length()];
 		message.getChars(0, messageChars.length, messageChars, 0);

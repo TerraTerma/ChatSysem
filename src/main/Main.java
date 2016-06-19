@@ -36,14 +36,10 @@ public class Main extends JavaPlugin {
 		new Hooker(server);
 		new ChatGameHelper(this);
 		
-		ReactionGame reactionGame = new ReactionGame();
-		LetterGame letterGame = new LetterGame();
-		HangmanGame hangmanGame = new HangmanGame();
-		
 		new ChatGameRegistry(this);
-		ChatGameRegistry.registerGame(reactionGame);
-		ChatGameRegistry.registerGame(letterGame);
-		ChatGameRegistry.registerGame(hangmanGame);
+//		ChatGameRegistry.registerGame(new ReactionGame());
+		ChatGameRegistry.registerGame(new LetterGame());
+//		ChatGameRegistry.registerGame(hangmanGame);
 		
 		ChatGameQueue chatGameQueue = new ChatGameQueue();
 		ChatGameRegistry.fillQueue(chatGameQueue);
