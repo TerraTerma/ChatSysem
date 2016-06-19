@@ -1,7 +1,9 @@
-package chatgame.configs;
+package chatgame.hangman;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import chatgame.ChatGameConfiguration;
 
 public class HangmanGameConfiguration extends ChatGameConfiguration {
 	

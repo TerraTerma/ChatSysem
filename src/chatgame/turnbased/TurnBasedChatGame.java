@@ -1,22 +1,26 @@
-package chatgame;
+package chatgame.turnbased;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import chatgame.ChatGame;
 import utilities.ChatHelper;
 
 public abstract class TurnBasedChatGame extends ChatGame {
 
-	private List<Player> joinedPlayers;
+	private TurnList turnList;
 	
-	public TurnBasedChatGame (String name, int minPlayers, int maxTime) {
+	public TurnBasedChatGame (String name, int turns, int minPlayers, int maxTime) {
 		super (name, minPlayers, maxTime);
 		
-		joinedPlayers = new ArrayList<>();
+		turnList = new TurnList (turns);
+	}
+	
+	public List<Player> getJoinedPlayers () {
+		return turnList.getPlayers();
 	}
 	
 	@Override
@@ -30,24 +34,20 @@ public abstract class TurnBasedChatGame extends ChatGame {
 	@Override
 	public void stop () {
 		super.stop();
-		joinedPlayers.clear();
+		turnList.clear();
 	}
 	
 	public void addPlayer (Player player) {
-		if (!(joinedPlayers.contains(player)))
-			joinedPlayers.add(player);
+		turnList.safeAdd(player);
 		
 		ChatHelper.sendGreenMessage (player, 
 				"You joined " + getName());
 	}
 	
 	public void sendAll (ChatColor chatColor, String message) {
-		joinedPlayers.stream()
+		turnList.getPlayers().stream()
 		.forEach(e -> e.sendMessage(chatColor + message));
 	}
-	
-	//TODO Make this into an event handler.
-	public void onPlayerJoin () {}
 	
 	@Override
 	public void onPlayerChat(AsyncPlayerChatEvent event) {

@@ -1,19 +1,15 @@
-package chatgame.games;
+package chatgame.hangman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import chatgame.TurnBasedChatGame;
-import chatgame.configs.HangmanGameConfiguration;
 import chatgame.event.ChatGameWinEvent;
 import chatgame.event.handler.WinEventHandler;
+import chatgame.turnbased.TurnBasedChatGame;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
@@ -26,26 +22,14 @@ public class HangmanGame extends TurnBasedChatGame {
 	private char[] correctChars;
 	private List<Character> guessedChars;
 	
-	private final int tries = 5;
-	
-	private Map<Player, Integer> players;
-	
 	private HangmanGameConfiguration hangmanGameConfiguration;
 	
 	public HangmanGame() {
-		super("Hangman", 1, 120);
-		
-		players = new HashMap<>();
+		super("Hangman", 5, 1, 120);
 		
 		hangmanGameConfiguration = new HangmanGameConfiguration();
 		phrases = new ArrayList<>
 		(hangmanGameConfiguration.getPhrases());
-	}
-	
-	@Override
-	public void addPlayer (Player player) {
-		super.addPlayer(player);
-		players.put(player, tries);
 	}
 	
 	@Override
@@ -86,6 +70,9 @@ public class HangmanGame extends TurnBasedChatGame {
 		super.onPlayerChat(event);
 	
 		//TODO Finish hangman game.
+		//TODO Adjust for turn-based gameplay.
+		
+		if (!getJoinedPlayers().contains(player)) return;
 		
 		char[] messageChars = new char[message.length()];
 		message.getChars(0, messageChars.length, messageChars, 0);

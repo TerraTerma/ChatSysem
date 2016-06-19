@@ -71,7 +71,8 @@ public class ChatGameQueue {
 		try {
 			startGame (chatGame);
 		} catch (NotEnoughPlayersException e) {
-			ChatHelper.broadcastRedMessage("There aren't enough players for " + chatGame.getName());
+			ChatHelper.broadcastRedMessage
+			("There aren't enough players for " + chatGame.getName());
 		}
 		
 	}

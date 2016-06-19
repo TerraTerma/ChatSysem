@@ -1,4 +1,4 @@
-package chatgame.games;
+package chatgame.reaction;
 
 import java.util.List;
 import java.util.Random;
@@ -6,7 +6,6 @@ import java.util.Random;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
-import chatgame.configs.ReactionGameConfiguration;
 import chatgame.event.ChatGameWinEvent;
 import chatgame.event.handler.WinEventHandler;
 import utilities.ChatHelper;

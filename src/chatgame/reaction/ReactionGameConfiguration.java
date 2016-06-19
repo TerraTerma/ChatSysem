@@ -1,7 +1,9 @@
-package chatgame.configs;
+package chatgame.reaction;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import chatgame.ChatGameConfiguration;
 
 public class ReactionGameConfiguration extends ChatGameConfiguration {
 

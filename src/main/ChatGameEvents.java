@@ -38,9 +38,9 @@ public class ChatGameEvents implements ChatGameWinListener, ChatGameLoseListener
 				+ " won " + chatGame.getName() + "!");
 		
 		winner.sendMessage(ChatColor.LIGHT_PURPLE
-				+ " Break a block to get your reward.");
+				+ "Break a block to get your reward.");
 		
-		Reward reward = new Reward()
+		Reward reward = new Reward(winner)
 				.setAmount(8)
 				.setDisplayName(ChatColor.YELLOW + "ChatGame Reward")
 				.setMaterial(Material.DIRT)

@@ -1,4 +1,4 @@
-package chatgame.configs;
+package chatgame;
 
 import java.io.File;
 import java.io.IOException;
