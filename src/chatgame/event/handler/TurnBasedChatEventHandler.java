@@ -2,7 +2,6 @@ package chatgame.event.handler;
 
 import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.listener.ChatGameListener;
-import chatgame.event.listener.ChatGameLoseListener;
 import chatgame.event.listener.TurnBasedChatListener;
 
 public class TurnBasedChatEventHandler extends ChatGameHandler {

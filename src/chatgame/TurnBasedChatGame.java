@@ -12,12 +12,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.handler.TurnBasedChatEventHandler;
-import chatgame.event.listener.TurnBasedChatListener;
 import exceptions.CorruptedListException;
 import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
 
-public abstract class TurnBasedChatGame extends ChatGame implements TurnBasedChatListener {
+public abstract class TurnBasedChatGame extends ChatGame {
 
 	private Queue<Player> playerQueue;
 	private List<Player> players;
@@ -48,8 +47,10 @@ public abstract class TurnBasedChatGame extends ChatGame implements TurnBasedCha
 		
 		if (player == null) {
 			currentTurns--;
+			
 			if (currentTurns == 0)
 				throw new EmptyQueueException();
+			
 			refill();
 		}
 		

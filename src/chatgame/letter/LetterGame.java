@@ -3,17 +3,18 @@ package chatgame.letter;
 import java.util.Random;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.TurnBasedChatGame;
 import chatgame.event.ChatGameEndEvent;
 import chatgame.event.ChatGameWinEvent;
+import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.handler.EndEventHandler;
 import chatgame.event.handler.WinEventHandler;
+import chatgame.event.listener.TurnBasedChatListener;
 import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
 
-public class LetterGame extends TurnBasedChatGame {
+public class LetterGame extends TurnBasedChatGame implements TurnBasedChatListener {
 
 	private char currentLetter;
 	private int guesses;
@@ -52,14 +53,7 @@ public class LetterGame extends TurnBasedChatGame {
 	}
 
 	@Override
-	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		super.onPlayerChat(event);
-		
-		if (!getPlayers().contains(player)) {
-			System.out.println("Returning");
-			return;
-		}
-		
+	public void onTurnBasedChat(TurnBasedChatEvent event) {
 		Player player = null;
 		try {
 			player = getNextPlayer();
@@ -67,17 +61,18 @@ public class LetterGame extends TurnBasedChatGame {
 			EndEventHandler.fireEvent(new ChatGameEndEvent(this));
 		}
 		
+		System.out.println("The next player is " + player.getName() + ".");
+		
 		char guessedChar = message.charAt(0);
 		
 		guesses++;
 		
 		if (guessedChar != currentLetter) {
 			ChatHelper.sendRedMessage(player, "Nope!");
-//			removePlayer(player);
+			System.out.println("Looks like he guessed wrong.");
 		}
 		
 		else WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
-		
 	}
 	
 }

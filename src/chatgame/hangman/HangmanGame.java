@@ -5,15 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.TurnBasedChatGame;
 import chatgame.event.ChatGameWinEvent;
+import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.handler.WinEventHandler;
+import chatgame.event.listener.TurnBasedChatListener;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
-public class HangmanGame extends TurnBasedChatGame {
+public class HangmanGame extends TurnBasedChatGame implements TurnBasedChatListener {
 
 	private List<String> phrases;
 	private String currentPhrase;
@@ -66,17 +67,7 @@ public class HangmanGame extends TurnBasedChatGame {
 	}
 
 	@Override
-	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		super.onPlayerChat(event);
-	
-		//TODO Finish hangman game.
-		//TODO Adjust for turn-based gameplay.
-		
-		if (!getPlayers().contains(player)) {
-			System.out.println("Returning.");
-			return;
-		}
-		
+	public void onTurnBasedChat(TurnBasedChatEvent event) {
 		char[] messageChars = new char[message.length()];
 		message.getChars(0, messageChars.length, messageChars, 0);
 		

@@ -7,6 +7,9 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import chatgame.event.handler.TurnBasedChatEventHandler;
+import chatgame.event.listener.ChatGameListener;
+import chatgame.event.listener.TurnBasedChatListener;
 import main.Main;
 
 public class ChatGameRegistry {
@@ -30,6 +33,7 @@ public class ChatGameRegistry {
 	
 	public static void registerGame (ChatGame chatGame) {
 		registerEvents(chatGame, main);
+		registerCustomEvents(chatGame);
 		
 		chatGames.add(chatGame);
 		chatGameChatListener.listenOn(chatGame);
@@ -43,6 +47,12 @@ public class ChatGameRegistry {
 		main.getServer()
 		.getPluginManager()
 		.registerEvents(listener, javaPlugin);
+	}
+	
+	private static void registerCustomEvents (ChatGame chatGame) {
+		if (chatGame instanceof TurnBasedChatListener)
+			TurnBasedChatEventHandler.addListener
+			((TurnBasedChatListener) chatGame);
 	}
 	
 }
