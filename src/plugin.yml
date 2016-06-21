@@ -1,12 +1,21 @@
 main: main.Main
 name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx, Reward-API]
-version: 0.7
+version: 0.7.5
 commands:
   chatsystem:
     description: Main ChatSystem command.
     aliases: cs
   cgreward:
     description: Give yourself a chatgame reward.
-    permissions: cs.cgreward
+    permissions: cg.admin
     aliases: cgr
+  cgskip:
+    description: Skip the current chat game.
+    permissions: cg.admin
+    aliases: cgs
+  cgforce:
+    description: Forces the specified chat game to start.
+    permissions: cg.force
+    usage: Usage: /cgf <name>
+    aliases: cgf
