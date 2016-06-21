@@ -9,6 +9,7 @@ public class CommandHandler implements CommandExecutor {
 
 	private RewardCommand rewardCommand = new RewardCommand();
     private SkipCommand skipCommand = new SkipCommand();
+	private ForceCommand forceCommand = new ForceCommand();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,6 +27,8 @@ public class CommandHandler implements CommandExecutor {
 			rewardCommand.run(player, args);
         else if (label.equalsIgnoreCase("cgskip"))
             skipCommand.run(player, args);
+		else if (label.equalsIgnoreCase("cgforce"))
+			forceCommand.run(player, args);
 		
 		return false;
 	}

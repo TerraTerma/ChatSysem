@@ -37,7 +37,7 @@ public class Main extends JavaPlugin {
 		new ChatGameHelper(this);
 		
 		new ChatGameRegistry(this);
-//		ChatGameRegistry.registerGame(new ReactionGame());
+		ChatGameRegistry.registerGame(new ReactionGame());
 		ChatGameRegistry.registerGame(new LetterGame());
 		ChatGameRegistry.registerGame(new HangmanGame());
 
@@ -53,6 +53,7 @@ public class Main extends JavaPlugin {
 		CommandHandler commandHandler = new CommandHandler();
 		getCommand("cgreward").setExecutor(commandHandler);
 		getCommand("cgskip").setExecutor(commandHandler);
+		getCommand("cgforce").setExecutor(commandHandler);
 		
 		logger.info(name + " " + version + " enabled.");
 	}

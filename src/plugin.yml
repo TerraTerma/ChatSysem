@@ -16,6 +16,6 @@ commands:
     aliases: cgs
   cgforce:
     description: Forces the specified chat game to start.
-    permissions: cg.force
+    permissions: cg.admin
     usage: /cgf <name>
     aliases: cgf

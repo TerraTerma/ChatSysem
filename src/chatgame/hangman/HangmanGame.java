@@ -11,6 +11,7 @@ import chatgame.event.ChatGameWinEvent;
 import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.handler.WinEventHandler;
 import chatgame.event.listener.TurnBasedChatListener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
@@ -64,6 +65,12 @@ public class HangmanGame extends TurnBasedChatGame implements TurnBasedChatListe
 	
 	public String getStringBoard () {
 		return String.valueOf(getCharBoard());
+	}
+
+	@Override
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
+		super.onPlayerChat(event);
+		ChatHelper.sendYellowMessage(player, getStringBoard());
 	}
 
 	@Override
