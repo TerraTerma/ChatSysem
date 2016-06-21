@@ -37,16 +37,16 @@ public class ChatGameEvents implements ChatGameWinListener, ChatGameLoseListener
 		ChatHelper.broadcastGreenMessage(winner.getName()
 				+ " won " + chatGame.getName() + "!");
 		
-		winner.sendMessage(ChatColor.LIGHT_PURPLE
-				+ "Break a block to get your reward.");
-		
-		Reward reward = new Reward(winner)
-				.setAmount(8)
-				.setDisplayName(ChatColor.YELLOW + "ChatGame Reward")
-				.setMaterial(Material.DIRT)
-				.setType(RewardType.MINED);
-		
-		RewardStore.put(reward);
+//		winner.sendMessage(ChatColor.LIGHT_PURPLE
+//				+ "Break a block to get your reward.");
+//
+//		Reward reward = new Reward(winner)
+//				.setAmount(8)
+//				.setDisplayName(ChatColor.YELLOW + "ChatGame Reward")
+//				.setMaterial(Material.DIRT)
+//				.setType(RewardType.MINED);
+//
+//		RewardStore.put(reward);
 		
 		EndEventHandler.fireEvent(new ChatGameEndEvent(chatGame));
 		
