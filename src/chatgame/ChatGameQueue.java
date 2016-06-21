@@ -14,13 +14,11 @@ public class ChatGameQueue {
 
 	private static List<ChatGame> chatGames = new ArrayList<>();
 	
-	private static ChatGameIntermission chatGameIntermission;
-	private static IntermissionScheduler intermissionScheduler;
+	private static ChatGameIntermission chatGameIntermission = new
+			ChatGameIntermission(10);
 
-	public ChatGameQueue () {
-		chatGameIntermission = new ChatGameIntermission(this, 10);
-		intermissionScheduler = new IntermissionScheduler(this);
-	}
+	private static IntermissionScheduler intermissionScheduler = new
+			IntermissionScheduler();
 
 	public static List<ChatGame> getChatGames () {
 		return chatGames;

@@ -6,21 +6,15 @@ import utilities.ChatGameHelper;
 
 public class IntermissionScheduler implements Runnable {
 	
-	private ChatGameQueue chatGameQueue;
-	
-	public IntermissionScheduler (ChatGameQueue chatGameQueue) {
-		this.chatGameQueue = chatGameQueue;
-	}
-	
 	public void run () {
 		
-		List<ChatGame> chatGames = chatGameQueue.getChatGames();
+		List<ChatGame> chatGames = ChatGameQueue.getChatGames();
 		
 		boolean runningGame = chatGames.stream()
 		.anyMatch(e -> e.isRunning());
 		
 		ChatGameIntermission chatGameIntermission = 
-				chatGameQueue.getChatGameIntermission();
+				ChatGameQueue.getChatGameIntermission();
 		
 		boolean intermissionInProgress = 
 				chatGameIntermission

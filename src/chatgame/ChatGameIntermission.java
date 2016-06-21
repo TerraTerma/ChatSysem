@@ -12,11 +12,8 @@ public class ChatGameIntermission implements Runnable {
 	
 	private BukkitTask bukkitTask;
 	
-	private ChatGameQueue chatGameQueue;
-	
-	public ChatGameIntermission (ChatGameQueue chatGameQueue, int intermission) {
+	public ChatGameIntermission (int intermission) {
 		this.intermission = intermission;
-		this.chatGameQueue = chatGameQueue;
 	}
 	
 	public boolean isInProgress () {
@@ -25,7 +22,7 @@ public class ChatGameIntermission implements Runnable {
 	
 	public void run () {
 
-		chatGameQueue.startRandomGame();
+		ChatGameQueue.startRandomGame();
 		inProgress = false;
 		bukkitTask.cancel();
 		
