@@ -1,6 +1,7 @@
 package chatgame.event.handler;
 
 import chatgame.ChatGame;
+import chatgame.ChatGameChatListener;
 import chatgame.ChatGameQueue;
 import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.listener.ChatGameListener;

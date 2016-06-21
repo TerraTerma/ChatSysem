@@ -27,7 +27,7 @@ public class HangmanGame extends TurnBasedChatGame implements TurnBasedChatListe
 	private HangmanGameConfiguration hangmanGameConfiguration;
 	
 	public HangmanGame() {
-		super("Hangman", 5, 1, 120);
+		super("Hangman", 5, 2, 120);
 		
 		hangmanGameConfiguration = new HangmanGameConfiguration();
 		phrases = new ArrayList<>

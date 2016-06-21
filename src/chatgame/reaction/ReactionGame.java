@@ -22,7 +22,7 @@ public class ReactionGame extends ChatGame {
 	private ReactionGameConfiguration reactionGameConfiguration;
 	
 	public ReactionGame() {
-		super("Reaction", 1, 60);
+		super("Reaction", 1, 30);
 		
 		reactionGameConfiguration = new ReactionGameConfiguration();
 		

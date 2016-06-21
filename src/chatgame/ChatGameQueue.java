@@ -15,7 +15,7 @@ public class ChatGameQueue {
 	private static List<ChatGame> chatGames = new ArrayList<>();
 	
 	private static ChatGameIntermission chatGameIntermission = new
-			ChatGameIntermission(10);
+			ChatGameIntermission(300);
 
 	private static IntermissionScheduler intermissionScheduler = new
 			IntermissionScheduler();
@@ -44,22 +44,6 @@ public class ChatGameQueue {
 		if (chatGame.isPresent()) {
 			stopRunningGame();
 			chatGame.get().start();
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean forceStartGame (Class<? extends ChatGame> gameClass) {
-
-		stopRunningGame();
-
-		Optional<ChatGame> game = chatGames.stream()
-		.filter(e -> e.getClass().equals(gameClass))
-		.findAny();
-
-		if (game.isPresent()) {
-			game.get().start();
 			return true;
 		}
 

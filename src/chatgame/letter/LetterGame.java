@@ -24,7 +24,11 @@ public class LetterGame extends TurnBasedChatGame implements
 			"abcdefghijklmnopqrstuvwxyz";
 	
 	public LetterGame() {
-		super("Guess The Letter", 1, 1, 60);
+		super("Guess the Letter", 1, 2, 30);
+	}
+
+	public int getGuesses () {
+		return guesses;
 	}
 
 	@Override
@@ -45,9 +49,6 @@ public class LetterGame extends TurnBasedChatGame implements
 	@Override
 	public void stop() {
 		super.stop();
-		
-		ChatHelper.broadcastYellowMessage(getName() + " has ended"
-				+ " with a total of " + guesses + " guesses.");
 		
 		guesses = 0;
 		
