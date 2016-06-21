@@ -7,34 +7,28 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ChatGameConfiguration {
 
-	private String directory = "plugins/TTChatSystem/games/";
-	
 	private File file;
 	
 	private YamlConfiguration yamlConfiguration;
 	
 	public ChatGameConfiguration (String fileName) {
 		
-		file = new File(directory + fileName);
+		file = new File("plugins/TTChatSystem/games/" + fileName);
 		
 		yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 		
 	}
 	
-	public File getFile () {
-		return file;
-	}
-	
-	public YamlConfiguration getYamlConfiguration () {
+	protected YamlConfiguration getYamlConfiguration () {
 		return yamlConfiguration;
 	}
 	
-	public void createSection(String path, Object value) {
+	protected void createSection(String path, Object value) {
 		if (yamlConfiguration.isSet(path)) return;
 		yamlConfiguration.set(path, value);
 	}
 	
-	public void save () {
+	protected void save () {
 		try {
 			yamlConfiguration.save(file);
 		} catch (IOException e) {

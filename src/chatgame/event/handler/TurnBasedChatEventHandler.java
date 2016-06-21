@@ -14,6 +14,7 @@ public class TurnBasedChatEventHandler extends ChatGameHandler {
 	public static void fireEvent (TurnBasedChatEvent event) {
 
 		Optional<ChatGame> game = ChatGameQueue.getRunningGame();
+		if (!game.isPresent()) return;
 		ChatGame chatGame = game.get();
 		if (chatGame instanceof TurnBasedChatListener)
 			((TurnBasedChatListener) chatGame).onTurnBasedChat(event);

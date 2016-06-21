@@ -1,14 +1,13 @@
 package chatgame;
 
+import exceptions.NotEnoughPlayersException;
+import org.bukkit.Bukkit;
+import utilities.ChatHelper;
+import utilities.ListHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-
-import org.bukkit.Bukkit;
-
-import exceptions.NotEnoughPlayersException;
-import utilities.ChatHelper;
 
 public class ChatGameQueue {
 
@@ -20,11 +19,11 @@ public class ChatGameQueue {
 	private static IntermissionScheduler intermissionScheduler = new
 			IntermissionScheduler();
 
-	public static List<ChatGame> getChatGames () {
+	static List<ChatGame> getChatGames () {
 		return chatGames;
 	}
 	
-	public static ChatGameIntermission getChatGameIntermission () {
+	static ChatGameIntermission getChatGameIntermission () {
 		return chatGameIntermission;
 	}
 
@@ -32,7 +31,7 @@ public class ChatGameQueue {
 		intermissionScheduler.beginMonitor();
 	}
 	
-	public static void addGame (ChatGame game) {
+	static void addGame (ChatGame game) {
 		chatGames.add(game);
 	}
 
@@ -50,7 +49,8 @@ public class ChatGameQueue {
 		return false;
 	}
 	
-	public static void startGame (ChatGame chatGame) throws NotEnoughPlayersException {
+	private static void startGame (ChatGame chatGame) throws
+			NotEnoughPlayersException {
 		
 		int playersOnline = Bukkit.getOnlinePlayers().size();
 	
@@ -64,27 +64,25 @@ public class ChatGameQueue {
 
 		stopRunningGame();
 
-		Random random = new Random ();
-
-		ChatGame chatGame = chatGames.get
-				(random.nextInt(chatGames.size()));
+		ChatGame chatGame;
+		chatGame = ListHelper.selectRandom(chatGames);
 
 		try {
 			startGame (chatGame);
 		} catch (NotEnoughPlayersException e) {
-			ChatHelper.broadcastRedMessage
-			("There aren't enough players for " + chatGame.getName());
+			ChatHelper.broadcastRedMessage ("There aren't enough players for " +
+					chatGame.getName());
 		}
 		
 	}
 	
 	public static Optional<ChatGame> getRunningGame() {
 		return chatGames.stream()
-				.filter(e -> e.isRunning())
+				.filter(ChatGame::isRunning)
 				.findAny();
 	}
 
-	public static void stopRunningGame () {
+	private static void stopRunningGame () {
 		Optional<ChatGame> chatGame = getRunningGame();
 		if (chatGame.isPresent()) chatGame.get().stop();
 	}

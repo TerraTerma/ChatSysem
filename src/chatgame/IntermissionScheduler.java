@@ -4,14 +4,14 @@ import java.util.List;
 
 import utilities.ChatGameHelper;
 
-public class IntermissionScheduler implements Runnable {
+class IntermissionScheduler implements Runnable {
 	
 	public void run () {
 		
 		List<ChatGame> chatGames = ChatGameQueue.getChatGames();
 		
 		boolean runningGame = chatGames.stream()
-		.anyMatch(e -> e.isRunning());
+		.anyMatch(ChatGame::isRunning);
 		
 		ChatGameIntermission chatGameIntermission = 
 				ChatGameQueue.getChatGameIntermission();
@@ -26,7 +26,7 @@ public class IntermissionScheduler implements Runnable {
 		
 	}
 
-	public void beginMonitor () {
+	void beginMonitor () {
 		ChatGameHelper.runRepeatingTask(this, 20, 20);
 	}
 	

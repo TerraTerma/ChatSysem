@@ -1,10 +1,9 @@
 package chatgame;
 
 import org.bukkit.scheduler.BukkitTask;
-
 import utilities.ChatGameHelper;
 
-public class ChatGameIntermission implements Runnable {
+class ChatGameIntermission implements Runnable {
 
 	private final int intermission;
 	
@@ -12,11 +11,11 @@ public class ChatGameIntermission implements Runnable {
 	
 	private BukkitTask bukkitTask;
 	
-	public ChatGameIntermission (int intermission) {
+	ChatGameIntermission (int intermission) {
 		this.intermission = intermission;
 	}
 	
-	public boolean isInProgress () {
+	boolean isInProgress () {
 		return inProgress;
 	}
 	
@@ -28,7 +27,7 @@ public class ChatGameIntermission implements Runnable {
 		
 	}
 	
-	public void beginIntermission () {
+	void beginIntermission () {
 		inProgress = true;
 		bukkitTask = ChatGameHelper.runDelayedTask(this, 20 * intermission);
 	}

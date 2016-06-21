@@ -27,7 +27,7 @@ public class ChatGameRegistry {
 	
 	public static void fillQueue () {
 		chatGames.stream()
-		.forEach(e -> ChatGameQueue.addGame(e));
+		.forEach(ChatGameQueue::addGame);
 	}
 	
 	public static void registerGame (ChatGame chatGame) {

@@ -108,7 +108,7 @@ public abstract class TurnBasedChatGame extends ChatGame {
 		ChatHelper.sendRedMessage(player, "You've been removed from " + getName() + ".");
 	}
 	
-	public void sendAll (ChatColor chatColor, String message) {
+	protected void sendAll (ChatColor chatColor, String message) {
 		players.stream()
 		.forEach(e -> e.sendMessage(chatColor + message));
 	}

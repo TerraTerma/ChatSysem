@@ -27,15 +27,15 @@ public abstract class ChatGame implements Listener {
 		return name;
 	}
 	
-	public int getMinimumPlayers () {
+	int getMinimumPlayers () {
 		return minPlayers;
 	}
 	
-	public int getMaximumTime () {
+	int getMaximumTime () {
 		return maxTime;
 	}
 	
-	public boolean isRunning () {
+	boolean isRunning () {
 		return running;
 	}
 	
