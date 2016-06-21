@@ -1,18 +1,22 @@
 package chatgame.event.handler;
 
+import chatgame.ChatGame;
+import chatgame.ChatGameQueue;
 import chatgame.event.TurnBasedChatEvent;
 import chatgame.event.listener.ChatGameListener;
 import chatgame.event.listener.TurnBasedChatListener;
 
+import java.util.Optional;
+
 public class TurnBasedChatEventHandler extends ChatGameHandler {
 
 	public static void fireEvent (TurnBasedChatEvent event) {
-		for (ChatGameListener listener : getListeners())
-			if (listener instanceof TurnBasedChatListener) {
-				TurnBasedChatListener turnBasedChatListener;
-				turnBasedChatListener  = (TurnBasedChatListener) listener;
-				turnBasedChatListener.onTurnBasedChat(event);
-			}
+
+		Optional<ChatGame> game = ChatGameQueue.getRunningGame();
+		ChatGame chatGame = game.get();
+		if (chatGame instanceof TurnBasedChatListener)
+			((TurnBasedChatListener) chatGame).onTurnBasedChat(event);
+
 	}
 	
 }

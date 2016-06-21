@@ -14,7 +14,8 @@ import chatgame.event.listener.TurnBasedChatListener;
 import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
 
-public class LetterGame extends TurnBasedChatGame implements TurnBasedChatListener {
+public class LetterGame extends TurnBasedChatGame implements
+		TurnBasedChatListener {
 
 	private char currentLetter;
 	private int guesses;
