@@ -40,10 +40,9 @@ public class Main extends JavaPlugin {
 //		ChatGameRegistry.registerGame(new ReactionGame());
 		ChatGameRegistry.registerGame(new LetterGame());
 		ChatGameRegistry.registerGame(new HangmanGame());
-		
-		ChatGameQueue chatGameQueue = new ChatGameQueue();
-		ChatGameRegistry.fillQueue(chatGameQueue);
-		chatGameQueue.startQueue();
+
+		ChatGameRegistry.fillQueue();
+		ChatGameQueue.startQueue();
 
 		ChatGameEvents events = new ChatGameEvents();
 		ChatGameHandler.addListener(events);

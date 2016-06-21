@@ -25,9 +25,9 @@ public class ChatGameRegistry {
 		chatGameChatListener = new ChatGameChatListener();
 	}
 	
-	public static void fillQueue (ChatGameQueue chatGameQueue) {
+	public static void fillQueue () {
 		chatGames.stream()
-		.forEach(e -> chatGameQueue.addGame(e));
+		.forEach(e -> ChatGameQueue.addGame(e));
 	}
 	
 	public static void registerGame (ChatGame chatGame) {
