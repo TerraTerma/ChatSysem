@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 public class CommandHandler implements CommandExecutor {
 
 	private RewardCommand rewardCommand = new RewardCommand();
+    private SkipCommand skipCommand = new SkipCommand();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -23,6 +24,8 @@ public class CommandHandler implements CommandExecutor {
 		
 		if (label.equalsIgnoreCase("cgreward"))
 			rewardCommand.run(player, args);
+        else if (label.equalsIgnoreCase("cgskip"))
+            skipCommand.run(player, args);
 		
 		return false;
 	}

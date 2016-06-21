@@ -117,8 +117,6 @@ public abstract class TurnBasedChatGame extends ChatGame {
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		super.onPlayerChat(event);
 		
-		//TODO Make the event fire in the right class.
-		
 		if (players.contains(player)) {
 			TurnBasedChatEventHandler.fireEvent
 			(new TurnBasedChatEvent(player, message));

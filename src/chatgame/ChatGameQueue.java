@@ -2,6 +2,7 @@ package chatgame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -11,47 +12,63 @@ import utilities.ChatHelper;
 
 public class ChatGameQueue {
 
-	private List<ChatGame> chatGames = new ArrayList<>();
+	private static List<ChatGame> chatGames = new ArrayList<>();
 	
-	private ChatGameIntermission chatGameIntermission;
-	private IntermissionScheduler intermissionScheduler;
-	
+	private static ChatGameIntermission chatGameIntermission;
+	private static IntermissionScheduler intermissionScheduler;
+
 	public ChatGameQueue () {
 		chatGameIntermission = new ChatGameIntermission(this, 10);
 		intermissionScheduler = new IntermissionScheduler(this);
 	}
 
-	public List<ChatGame> getChatGames () {
+	public static List<ChatGame> getChatGames () {
 		return chatGames;
 	}
 	
-	public ChatGameIntermission getChatGameIntermission () {
+	public static ChatGameIntermission getChatGameIntermission () {
 		return chatGameIntermission;
 	}
-	
-	public void startQueue() {
+
+	public static void startQueue() {
 		intermissionScheduler.beginMonitor();
 	}
 	
-	public void addGame (ChatGame game) {
+	public static void addGame (ChatGame game) {
 		chatGames.add(game);
 	}
-	
-	public boolean forceStartGame (Class<? extends ChatGame> gameClass) {
-		
-		if (checkRunningGame()) return true;
-		
-		chatGames.stream()
-		.filter(e -> e.getClass().equals(gameClass))
-		.findAny()
-		.get()
-		.start();
-		
+
+	public static boolean forceStartGame (String name) {
+		Optional<ChatGame> chatGame = chatGames.stream()
+				.filter(e -> e.getName().equalsIgnoreCase(name))
+				.findAny();
+
+		if (chatGame.isPresent()) {
+			stopRunningGame();
+			chatGame.get().start();
+			return true;
+		}
+
 		return false;
-		
+	}
+
+	public static boolean forceStartGame (Class<? extends ChatGame> gameClass) {
+
+		stopRunningGame();
+
+		Optional<ChatGame> game = chatGames.stream()
+		.filter(e -> e.getClass().equals(gameClass))
+		.findAny();
+
+		if (game.isPresent()) {
+			game.get().start();
+			return true;
+		}
+
+		return false;
 	}
 	
-	public void startGame (ChatGame chatGame) throws NotEnoughPlayersException {
+	public static void startGame (ChatGame chatGame) throws NotEnoughPlayersException {
 		
 		int playersOnline = Bukkit.getOnlinePlayers().size();
 	
@@ -61,13 +78,15 @@ public class ChatGameQueue {
 		chatGame.start();
 	}
 	
-	public void startRandomGame () {
-		
+	public static void startRandomGame () {
+
+		stopRunningGame();
+
 		Random random = new Random ();
-		
+
 		ChatGame chatGame = chatGames.get
 				(random.nextInt(chatGames.size()));
-		
+
 		try {
 			startGame (chatGame);
 		} catch (NotEnoughPlayersException e) {
@@ -77,8 +96,15 @@ public class ChatGameQueue {
 		
 	}
 	
-	public boolean checkRunningGame () {
-		return chatGames.stream().anyMatch(e -> e.isRunning());
+	public static Optional<ChatGame> getRunningGame() {
+		return chatGames.stream()
+				.filter(e -> e.isRunning())
+				.findAny();
+	}
+
+	public static void stopRunningGame () {
+		Optional<ChatGame> chatGame = getRunningGame();
+		if (chatGame.isPresent()) chatGame.get().stop();
 	}
 	
 }

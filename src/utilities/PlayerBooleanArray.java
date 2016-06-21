@@ -16,9 +16,7 @@ public class PlayerBooleanArray {
 		
 		pairs = new HashMap<>();
 	}
-	
-	
-	
+
 	public boolean getStartBoolean () {
 		return startBoolean;
 	}

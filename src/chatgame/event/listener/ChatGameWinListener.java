@@ -4,6 +4,6 @@ import chatgame.event.ChatGameWinEvent;
 
 public interface ChatGameWinListener extends ChatGameListener {
 
-	public void onChatGameWin (ChatGameWinEvent event);
+	void onChatGameWin (ChatGameWinEvent event);
 	
 }

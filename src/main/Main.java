@@ -1,6 +1,8 @@
 package main;
 import java.util.logging.Logger;
 
+import chatgame.hangman.HangmanGame;
+import chatgame.reaction.ReactionGame;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,7 +24,7 @@ public class Main extends JavaPlugin {
 	private static PluginManager manager;
 	
 	private Logger logger = getLogger();
-	
+
 	@Override
 	public void onEnable () {		
 		name = getName();
@@ -37,12 +39,12 @@ public class Main extends JavaPlugin {
 		new ChatGameRegistry(this);
 //		ChatGameRegistry.registerGame(new ReactionGame());
 		ChatGameRegistry.registerGame(new LetterGame());
-//		ChatGameRegistry.registerGame(hangmanGame);
+		ChatGameRegistry.registerGame(new HangmanGame());
 		
 		ChatGameQueue chatGameQueue = new ChatGameQueue();
 		ChatGameRegistry.fillQueue(chatGameQueue);
 		chatGameQueue.startQueue();
-		
+
 		ChatGameEvents events = new ChatGameEvents();
 		ChatGameHandler.addListener(events);
 		
@@ -51,30 +53,14 @@ public class Main extends JavaPlugin {
 		
 		CommandHandler commandHandler = new CommandHandler();
 		getCommand("cgreward").setExecutor(commandHandler);
+		getCommand("cgskip").setExecutor(commandHandler);
 		
 		logger.info(name + " " + version + " enabled.");
 	}
 	
 	@Override
 	public void onDisable () {
-		
 		logger.info(name + " " + version + " disabled.");
-	}
-	
-	/**
-	 * Get the name of the plugin.
-	 * @return
-	 */
-	public static String getPluginName () {
-		return name;
-	}
-	
-	/**
-	 * Get current version of the plugin.
-	 * @return
-	 */
-	public static String getPluginVersion () {
-		return version;
 	}
 	
 }

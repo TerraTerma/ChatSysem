@@ -8,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import chatgame.event.handler.TurnBasedChatEventHandler;
-import chatgame.event.listener.ChatGameListener;
 import chatgame.event.listener.TurnBasedChatListener;
 import main.Main;
 

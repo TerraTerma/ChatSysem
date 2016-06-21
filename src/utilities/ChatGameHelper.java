@@ -8,20 +8,20 @@ import main.Main;
 
 public class ChatGameHelper {
 
-	private static Main main;
+	private static Main mainPlugin;
 	private static BukkitScheduler scheduler;
 	
 	public ChatGameHelper (Main main) {
-		ChatGameHelper.main = main;
+		mainPlugin = main;
 		scheduler = Bukkit.getScheduler();
 	}
 	
 	public static BukkitTask runRepeatingTask (Runnable runnable, long start, long interval) {
-		return scheduler.runTaskTimer(main, runnable, start, interval);
+		return scheduler.runTaskTimer(mainPlugin, runnable, start, interval);
 	}
 	
 	public static BukkitTask runDelayedTask (Runnable runnable, long delay) {
-		return scheduler.runTaskLater(main, runnable, delay);
+		return scheduler.runTaskLater(mainPlugin, runnable, delay);
 	}
 	
 }

@@ -4,6 +4,6 @@ import chatgame.event.TurnBasedChatEvent;
 
 public interface TurnBasedChatListener extends ChatGameListener {
 
-	public void onTurnBasedChat (TurnBasedChatEvent event);
+	void onTurnBasedChat (TurnBasedChatEvent event);
 	
 }
