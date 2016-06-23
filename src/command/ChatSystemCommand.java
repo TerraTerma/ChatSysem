@@ -14,6 +14,6 @@ abstract class ChatSystemCommand {
 		return name;
 	}
 
-	abstract void run (CommandSender sender, String... args);
+	abstract void run (CommandSender sender, Object... args);
 
 }

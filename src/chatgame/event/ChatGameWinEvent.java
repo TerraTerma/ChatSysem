@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import chatgame.ChatGame;
 
-public class ChatGameWinEvent extends ChatGameEndEvent {
+public class ChatGameWinEvent extends ChatGameEvent {
 
 	private Player winner;
 

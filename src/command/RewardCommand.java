@@ -9,14 +9,14 @@ import logan.reward_api.main.Reward;
 import logan.reward_api.main.RewardStore;
 import utilities.ChatHelper;
 
-class RewardCommand extends ChatSystemCommand {
+public class RewardCommand extends ChatSystemCommand {
 
-	RewardCommand() {
+	public RewardCommand() {
 		super("cgreward");
 	}
 
 	@Override
-	public void run (CommandSender sender, String[] args) {
+	public void run (CommandSender sender, Object... args) {
 
 		if (!(sender instanceof Player)) {
 			sender.sendMessage("You must be a player.");

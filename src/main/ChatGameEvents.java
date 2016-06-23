@@ -1,60 +1,37 @@
 package main;
 
-import chatgame.ChatGame;
 import chatgame.event.ChatGameEndEvent;
-import chatgame.event.ChatGameLoseEvent;
+import chatgame.event.ChatGameEvent;
 import chatgame.event.ChatGameWinEvent;
-import chatgame.event.handler.EndEventHandler;
-import chatgame.event.listener.ChatGameEndListener;
-import chatgame.event.listener.ChatGameLoseListener;
-import chatgame.event.listener.ChatGameWinListener;
-import chatgame.letter.LetterGame;
-import org.bukkit.entity.Player;
+import chatgame.event.ChatGameListener;
 import utilities.ChatHelper;
 
-public class ChatGameEvents implements ChatGameWinListener,
-		ChatGameLoseListener, ChatGameEndListener {
+class ChatGameEvents implements ChatGameListener {
 
 	@Override
-	public void onChatGameLose(ChatGameLoseEvent event) {
-		
-		ChatGame chatGame = event.getChatGame();
-		
-		EndEventHandler.fireEvent(new ChatGameEndEvent(chatGame));
-		
-	}
+	public void onEventFire(ChatGameEvent event) {
 
-	@Override
-	public void onChatGameWin(ChatGameWinEvent event) {
-		
-		ChatGame chatGame = event.getChatGame();
-		Player winner = event.getWinner();
-		
-		ChatHelper.broadcastGreenMessage(winner.getName()
-				+ " won " + chatGame.getName() + "!");
-		
-		EndEventHandler.fireEvent(new ChatGameEndEvent(chatGame));
-		
-	}
-	
-	@Override
-	public void onChatGameEnd (ChatGameEndEvent event) {
-		
-		ChatGame chatGame = event.getChatGame();
+		ChatGameWinEvent winEvent;
+		ChatGameEndEvent endEvent;
 
-		chatGame.stop();
+		if (event instanceof ChatGameWinEvent) {
+			winEvent = (ChatGameWinEvent) event;
 
-		if (chatGame instanceof LetterGame) {
-			LetterGame letterGame = (LetterGame) chatGame;
-			ChatHelper.broadcastYellowMessage(chatGame.getName() + " has " +
-					"ended with a total of " + letterGame.getGuesses() + " " +
-					"guesses.");
-			return;
+			ChatHelper.broadcastGreenMessage(winEvent.getWinner().getName()
+			+ " has won " + winEvent.getChatGame().getName() + ".");
+
 		}
 
-		ChatHelper.broadcastRedMessage
-				(chatGame.getName() + " has ended.");
-		
+		if (event instanceof ChatGameEndEvent) {
+			endEvent = (ChatGameEndEvent) event;
+
+			ChatHelper.broadcastGoldMessage
+					(endEvent.getChatGame().getName() + " has ended.");
+
+		}
+
+		event.getChatGame().stop();
+
 	}
-	
+
 }

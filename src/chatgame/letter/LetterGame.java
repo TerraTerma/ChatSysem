@@ -2,20 +2,14 @@ package chatgame.letter;
 
 import java.util.Random;
 
+import chatgame.event.*;
 import org.bukkit.entity.Player;
 
 import chatgame.TurnBasedChatGame;
-import chatgame.event.ChatGameEndEvent;
-import chatgame.event.ChatGameWinEvent;
-import chatgame.event.TurnBasedChatEvent;
-import chatgame.event.handler.EndEventHandler;
-import chatgame.event.handler.WinEventHandler;
-import chatgame.event.listener.TurnBasedChatListener;
 import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
 
-public class LetterGame extends TurnBasedChatGame implements
-		TurnBasedChatListener {
+public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 
 	private char currentLetter;
 	private int guesses;
@@ -25,10 +19,6 @@ public class LetterGame extends TurnBasedChatGame implements
 	
 	public LetterGame() {
 		super("Guess the Letter", 1, 2, 30);
-	}
-
-	public int getGuesses () {
-		return guesses;
 	}
 
 	@Override
@@ -55,26 +45,25 @@ public class LetterGame extends TurnBasedChatGame implements
 	}
 
 	@Override
-	public void onTurnBasedChat(TurnBasedChatEvent event) {
+	public void onEventFire(ChatGameEvent event) {
 		Player player = null;
 		try {
 			player = getNextPlayer();
 		} catch (EmptyQueueException e) {
-			EndEventHandler.fireEvent(new ChatGameEndEvent(this));
+			ChatGameHandler.fireEvent(new ChatGameEndEvent(this));
 		}
-		
+
 		System.out.println("The next player is " + player.getName() + ".");
-		
+
 		char guessedChar = message.charAt(0);
-		
+
 		guesses++;
-		
+
 		if (guessedChar != currentLetter) {
 			ChatHelper.sendRedMessage(player, "Nope!");
 			System.out.println("Looks like he guessed wrong.");
 		}
-		
-		else WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
+
+		else ChatGameHandler.fireEvent(new ChatGameWinEvent(this, player));
 	}
-	
 }

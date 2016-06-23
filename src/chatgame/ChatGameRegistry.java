@@ -3,12 +3,12 @@ package chatgame;
 import java.util.ArrayList;
 import java.util.List;
 
+import chatgame.event.ChatGameHandler;
+import chatgame.event.ChatGameListener;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import chatgame.event.handler.TurnBasedChatEventHandler;
-import chatgame.event.listener.TurnBasedChatListener;
 import main.Main;
 
 public class ChatGameRegistry {
@@ -49,9 +49,9 @@ public class ChatGameRegistry {
 	}
 	
 	private static void registerCustomEvents (ChatGame chatGame) {
-		if (chatGame instanceof TurnBasedChatListener)
-			TurnBasedChatEventHandler.addListener
-			((TurnBasedChatListener) chatGame);
+		if (chatGame instanceof ChatGameListener)
+			ChatGameHandler.addListener
+                    ((ChatGameListener) chatGame);
 	}
 	
 }

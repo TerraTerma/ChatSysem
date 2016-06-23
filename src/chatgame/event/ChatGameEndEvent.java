@@ -2,11 +2,12 @@ package chatgame.event;
 
 import chatgame.ChatGame;
 
-public class ChatGameEndEvent {
+public class ChatGameEndEvent extends ChatGameEvent {
 
 	private ChatGame chatGame;
 	
 	public ChatGameEndEvent (ChatGame chatGame) {
+		super (chatGame);
 		this.chatGame = chatGame;
 	}
 	

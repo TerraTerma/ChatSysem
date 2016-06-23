@@ -3,11 +3,12 @@ package chatgame.reaction;
 import java.util.List;
 import java.util.Random;
 
+import chatgame.event.ChatGameHandler;
+import chatgame.event.ChatGameListener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
 import chatgame.event.ChatGameWinEvent;
-import chatgame.event.handler.WinEventHandler;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
@@ -63,7 +64,7 @@ public class ReactionGame extends ChatGame {
 		
 		if (!message.equalsIgnoreCase(currentWord)) return;
 			guessed = true;
-			WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
+			ChatGameHandler.fireEvent(new ChatGameWinEvent(this, player));
 	}
 	
 }

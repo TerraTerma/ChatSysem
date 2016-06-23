@@ -5,17 +5,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class CommandHandler implements CommandExecutor {
 
-	private ChatSystemCommand[] commands = {
-			new RewardCommand(),
-			new SkipCommand(),
-			new ForceCommand()
-	};
-	
 	@Override
 	public boolean onCommand (CommandSender sender, Command command, String
 			label, String[] args) {
+
+		List<ChatSystemCommand> commands;
+		commands = CommandRegistry.getCommandList();
 
 		for (ChatSystemCommand chatSystemCommand : commands) {
 

@@ -10,16 +10,16 @@ import utilities.ChatHelper;
  */
 public class SkipCommand extends ChatSystemCommand {
 
-    SkipCommand () {
+    public SkipCommand () {
         super("cgskip");
     }
 
     @Override
-    void run(CommandSender sender, String... args) {
+    void run(CommandSender sender, Object... args) {
 
         ChatGameQueue.startRandomGame();
 
-        ChatHelper.sendDarkBlueMessage(sender,
+        ChatHelper.sendBlueMessage(sender,
                 "Skipped the current chat game.");
 
     }

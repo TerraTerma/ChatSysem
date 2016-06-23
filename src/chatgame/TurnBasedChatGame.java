@@ -6,12 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import chatgame.event.ChatGameHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.event.TurnBasedChatEvent;
-import chatgame.event.handler.TurnBasedChatEventHandler;
 import exceptions.CorruptedListException;
 import exceptions.EmptyQueueException;
 import utilities.ChatHelper;
@@ -118,9 +118,9 @@ public abstract class TurnBasedChatGame extends ChatGame {
 		super.onPlayerChat(event);
 		
 		if (players.contains(player)) {
-			TurnBasedChatEventHandler.fireEvent
-			(new TurnBasedChatEvent(player, message));
-			
+			ChatGameHandler.fireEvent
+					(new TurnBasedChatEvent(this, player, message));
+
 			System.out.println("Fired event.");
 		}
 		

@@ -3,15 +3,15 @@ import java.util.logging.Logger;
 
 import chatgame.hangman.HangmanGame;
 import chatgame.reaction.ReactionGame;
+import command.*;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
-import chatgame.event.handler.ChatGameHandler;
+import chatgame.event.ChatGameHandler;
 import chatgame.letter.LetterGame;
-import command.CommandHandler;
 import event.ChatEvent;
 import event.MentionEvent;
 import utilities.ChatGameHelper;
@@ -49,11 +49,12 @@ public class Main extends JavaPlugin {
 		
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
-		
-		CommandHandler commandHandler = new CommandHandler();
-		getCommand("cgreward").setExecutor(commandHandler);
-		getCommand("cgskip").setExecutor(commandHandler);
-		getCommand("cgforce").setExecutor(commandHandler);
+
+		new CommandRegistry(this);
+		CommandRegistry.registerCommand(new InfoCommand(this));
+		CommandRegistry.registerCommand(new ForceCommand());
+		CommandRegistry.registerCommand(new RewardCommand());
+		CommandRegistry.registerCommand(new SkipCommand());
 		
 		logger.info(name + " " + version + " enabled.");
 	}

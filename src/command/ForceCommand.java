@@ -7,18 +7,18 @@ import utilities.ChatHelper;
 
 import java.io.Console;
 
-class ForceCommand extends ChatSystemCommand {
+public class ForceCommand extends ChatSystemCommand {
 
-    ForceCommand () {
+    public ForceCommand () {
         super("cgforce");
     }
 
     @Override
-    void run(CommandSender sender, String... args) {
+    void run(CommandSender sender, Object... args) {
 
         String gameName;
 
-        if (args.length == 1) gameName = args[0];
+        if (args.length == 1) gameName = args[0].toString();
         else return;
 
         if (!ChatGameQueue.forceStartGame(gameName))

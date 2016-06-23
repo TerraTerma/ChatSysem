@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import chatgame.event.ChatGameEvent;
+import chatgame.event.ChatGameHandler;
+import chatgame.event.ChatGameListener;
 import org.bukkit.ChatColor;
 
 import chatgame.TurnBasedChatGame;
 import chatgame.event.ChatGameWinEvent;
 import chatgame.event.TurnBasedChatEvent;
-import chatgame.event.handler.WinEventHandler;
-import chatgame.event.listener.TurnBasedChatListener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
-public class HangmanGame extends TurnBasedChatGame implements TurnBasedChatListener {
+public class HangmanGame extends TurnBasedChatGame implements ChatGameListener {
 
 	private List<String> phrases;
 	private String currentPhrase;
@@ -74,22 +75,25 @@ public class HangmanGame extends TurnBasedChatGame implements TurnBasedChatListe
 	}
 
 	@Override
-	public void onTurnBasedChat(TurnBasedChatEvent event) {
+	public  void onEventFire(ChatGameEvent event) {
+
+		if (!(event instanceof TurnBasedChatEvent)) return;
+
 		char[] messageChars = new char[message.length()];
 		message.getChars(0, messageChars.length, messageChars, 0);
-		
+
 		if (messageChars.length == 1)
 			guessedChars.add(messageChars[0]);
-		
+
 		if (Arrays.equals(getCharBoard(), phraseChars)) {
 			sendAll (ChatColor.GREEN, player.getName() + " guessed the final letter.");
-			WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
+
+			ChatGameHandler.fireEvent(new ChatGameWinEvent(this, player));
 		}
-			
-		if (Arrays.equals(messageChars, phraseChars)) {
-			WinEventHandler.fireEvent(new ChatGameWinEvent(this, player));
-		}
-		
+
+		if (Arrays.equals(messageChars, phraseChars))
+			ChatGameHandler.fireEvent(new ChatGameWinEvent(this, player));
+
 		sendAll (ChatColor.YELLOW, getStringBoard());
 	}
 

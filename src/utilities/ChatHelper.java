@@ -1,9 +1,10 @@
 package utilities;
-import java.util.Collection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+
+import java.util.Collection;
 
 public abstract class ChatHelper {
 
@@ -135,6 +136,10 @@ public abstract class ChatHelper {
 		sender.sendMessage(ChatColor.DARK_GRAY + message);
 	}
 
+	public static void sendBlueMessage (CommandSender sender, String message) {
+		sender.sendMessage(ChatColor.BLUE + message);
+	}
+
 
 	public static void sendGreenMessage (Collection<CommandSender> sender,
 										 String
@@ -148,6 +153,12 @@ public abstract class ChatHelper {
 			message) {
 		sender.stream()
 		.forEach(e -> ChatHelper.sendAquaMessage(e, message));
+	}
+
+	public static void sendBlueMessage (Collection<CommandSender> sender,
+										String message) {
+		sender.stream()
+				.forEach(e -> ChatHelper.sendBlueMessage(e, message));
 	}
 
 	public static void sendRedMessage (Collection<CommandSender> sender, String
