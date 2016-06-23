@@ -1,16 +1,20 @@
 package command;
 
 import chatgame.ChatGameQueue;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import utilities.ChatHelper;
 
-/**
- * Created by Tre on 6/20/2016.
- */
-public class ForceCommand implements ChatSystemCommand {
+import java.io.Console;
+
+class ForceCommand extends ChatSystemCommand {
+
+    ForceCommand () {
+        super("cgforce");
+    }
 
     @Override
-    public void run(Player player, String[] args) {
+    void run(CommandSender sender, String... args) {
 
         String gameName;
 
@@ -18,8 +22,9 @@ public class ForceCommand implements ChatSystemCommand {
         else return;
 
         if (!ChatGameQueue.forceStartGame(gameName))
-            ChatHelper.sendAquaMessage(player, "Couldn't find the game " +
+            ChatHelper.sendAquaMessage(sender, "Couldn't find the game " +
                     gameName + ".");
 
     }
+
 }

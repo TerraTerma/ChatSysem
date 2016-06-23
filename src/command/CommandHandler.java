@@ -7,28 +7,24 @@ import org.bukkit.entity.Player;
 
 public class CommandHandler implements CommandExecutor {
 
-	private RewardCommand rewardCommand = new RewardCommand();
-    private SkipCommand skipCommand = new SkipCommand();
-	private ForceCommand forceCommand = new ForceCommand();
+	private ChatSystemCommand[] commands = {
+			new RewardCommand(),
+			new SkipCommand(),
+			new ForceCommand()
+	};
 	
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
-		Player player;
-		
-		if (!(sender instanceof Player)) {
-			sender.sendMessage("You must be a player.");
-			return true;
+	public boolean onCommand (CommandSender sender, Command command, String
+			label, String[] args) {
+
+		for (ChatSystemCommand chatSystemCommand : commands) {
+
+			String name = chatSystemCommand.getName();
+
+			if (label.equalsIgnoreCase(name))
+				chatSystemCommand.run(sender, args);
+
 		}
-		
-		player = (Player) sender;
-		
-		if (label.equalsIgnoreCase("cgreward"))
-			rewardCommand.run(player, args);
-        else if (label.equalsIgnoreCase("cgskip"))
-            skipCommand.run(player, args);
-		else if (label.equalsIgnoreCase("cgforce"))
-			forceCommand.run(player, args);
 		
 		return false;
 	}

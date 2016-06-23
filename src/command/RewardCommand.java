@@ -2,20 +2,30 @@ package command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import logan.reward_api.main.Reward;
 import logan.reward_api.main.RewardStore;
 import utilities.ChatHelper;
 
-public class RewardCommand implements ChatSystemCommand {
+class RewardCommand extends ChatSystemCommand {
+
+	RewardCommand() {
+		super("cgreward");
+	}
 
 	@Override
-	public void run (Player player, String[] args) {
-		
-		ChatHelper.sendGrayMessage(player, "Running rewards command.");
-		
-		Reward reward = new Reward(player)
+	public void run (CommandSender sender, String[] args) {
+
+		if (!(sender instanceof Player)) {
+			sender.sendMessage("You must be a player.");
+			return;
+		}
+
+		ChatHelper.sendGrayMessage(sender, "Running rewards command.");
+
+		Reward reward = new Reward((Player) sender)
 				.setMaterial(Material.DIAMOND)
 				.setAmount(2)
 				.setDisplayName(ChatColor.BLUE + "You got a sexy diamond.")
@@ -23,7 +33,7 @@ public class RewardCommand implements ChatSystemCommand {
 		
 		RewardStore.put(reward);
 		
-		ChatHelper.sendGrayMessage(player, "There has been a reward reserved for you!");
+		ChatHelper.sendGrayMessage(sender, "There has been a reward reserved for you!");
 		
 	}
 

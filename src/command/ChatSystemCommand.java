@@ -1,9 +1,19 @@
 package command;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 
-public interface ChatSystemCommand {
+abstract class ChatSystemCommand {
 
-	public void run (Player player, String[] args);
-	
+	private String name;
+
+	ChatSystemCommand (String name) {
+		this.name = name;
+	}
+
+	String getName () {
+		return name;
+	}
+
+	abstract void run (CommandSender sender, String... args);
+
 }
