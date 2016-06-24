@@ -24,17 +24,18 @@ public class ChatEvent implements Listener {
 		String newFormat;
 		
 		playerName = Hooker.getEssentials()
-				.getUser(player)
-				.getNickname();
+						   .getUser(player)
+						   .getNickname();
 		
 		try {
 			
 			newFormat = format.replaceAll("%player%", playerName);
 			
 		} catch (NullPointerException e) {
-			
+
+			String playerColor = ConfigSection.PLAYER_COLOR.getValue();
 			playerName = player.getDisplayName();
-			newFormat = format.replaceAll("%player%", playerName);
+			newFormat = format.replaceAll("%player%", playerColor + playerName);
 			
 		}
 		

@@ -41,7 +41,8 @@ public abstract class ChatGame implements Listener {
 	
 	public void start () {
 		running = true;
-		gameTask = ChatGameHelper.runRepeatingTask(new ChatGameRunnable(this), 20, 20);
+		gameTask = ChatGameHelper.runRepeatingTask
+				(new ChatGameRunnable(this), 20, 20);
 	}
 	
 	public void stop () {

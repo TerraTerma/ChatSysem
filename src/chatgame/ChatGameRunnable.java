@@ -26,8 +26,4 @@ class ChatGameRunnable implements Runnable {
 		
 	}
 	
-	protected int getRuntime () {
-		return runTime;
-	}
-	
 }

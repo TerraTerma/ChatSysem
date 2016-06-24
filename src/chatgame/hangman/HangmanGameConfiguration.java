@@ -5,11 +5,11 @@ import java.util.List;
 
 import chatgame.ChatGameConfiguration;
 
-public class HangmanGameConfiguration extends ChatGameConfiguration {
+class HangmanGameConfiguration extends ChatGameConfiguration {
 	
 	List<String> phrases;
 	
-	public HangmanGameConfiguration() {
+	HangmanGameConfiguration() {
 		super("hangman.yml");
 		
 		phrases = new ArrayList<>();
@@ -23,7 +23,7 @@ public class HangmanGameConfiguration extends ChatGameConfiguration {
 				.getStringList("phrases");
 	}
 	
-	public List<String> getPhrases () {
+	List<String> getPhrases () {
 		return phrases;
 	}
 	

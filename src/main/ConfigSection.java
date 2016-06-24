@@ -3,6 +3,7 @@ package main;
 public enum ConfigSection {
 	CHAT_FORMAT("chat.format", "&8(%world%&8) %prefix% %player%&8: %message%"),
 	WORLD_COLOR("chat.world-color", "&7"),
+	PLAYER_COLOR("chat.player-color", "&7"),
 	MESSAGE_COLOR("chat.message-color", "&d"),
 	MENTION_FORMAT("mention.format", "&b&o@"),
 	MENTION_AFK_FORMAT("mention.afk-prefix", "&3&o@"),

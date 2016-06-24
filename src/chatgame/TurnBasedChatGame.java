@@ -98,7 +98,7 @@ public abstract class TurnBasedChatGame extends ChatGame {
 	public void removePlayer (Player player) {
 		players.remove(player);
 		playerQueue.remove(player);
-		
+
 		try {
 			checkSize();
 		} catch (CorruptedListException e) {
@@ -109,8 +109,7 @@ public abstract class TurnBasedChatGame extends ChatGame {
 	}
 	
 	protected void sendAll (ChatColor chatColor, String message) {
-		players.stream()
-		.forEach(e -> e.sendMessage(chatColor + message));
+		players.forEach(e -> e.sendMessage(chatColor + message));
 	}
 	
 	@Override

@@ -20,8 +20,10 @@ public class CommandHandler implements CommandExecutor {
 
 			String name = chatSystemCommand.getName();
 
-			if (label.equalsIgnoreCase(name))
+			if (label.equalsIgnoreCase(name)) {
 				chatSystemCommand.run(sender, args);
+				return true;
+			}
 
 		}
 		

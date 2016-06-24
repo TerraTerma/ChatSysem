@@ -16,12 +16,12 @@ public class ChatGameChatListener implements Listener {
 	public void onPlayerChat (AsyncPlayerChatEvent event) {
 		
 		Optional<ChatGame> chatGame = chatGames.stream()
-		.filter(ChatGame::isRunning)
-		.findAny();
+											   .filter(ChatGame::isRunning)
+											   .findAny();
 		
 		if (chatGame.isPresent())
 			chatGame.get()
-			.onPlayerChat(event);
+					.onPlayerChat(event);
 		
 	}
 	

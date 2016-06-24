@@ -1,20 +1,22 @@
 package main;
-import java.util.logging.Logger;
-
-import chatgame.hangman.HangmanGame;
-import chatgame.reaction.ReactionGame;
-import command.*;
-import org.bukkit.Server;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
 import chatgame.event.ChatGameHandler;
+import chatgame.hangman.HangmanGame;
 import chatgame.letter.LetterGame;
+import chatgame.reaction.ReactionGame;
+import command.*;
 import event.ChatEvent;
 import event.MentionEvent;
+import net.minecraft.server.v1_10_R1.PacketPlayInFlying;
+import org.bukkit.Server;
+import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 import utilities.ChatGameHelper;
+
+import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
 
@@ -55,6 +57,7 @@ public class Main extends JavaPlugin {
 		CommandRegistry.registerCommand(new ForceCommand());
 		CommandRegistry.registerCommand(new RewardCommand());
 		CommandRegistry.registerCommand(new SkipCommand());
+		CommandRegistry.registerCommand(new ReloadCommand());
 		
 		logger.info(name + " " + version + " enabled.");
 	}

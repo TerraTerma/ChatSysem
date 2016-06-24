@@ -1,15 +1,15 @@
 package chatgame.reaction;
 
+import chatgame.ChatGameConfiguration;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import chatgame.ChatGameConfiguration;
-
-public class ReactionGameConfiguration extends ChatGameConfiguration {
+class ReactionGameConfiguration extends ChatGameConfiguration {
 
 	private List<String> words;
 	
-	public ReactionGameConfiguration() {
+	ReactionGameConfiguration() {
 		super("reaction.yml");
 		
 		words = new ArrayList<>();
@@ -22,7 +22,7 @@ public class ReactionGameConfiguration extends ChatGameConfiguration {
 		save();
 	}
 
-	public List<String> getWords () {
+	List<String> getWords () {
 		return super.getYamlConfiguration().getStringList("words");
 	}
 	

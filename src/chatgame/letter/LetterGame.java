@@ -14,9 +14,6 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 	private char currentLetter;
 	private int guesses;
 	
-	private final String alphabet = 
-			"abcdefghijklmnopqrstuvwxyz";
-	
 	public LetterGame() {
 		super("Guess the Letter", 1, 2, 30);
 	}
@@ -24,7 +21,10 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 	@Override
 	public void start() {
 		super.start();
-		
+
+		final String alphabet =
+				"abcdefghijklmnopqrstuvwxyz";
+
 		int index = new Random()
 		.nextInt(alphabet.length());
 		
@@ -34,6 +34,10 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 		
 		ChatHelper.broadcastYellowMessage(getName() + " has started.");
 		ChatHelper.broadcastYellowMessage("Whoever guesses the letter first wins!");
+	}
+
+	public int getGuesses () {
+		return guesses;
 	}
 
 	@Override
@@ -51,6 +55,7 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 			player = getNextPlayer();
 		} catch (EmptyQueueException e) {
 			ChatGameHandler.fireEvent(new ChatGameEndEvent(this));
+			System.out.println("Unexpected end of " + getName() + ".");
 		}
 
 		System.out.println("The next player is " + player.getName() + ".");
@@ -60,6 +65,7 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 		guesses++;
 
 		if (guessedChar != currentLetter) {
+
 			ChatHelper.sendRedMessage(player, "Nope!");
 			System.out.println("Looks like he guessed wrong.");
 		}

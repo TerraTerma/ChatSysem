@@ -2,6 +2,7 @@ package chatgame;
 
 import java.util.List;
 
+import chatgame.event.ChatGameListener;
 import utilities.ChatGameHelper;
 
 class IntermissionScheduler implements Runnable {
@@ -11,12 +12,12 @@ class IntermissionScheduler implements Runnable {
 		List<ChatGame> chatGames = ChatGameQueue.getChatGames();
 		
 		boolean runningGame = chatGames.stream()
-		.anyMatch(ChatGame::isRunning);
+									   .anyMatch(ChatGame::isRunning);
 		
 		ChatGameIntermission chatGameIntermission = 
 				ChatGameQueue.getChatGameIntermission();
 		
-		boolean intermissionInProgress = 
+		boolean intermissionInProgress =
 				chatGameIntermission
 				.isInProgress();
 		
