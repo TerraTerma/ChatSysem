@@ -3,9 +3,14 @@ name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx]
 version: 0.7.5
 commands:
-  chatsystem:
-    description: Main ChatSystem command.
-    aliases: cs
+  csinfo:
+    description: View info about ChatSystem.
+    aliases: csi
+  csreload:
+    description: Reloads the chat configuration.
+    permissions: cs.admin
+    usage: /csreload
+    aliases: csr
   cgreward:
     description: Give yourself a chatgame reward.
     permissions: cg.admin

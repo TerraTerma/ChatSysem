@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ChatConfig {
@@ -27,9 +28,13 @@ public class ChatConfig {
 	
 	public static void reload () {
 
+		load();
+
 		for (ConfigSection configSection : ConfigSection.values()) {
 			if(config.isSet(configSection.getPath())) {
+				System.out.println("Before the set: " + configSection.getValue()) ;
 				configSection.setValue(config.get(configSection.getPath()));
+				System.out.println("After the set: " + configSection.getValue());
 				System.out.println("Setting the config value.");
 			}
 			else {
@@ -38,12 +43,22 @@ public class ChatConfig {
 			}
 		}
 
+		// check to see if the config values were actually set
 		Arrays.stream(ConfigSection.values()).forEach(e -> System.out.println(e.getPath() + " " + e.getValue()));
+
 	}
 
 	private static void set (ConfigSection section, Object value) {
 		config.set(section.getPath(), value);
 		section.setValue(value);
+	}
+
+	private static void load () {
+		try {
+			config.load(file);
+		} catch (IOException | InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void save () {
