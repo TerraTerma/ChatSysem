@@ -3,6 +3,7 @@ package chatgame;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ChatGameConfiguration {
@@ -27,7 +28,15 @@ public class ChatGameConfiguration {
 		if (yamlConfiguration.isSet(path)) return;
 		yamlConfiguration.set(path, value);
 	}
-	
+
+	protected void load () {
+		try {
+			yamlConfiguration.load(file);
+		} catch (IOException | InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+
 	protected void save () {
 		try {
 			yamlConfiguration.save(file);

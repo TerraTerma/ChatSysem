@@ -27,24 +27,11 @@ public class ChatConfig {
 	}
 	
 	public static void reload () {
-
 		load();
-
 		for (ConfigSection configSection : ConfigSection.values()) {
-			if(config.isSet(configSection.getPath())) {
-				System.out.println("Before the set: " + configSection.getValue()) ;
-				configSection.setValue(config.get(configSection.getPath()));
-				System.out.println("After the set: " + configSection.getValue());
-				System.out.println("Setting the config value.");
-			}
-			else {
-				set(configSection, configSection.getDefaultValue());
-				System.out.println("Creating the config value.");
-			}
+			if(config.isSet(configSection.getPath())) configSection.setValue(config.get(configSection.getPath()));
+			else set(configSection, configSection.getDefaultValue());
 		}
-
-		// check to see if the config values were actually set
-		Arrays.stream(ConfigSection.values()).forEach(e -> System.out.println(e.getPath() + " " + e.getValue()));
 
 	}
 
