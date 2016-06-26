@@ -20,25 +20,26 @@ public class InfoCommand extends ChatSystemCommand {
     }
 
     @Override
-    void run(CommandSender sender, Object... args) {
+    boolean run(CommandSender sender, Object... args) {
 
         String name = main.getName();
         String version = main.getDescription().getVersion();
 
         ChatHelper.sendYellowMessage(sender, name + " " + version);
 
-        Player player = (Player) sender;
+//        Player player = (Player) sender;
 
-        /*
-        For testing packets
-         */
-        for (Field field : PacketPlayInFlying.class.getFields()) {
-            player.sendMessage("Field: " + field.getName());
-        }
+//        /*
+//        For testing packets
+//         */
+//        for (Field field : PacketPlayInFlying.class.getFields()) {
+//            player.sendMessage("Field: " + field.getName());
+//        }
+//
+//        for (Method method : PacketPlayInFlying.class.getMethods()) {
+//            player.sendMessage("Method: " + method.getName());
+//        }
 
-        for (Method method : PacketPlayInFlying.class.getMethods()) {
-            player.sendMessage("Method: " + method.getName());
-        }
-
+        return true;
     }
 }

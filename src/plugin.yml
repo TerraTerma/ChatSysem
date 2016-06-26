@@ -9,7 +9,7 @@ commands:
   csreload:
     description: Reloads the chat configuration.
     permissions: cs.admin
-    usage: /csreload
+    usage: /csreload [game1] [game2] ...
     aliases: csr
   cgreward:
     description: Give yourself a chatgame reward.
@@ -24,3 +24,13 @@ commands:
     permissions: cg.admin
     usage: /cgf <name>
     aliases: cgf
+  cgenable:
+    description: Enable a chat game.
+    permissions: cg.admin
+    usage: /cgenable <name>
+    aliases: cge
+  cgdisable:
+    description: Disable a chat game.
+    permissions: cg.admin
+    usage: /cgdisable <name>
+    aliases: cgd

@@ -2,6 +2,7 @@ package chatgame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import chatgame.event.ChatGameHandler;
 import chatgame.event.ChatGameListener;
@@ -25,6 +26,16 @@ public class ChatGameRegistry {
         chatGameChatListener = new ChatGameChatListener();
     }
 
+    public static List<ChatGame> getChatGames () {
+        return  chatGames;
+    }
+
+    public static Optional<ChatGame> getChatGame (String name) {
+        return chatGames.stream()
+                        .filter(e -> e.getName().equalsIgnoreCase(name))
+                        .findAny();
+    }
+
     public static void fillQueue() {
         chatGames.forEach(ChatGameQueue::addGame);
     }
@@ -37,8 +48,9 @@ public class ChatGameRegistry {
         chatGameChatListener.listenOn(chatGame);
 
         HandlerList.unregisterAll(chatGameChatListener);
-
         registerEvents(chatGameChatListener, main);
+
+        ChatGameQueue.addGame(chatGame);
     }
 
     private static void registerEvents(Listener listener, JavaPlugin javaPlugin) {

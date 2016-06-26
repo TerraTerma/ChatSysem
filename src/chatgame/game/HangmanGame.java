@@ -1,12 +1,14 @@
-package chatgame.hangman;
+package chatgame.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import chatgame.ReloadableChatGame;
 import chatgame.event.ChatGameEvent;
 import chatgame.event.ChatGameHandler;
 import chatgame.event.ChatGameListener;
+import configuration.HangmanGameConfiguration;
 import org.bukkit.ChatColor;
 
 import chatgame.TurnBasedChatGame;
@@ -16,30 +18,32 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
-public class HangmanGame extends TurnBasedChatGame implements ChatGameListener {
+public class HangmanGame extends TurnBasedChatGame implements ChatGameListener,
+		ReloadableChatGame {
 
 	private List<String> phrases;
-	private String currentPhrase;
-	
+
 	private char[] phraseChars;
 	private char[] correctChars;
 	private List<Character> guessedChars;
 	
-	private HangmanGameConfiguration hangmanGameConfiguration;
-	
 	public HangmanGame() {
 		super("Hangman", 5, 2, 120);
-		
-		hangmanGameConfiguration = new HangmanGameConfiguration();
+
 		phrases = new ArrayList<>
-		(hangmanGameConfiguration.getPhrases());
+		((List<String>) HangmanGameConfiguration.PHRASES.getValue());
 	}
-	
+
+	@Override
+	public void reload () {
+		phrases = (List<String>) HangmanGameConfiguration.PHRASES.getValue();
+	}
+
 	@Override
 	public void start () {
 		super.start();
 		
-		currentPhrase = ListHelper.selectRandom(phrases);
+		String currentPhrase = ListHelper.selectRandom(phrases);
 
 		int length = currentPhrase.length();
 		
@@ -53,7 +57,7 @@ public class HangmanGame extends TurnBasedChatGame implements ChatGameListener {
 		ChatHelper.broadcastPinkMessage(getName() + " has started.");
 	}
 	
-	public char[] getCharBoard () {
+	private char[] getCharBoard () {
 		for (int i = 0; i < phraseChars.length; i++)
 			if (guessedChars.contains(phraseChars[i]))
 				correctChars[i] = phraseChars[i];
@@ -64,7 +68,7 @@ public class HangmanGame extends TurnBasedChatGame implements ChatGameListener {
 		return correctChars;
 	}
 	
-	public String getStringBoard () {
+	private String getStringBoard () {
 		return String.valueOf(getCharBoard());
 	}
 
@@ -75,7 +79,7 @@ public class HangmanGame extends TurnBasedChatGame implements ChatGameListener {
 	}
 
 	@Override
-	public  void onEventFire(ChatGameEvent event) {
+	public void onEventFire(ChatGameEvent event) {
 
 		if (!(event instanceof TurnBasedChatEvent)) return;
 

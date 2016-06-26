@@ -35,7 +35,7 @@ public abstract class ChatGame implements Listener {
 		return maxTime;
 	}
 	
-	boolean isRunning () {
+	public boolean isRunning () {
 		return running;
 	}
 	

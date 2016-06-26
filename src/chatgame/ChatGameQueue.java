@@ -19,8 +19,14 @@ public class ChatGameQueue {
 	private static IntermissionScheduler intermissionScheduler = new
 			IntermissionScheduler();
 
-	static List<ChatGame> getChatGames () {
+	public static List<ChatGame> getChatGames () {
 		return chatGames;
+	}
+
+	public static Optional<ChatGame> getChatGame (String name) {
+		return chatGames.stream()
+						.filter(e -> e.getName().equalsIgnoreCase(name))
+						.findAny();
 	}
 	
 	static ChatGameIntermission getChatGameIntermission () {
@@ -31,8 +37,23 @@ public class ChatGameQueue {
 		intermissionScheduler.beginMonitor();
 	}
 	
-	static void addGame (ChatGame game) {
+	public static boolean addGame (ChatGame game) {
+		if (chatGames.contains(game)) return false;
 		chatGames.add(game);
+		return true;
+	}
+
+	public static void removeGame (ChatGame chatGame) {
+		Optional<ChatGame> chatGameOptional =
+				chatGames.stream()
+						 .filter(e -> e.equals(chatGame))
+						 .findAny();
+
+		if (chatGameOptional.isPresent()) {
+			ChatGame game = chatGameOptional.get();
+			chatGames.remove(game);
+		}
+
 	}
 
 	public static boolean forceStartGame (String name) {
@@ -85,6 +106,13 @@ public class ChatGameQueue {
 	private static void stopRunningGame () {
 		Optional<ChatGame> chatGame = getRunningGame();
 		if (chatGame.isPresent()) chatGame.get().stop();
+	}
+
+	public static void reloadGames () {
+		chatGames.forEach(e ->{
+			if (e instanceof ReloadableChatGame)
+				((ReloadableChatGame) e).reload();
+		});
 	}
 	
 }

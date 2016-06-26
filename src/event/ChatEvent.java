@@ -1,4 +1,5 @@
 package event;
+import configuration.ChatConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -6,7 +7,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
-import main.ConfigSection;
 import main.Hooker;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
@@ -20,7 +20,7 @@ public class ChatEvent implements Listener {
 		String message = event.getMessage();
 		String playerName;
 		
-		String format = ConfigSection.CHAT_FORMAT.getValue();
+		String format = (String) ChatConfiguration.CHAT_FORMAT.getValue();
 		String newFormat;
 		
 		playerName = Hooker.getEssentials()
@@ -33,7 +33,7 @@ public class ChatEvent implements Listener {
 			
 		} catch (NullPointerException e) {
 
-			String playerColor = ConfigSection.PLAYER_COLOR.getValue();
+			String playerColor = (String) ChatConfiguration.PLAYER_COLOR.getValue();
 			playerName = player.getDisplayName();
 			newFormat = format.replaceAll("%player%", playerColor + playerName);
 			
@@ -43,10 +43,10 @@ public class ChatEvent implements Listener {
 				.getMVWorldManager()
 				.getMVWorld(player.getWorld());
 				
-		String worldColor = ConfigSection.WORLD_COLOR.getValue();
+		String worldColor = (String) ChatConfiguration.WORLD_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%world%", worldColor + world.getAlias());
 		
-		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
+		String messageColor = (String) ChatConfiguration.MESSAGE_COLOR.getValue();
 		newFormat = newFormat.replaceAll("%message%", messageColor + message);
 		
 		String prefix = PermissionsEx.getUser(player)

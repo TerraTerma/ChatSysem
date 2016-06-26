@@ -1,6 +1,7 @@
 package event;
 import java.util.Optional;
 
+import configuration.ChatConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -12,7 +13,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 
-import main.ConfigSection;
 import main.Hooker;
 import utilities.ChatHelper;
 
@@ -32,18 +32,18 @@ public class MentionEvent implements Listener {
 		String playerName = player.getName();
 		
 		Location playerLoc = player.getLocation();
-		String soundName = ConfigSection.MENTION_SOUND.getValue();
+		String soundName = (String) ChatConfiguration.MENTION_SOUND.getValue();
 		Sound sound = Sound.valueOf(soundName);
 		player.playSound(playerLoc, sound, 0.75f, 1f);
 
-		String messageColor = ConfigSection.MESSAGE_COLOR.getValue();
+		String messageColor = (String) ChatConfiguration.MESSAGE_COLOR.getValue();
 		
 		Essentials essentials = Hooker.getEssentials();
 		User user = essentials.getUser(player);
 		
 		String mentionPrefix;
-		if (user.isAfk()) mentionPrefix = ConfigSection.MENTION_AFK_FORMAT.getValue();
-		else mentionPrefix = ConfigSection.MENTION_FORMAT.getValue();
+		if (user.isAfk()) mentionPrefix = (String) ChatConfiguration.MENTION_AFK_FORMAT.getValue();
+		else mentionPrefix = (String) ChatConfiguration.MENTION_FORMAT.getValue();
 			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		

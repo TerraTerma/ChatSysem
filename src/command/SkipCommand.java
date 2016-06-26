@@ -5,9 +5,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import utilities.ChatHelper;
 
-/**
- * Created by Tre on 6/20/2016.
- */
 public class SkipCommand extends ChatSystemCommand {
 
     public SkipCommand () {
@@ -15,12 +12,12 @@ public class SkipCommand extends ChatSystemCommand {
     }
 
     @Override
-    void run(CommandSender sender, Object... args) {
+    boolean run(CommandSender sender, Object... args) {
 
         ChatGameQueue.startRandomGame();
-
         ChatHelper.sendBlueMessage(sender,
                 "Skipped the current chat game.");
 
+        return true;
     }
 }

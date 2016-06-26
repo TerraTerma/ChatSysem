@@ -2,6 +2,7 @@ package chatgame.letter;
 
 import java.util.Random;
 
+import chatgame.ChatGame;
 import chatgame.event.*;
 import org.bukkit.entity.Player;
 
@@ -15,7 +16,7 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 	private int guesses;
 	
 	public LetterGame() {
-		super("Guess the Letter", 1, 2, 30);
+		super("GuessTheLetter", 1, 2, 30);
 	}
 
 	@Override
@@ -50,6 +51,10 @@ public class LetterGame extends TurnBasedChatGame implements ChatGameListener {
 
 	@Override
 	public void onEventFire(ChatGameEvent event) {
+
+		ChatGame chatGame = event.getChatGame();
+		if (!(chatGame instanceof LetterGame)) return;
+
 		Player player = null;
 		try {
 			player = getNextPlayer();

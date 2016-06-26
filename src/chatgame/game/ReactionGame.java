@@ -1,10 +1,11 @@
-package chatgame.reaction;
+package chatgame.game;
 
 import java.util.List;
 import java.util.Random;
 
+import chatgame.ReloadableChatGame;
 import chatgame.event.ChatGameHandler;
-import chatgame.event.ChatGameListener;
+import configuration.ReactionGameConfiguration;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import chatgame.ChatGame;
@@ -12,7 +13,7 @@ import chatgame.event.ChatGameWinEvent;
 import utilities.ChatHelper;
 import utilities.ListHelper;
 
-public class ReactionGame extends ChatGame {
+public class ReactionGame extends ChatGame implements ReloadableChatGame {
 
 	private boolean guessed;
 	
@@ -20,16 +21,18 @@ public class ReactionGame extends ChatGame {
 	
 	private String currentWord;
 	
-	private ReactionGameConfiguration reactionGameConfiguration;
-	
 	public ReactionGame() {
 		super("Reaction", 1, 30);
-		
-		reactionGameConfiguration = new ReactionGameConfiguration();
-		
-		words = reactionGameConfiguration.getWords();
+
+		Object value = ReactionGameConfiguration.WORDS.getValue();
+		words = (List<String>) value;
 	}
-	
+
+	@Override
+	public void reload () {
+		words = (List<String>) ReactionGameConfiguration.WORDS.getValue();
+	}
+
 	@Override
 	public void start() {
 		super.start();

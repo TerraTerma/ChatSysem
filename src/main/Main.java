@@ -3,15 +3,15 @@ package main;
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
 import chatgame.event.ChatGameHandler;
-import chatgame.hangman.HangmanGame;
+import chatgame.game.HangmanGame;
 import chatgame.letter.LetterGame;
-import chatgame.reaction.ReactionGame;
+import chatgame.game.ReactionGame;
 import command.*;
+import configuration.ChatConfiguration;
+import configuration.ConfigurationManager;
 import event.ChatEvent;
 import event.MentionEvent;
-import net.minecraft.server.v1_10_R1.PacketPlayInFlying;
 import org.bukkit.Server;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import utilities.ChatGameHelper;
@@ -34,9 +34,10 @@ public class Main extends JavaPlugin {
 		server = getServer();
 		manager = server.getPluginManager();
 		
-		new ChatConfig(getDataFolder() + "/config.yml");
 		new Hooker(server);
 		new ChatGameHelper(this);
+
+		new ConfigurationManager();
 		
 		new ChatGameRegistry(this);
 		ChatGameRegistry.registerGame(new ReactionGame());
@@ -52,12 +53,20 @@ public class Main extends JavaPlugin {
 		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
 
+		ChatSystemCommand[] commands = {
+			new InfoCommand(this),
+			new ForceCommand(),
+			new RewardCommand(),
+			new SkipCommand(),
+			new ReloadCommand(),
+			new EnableCommand(),
+			new DisableCommand()
+		};
+
 		new CommandRegistry(this);
-		CommandRegistry.registerCommand(new InfoCommand(this));
-		CommandRegistry.registerCommand(new ForceCommand());
-		CommandRegistry.registerCommand(new RewardCommand());
-		CommandRegistry.registerCommand(new SkipCommand());
-		CommandRegistry.registerCommand(new ReloadCommand());
+
+		for (ChatSystemCommand command : commands)
+			CommandRegistry.registerCommand(command);
 		
 		logger.info(name + " " + version + " enabled.");
 	}

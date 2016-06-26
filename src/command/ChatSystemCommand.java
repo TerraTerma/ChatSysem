@@ -2,7 +2,7 @@ package command;
 
 import org.bukkit.command.CommandSender;
 
-abstract class ChatSystemCommand {
+public abstract class ChatSystemCommand {
 
 	private String name;
 
@@ -14,6 +14,6 @@ abstract class ChatSystemCommand {
 		return name;
 	}
 
-	abstract void run (CommandSender sender, Object... args);
+	abstract boolean run (CommandSender sender, Object... args);
 
 }

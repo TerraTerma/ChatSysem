@@ -16,11 +16,11 @@ public class RewardCommand extends ChatSystemCommand {
 	}
 
 	@Override
-	public void run (CommandSender sender, Object... args) {
+	boolean run (CommandSender sender, Object... args) {
 
 		if (!(sender instanceof Player)) {
 			sender.sendMessage("You must be a player.");
-			return;
+			return true;
 		}
 
 		ChatHelper.sendGrayMessage(sender, "Running rewards command.");
@@ -34,7 +34,8 @@ public class RewardCommand extends ChatSystemCommand {
 		RewardStore.put(reward);
 		
 		ChatHelper.sendGrayMessage(sender, "There has been a reward reserved for you!");
-		
+
+		return true;
 	}
 
 }

@@ -14,17 +14,15 @@ public class ForceCommand extends ChatSystemCommand {
     }
 
     @Override
-    void run(CommandSender sender, Object... args) {
+    boolean run(CommandSender sender, Object... args) {
+        if (args.length == 0) return false;
 
-        String gameName;
-
-        if (args.length == 1) gameName = args[0].toString();
-        else return;
-
+        String gameName = args[0].toString();
         if (!ChatGameQueue.forceStartGame(gameName))
             ChatHelper.sendAquaMessage(sender, "Couldn't find the game " +
                     gameName + ".");
 
+        return true;
     }
 
 }
