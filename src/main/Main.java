@@ -4,10 +4,9 @@ import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
 import chatgame.event.ChatGameHandler;
 import chatgame.game.HangmanGame;
-import chatgame.letter.LetterGame;
 import chatgame.game.ReactionGame;
+import chatgame.letter.LetterGame;
 import command.*;
-import configuration.ChatConfiguration;
 import configuration.ConfigurationManager;
 import event.ChatEvent;
 import event.MentionEvent;
@@ -50,7 +49,6 @@ public class Main extends JavaPlugin {
 		ChatGameEvents events = new ChatGameEvents();
 		ChatGameHandler.addListener(events);
 		
-		manager.registerEvents(new MentionEvent(), this);
 		manager.registerEvents(new ChatEvent(), this);
 
 		ChatSystemCommand[] commands = {

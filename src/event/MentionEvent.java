@@ -1,33 +1,30 @@
 package event;
-import java.util.Optional;
-
-import configuration.ChatConfiguration;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
-
+import configuration.ChatConfiguration;
 import main.Hooker;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import utilities.ChatHelper;
 
-public class MentionEvent implements Listener {
+import java.util.Optional;
 
-	@EventHandler
-	public void onPlayerChat(AsyncPlayerChatEvent event) {
+public class MentionEvent {
+
+	String formatMention(AsyncPlayerChatEvent event, String newFormat) {
 		
 		String message = event.getMessage();
 
 		Optional<? extends Player> mentionedPlayer = Bukkit.getOnlinePlayers().stream()
 				.filter(e -> message.contains(e.getName())).findAny();
 		
-		if (!mentionedPlayer.isPresent()) return;
-		
+		if (!mentionedPlayer.isPresent()) return null;
+
 		Player player = mentionedPlayer.get();
 		String playerName = player.getName();
 		
@@ -36,8 +33,9 @@ public class MentionEvent implements Listener {
 		Sound sound = Sound.valueOf(soundName);
 		player.playSound(playerLoc, sound, 0.75f, 1f);
 
-		String messageColor = (String) ChatConfiguration.MESSAGE_COLOR.getValue();
-		
+		String colorizedFormat = ChatHelper.colorText(newFormat);
+		String messageColor = ChatColor.getLastColors(colorizedFormat);
+
 		Essentials essentials = Hooker.getEssentials();
 		User user = essentials.getUser(player);
 		
@@ -46,8 +44,9 @@ public class MentionEvent implements Listener {
 		else mentionPrefix = (String) ChatConfiguration.MENTION_FORMAT.getValue();
 			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
-		
-		event.setMessage(ChatHelper.colorText(newMessage));
+		newFormat = newFormat.replace("%message%", newMessage);
+
+		return newFormat;
 	}
 	
 }
