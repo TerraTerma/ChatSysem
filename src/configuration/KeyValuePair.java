@@ -12,6 +12,10 @@ public class KeyValuePair {
         this.value = value;
     }
 
+    KeyValuePair (String key) {
+        this.key = key;
+    }
+
     public String getKey () {
         return key;
     }

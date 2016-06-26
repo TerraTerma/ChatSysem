@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 abstract class ChatSystemConfiguration {
 
@@ -52,19 +53,25 @@ abstract class ChatSystemConfiguration {
         Arrays.stream(keyValuePairs).forEach(this::setSection);
     }
 
-    private void reload (KeyValuePair keyValuePair) {
-        String key = keyValuePair.getKey();
-        Object value = configuration.get(key);
-        keyValuePair.setValue(value);
-        System.out.println("The value of this key is "+ keyValuePair.getValue() + ".");
+    void setSections (List<KeyValuePair> keyValuePairList) {
+        keyValuePairList.forEach(this::setSection);
     }
 
     abstract void reload ();
 
+    public void reload (KeyValuePair keyValuePair) {
+        String key = keyValuePair.getKey();
+        Object value = configuration.get(key);
+        keyValuePair.setValue(value);
+    }
+
     void reload (KeyValuePair[] keyValuePairs) {
+        reload (Arrays.asList(keyValuePairs));
+    }
+
+    void reload (List<KeyValuePair> keyValuePairList) {
         load();
-        Arrays.stream(keyValuePairs)
-                .forEach(this::reload);
+        keyValuePairList.forEach(this::reload);
         save();
     }
 

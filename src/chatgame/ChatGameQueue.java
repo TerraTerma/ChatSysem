@@ -19,7 +19,7 @@ public class ChatGameQueue {
 	private static IntermissionScheduler intermissionScheduler = new
 			IntermissionScheduler();
 
-	public static List<ChatGame> getChatGames () {
+	static List<ChatGame> getChatGames () {
 		return chatGames;
 	}
 
@@ -97,7 +97,7 @@ public class ChatGameQueue {
 		
 	}
 	
-	public static Optional<ChatGame> getRunningGame() {
+	private static Optional<ChatGame> getRunningGame() {
 		return chatGames.stream()
 				.filter(ChatGame::isRunning)
 				.findAny();

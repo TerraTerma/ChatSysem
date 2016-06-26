@@ -1,5 +1,6 @@
 package event;
 import configuration.ChatConfiguration;
+import configuration.GroupConfiguration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,6 +10,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 
 import main.Hooker;
+import ru.tehkode.permissions.PermissionGroup;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.PermissionsData;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
 
@@ -26,7 +30,15 @@ public class ChatEvent implements Listener {
 		Player player = event.getPlayer();
 		String message = event.getMessage();
 
-		String newFormat = (String) ChatConfiguration.CHAT_FORMAT.getValue();
+		String worldName = player.getWorld().getName();
+
+		//Get the specified group format
+		PermissionUser permissionUser = PermissionsEx.getUser(player);
+		List<String> identifiers = permissionUser.getParentIdentifiers(worldName);
+		String firstGroup = identifiers.get(0);
+		String newFormat = GroupConfiguration
+				.getGroupFormat(firstGroup);
+		System.out.println("The new format is " + newFormat);
 
 		//Add the player name to the format
 		String playerName = Hooker.getEssentials()

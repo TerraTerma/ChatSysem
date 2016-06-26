@@ -36,6 +36,9 @@ public class MentionEvent {
 		String colorizedFormat = ChatHelper.colorText(newFormat);
 		String messageColor = ChatColor.getLastColors(colorizedFormat);
 
+		if (messageColor == null || messageColor.equals(""))
+			messageColor = ChatColor.WHITE.toString();
+
 		Essentials essentials = Hooker.getEssentials();
 		User user = essentials.getUser(player);
 		

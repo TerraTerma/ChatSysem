@@ -9,7 +9,6 @@ import chatgame.letter.LetterGame;
 import command.*;
 import configuration.ConfigurationManager;
 import event.ChatEvent;
-import event.MentionEvent;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

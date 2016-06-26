@@ -19,8 +19,6 @@ public class ReactionGameConfiguration extends ChatGameConfiguration {
 		WORDS.setValue(words);
 
 		setSection(WORDS);
-
-		reload();
 	}
 
 	void reload () {

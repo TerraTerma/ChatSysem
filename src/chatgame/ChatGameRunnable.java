@@ -21,9 +21,7 @@ class ChatGameRunnable implements Runnable {
 		}
 		
 		runTime++;
-		
-		System.out.println(runTime);
-		
+
 	}
 	
 }

@@ -5,26 +5,22 @@ public class ConfigurationManager {
     private static ReactionGameConfiguration reactionGameConfiguration;
     private static HangmanGameConfiguration hangmanGameConfiguration;
     private static ChatConfiguration chatConfiguration;
+    private static GroupConfiguration groupConfiguration;
 
     public ConfigurationManager () {
         reactionGameConfiguration = new ReactionGameConfiguration();
         hangmanGameConfiguration = new HangmanGameConfiguration();
         chatConfiguration = new ChatConfiguration();
+        groupConfiguration = new GroupConfiguration();
+
+        reloadConfigurations();
     }
 
-    public static void reloadHangmanConfiguration () {
-        hangmanGameConfiguration.reload();
-        System.out.println("Reloading the hangman game configuration.");
-    }
-
-    public static void reloadReactionConfiguration () {
+    public static void reloadConfigurations () {
         reactionGameConfiguration.reload();
-        System.out.println("Reloading the reaction game configuration.");
-    }
-
-    public static void reloadChatConfiguration () {
+        hangmanGameConfiguration.reload();
         chatConfiguration.reload();
-        System.out.println("Reloaded the chat configuration.");
+        groupConfiguration.reload();
     }
 
 }
