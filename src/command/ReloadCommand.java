@@ -1,6 +1,6 @@
 package command;
 
-import configuration.ConfigurationManager;
+import configuration.ConfigurationRegistry;
 import org.bukkit.command.CommandSender;
 
 public class ReloadCommand extends ChatSystemCommand {
@@ -11,7 +11,7 @@ public class ReloadCommand extends ChatSystemCommand {
 
     @Override
     boolean run (CommandSender sender, Object... args) {
-        ConfigurationManager.reloadConfigurations();
+        ConfigurationRegistry.reloadConfigurations();
         sender.sendMessage("Reloaded ChatSystem configuration.");
         return true;
     }

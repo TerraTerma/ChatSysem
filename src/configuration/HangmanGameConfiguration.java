@@ -7,7 +7,7 @@ public class HangmanGameConfiguration extends ChatGameConfiguration {
 	
 	public static KeyValuePair PHRASES = new KeyValuePair();
 
-	HangmanGameConfiguration() {
+	public HangmanGameConfiguration() {
 		super("hangman.yml");
 
 		List<String> phrases = new ArrayList<>();

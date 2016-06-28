@@ -1,8 +1,8 @@
 package configuration;
 
-abstract class ChatGameConfiguration extends ChatSystemConfiguration {
+public abstract class ChatGameConfiguration extends ChatSystemConfiguration {
 
-	ChatGameConfiguration(String fileName) {
+	public ChatGameConfiguration(String fileName) {
 		super("games/" + fileName);
 	}
 

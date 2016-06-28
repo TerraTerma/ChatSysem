@@ -7,7 +7,9 @@ import chatgame.game.HangmanGame;
 import chatgame.game.ReactionGame;
 import chatgame.letter.LetterGame;
 import command.*;
-import configuration.ConfigurationManager;
+import configuration.ConfigurationRegistry;
+import configuration.HangmanGameConfiguration;
+import configuration.ReactionGameConfiguration;
 import event.ChatEvent;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
@@ -35,12 +37,12 @@ public class Main extends JavaPlugin {
 		new Hooker(server);
 		new ChatGameHelper(this);
 
-		new ConfigurationManager();
+		new ConfigurationRegistry();
 		
 		new ChatGameRegistry(this);
-		ChatGameRegistry.registerGame(new ReactionGame());
+		ChatGameRegistry.registerGame(new ReactionGame(), new ReactionGameConfiguration());
+		ChatGameRegistry.registerGame(new HangmanGame(), new HangmanGameConfiguration());
 		ChatGameRegistry.registerGame(new LetterGame());
-		ChatGameRegistry.registerGame(new HangmanGame());
 
 		ChatGameRegistry.fillQueue();
 		ChatGameQueue.startQueue();
