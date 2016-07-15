@@ -7,28 +7,32 @@ commands:
     description: View info about ChatSystem.
   csreload:
     description: Reloads the chat configuration.
-    permissions: cs.admin
+    permission: cs.admin
     usage: /csreload
   cgreload:
     description: Reloads the chat games.
-    permissions: cs.admin
+    permission: cs.admin
     usage: /cgreload
+  sc:
+    description: Staff chat command.
+    permission: cs.staffchat
+    usage: /sc <message>
   cgskip:
     description: Skip the current chat game.
-    permissions: cg.admin
+    permission: cg.admin
   cgforce:
     description: Forces the specified chat game to start.
-    permissions: cg.admin
+    permission: cg.admin
     usage: /cgf <name>
   cgenable:
     description: Enable a chat game.
-    permissions: cg.admin
+    permission: cg.admin
     usage: /cgenable <name>
   cgdisable:
     description: Disable a chat game.
-    permissions: cg.admin
+    permission: cg.admin
     usage: /cgdisable <name>
   cgreaction:
     description: Reaction game command.
-    permissions: cg.admin
+    permission: cg.admin
     usage: /cgreaction <add/remove> <word>
