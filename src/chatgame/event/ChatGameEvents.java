@@ -16,7 +16,7 @@ public class ChatGameEvents implements ChatGameListener {
 		if (event instanceof ChatGameWinEvent) {
 			winEvent = (ChatGameWinEvent) event;
 
-			ChatHelper.broadcastGoldMessage(winEvent.getWinner().getName()
+			ChatHelper.broadcastPinkMessage(winEvent.getWinner().getName()
 			+ " has won " + name + ".");
 
 		}
