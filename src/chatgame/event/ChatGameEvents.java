@@ -1,13 +1,9 @@
-package main;
+package chatgame.event;
 
 import chatgame.ChatGame;
-import chatgame.event.ChatGameEndEvent;
-import chatgame.event.ChatGameEvent;
-import chatgame.event.ChatGameListener;
-import chatgame.event.ChatGameWinEvent;
 import utilities.ChatHelper;
 
-class ChatGameEvents implements ChatGameListener {
+public class ChatGameEvents implements ChatGameListener {
 
 	@Override
 	public void onEventFire(ChatGameEvent event) {
