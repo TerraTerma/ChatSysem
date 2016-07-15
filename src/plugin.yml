@@ -36,3 +36,5 @@ commands:
     description: Reaction game command.
     permission: cg.admin
     usage: /cgreaction <add/remove> <word>
+  pcc:
+    description: Clears your own chat.
