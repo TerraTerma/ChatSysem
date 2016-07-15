@@ -1,7 +1,5 @@
 package configuration;
 
-import java.util.List;
-
 public class KeyValuePair {
 
     private String key;
