@@ -1,22 +1,17 @@
 package event;
-import configuration.ChatConfiguration;
+
+import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import configuration.GroupConfiguration;
+import main.Hooker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-
-import com.onarandombox.MultiverseCore.api.MultiverseWorld;
-
-import main.Hooker;
-import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.PermissionUser;
-import ru.tehkode.permissions.PermissionsData;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,15 +36,8 @@ public class ChatEvent implements Listener {
 		System.out.println("The new format is " + newFormat);
 
 		//Add the player name to the format
-		String playerName = Hooker.getEssentials()
-				.getUser(player)
-				.getNickname();
-		try {
-			newFormat = newFormat.replaceAll("%player%", playerName);
-		} catch (NullPointerException e) {
-			playerName = player.getDisplayName();
-			newFormat = newFormat.replaceAll("%player%", playerName);
-		}
+		String playerName = player.getDisplayName();
+		newFormat = newFormat.replaceAll("%player%", playerName);
 
 		//Add the world name to the format
 		MultiverseWorld world = Hooker.getMultiverseCore()
