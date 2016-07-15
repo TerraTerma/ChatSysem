@@ -2,6 +2,7 @@ package main;
 
 import chatgame.ChatGameQueue;
 import chatgame.ChatGameRegistry;
+import chatgame.event.ChatGameEvents;
 import chatgame.event.ChatGameHandler;
 import chatgame.game.ReactionGame;
 import command.*;
@@ -21,17 +22,16 @@ public class Main extends JavaPlugin {
 
 	private static String name;
 	private static String version;
-	private static Server server;
-	private static PluginManager manager;
-	
+
 	private Logger logger = getLogger();
 
 	@Override
-	public void onEnable () {		
+	public void onEnable () {
+		Server server = getServer();
+		PluginManager pluginManager = server.getPluginManager();
+
 		name = getName();
 		version = getDescription().getVersion();
-		server = getServer();
-		manager = server.getPluginManager();
 
 		new Hooker(server);
 		new ChatGameHelper(this);
@@ -53,12 +53,11 @@ public class Main extends JavaPlugin {
 		ChatGameEvents events = new ChatGameEvents();
 		ChatGameHandler.addListener(events);
 		
-		manager.registerEvents(new ChatEvent(), this);
+		pluginManager.registerEvents(new ChatEvent(), this);
 
 		ChatSystemCommand[] commands = {
 				new InfoCommand(this),
 				new ForceCommand(),
-				new RewardCommand(),
 				new SkipCommand(),
 				new ReloadCommand(),
 				new EnableCommand(),
