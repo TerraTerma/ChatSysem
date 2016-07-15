@@ -1,48 +1,34 @@
 main: main.Main
 name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx]
-version: 0.9-dev
+version: 1.0
 commands:
   csinfo:
     description: View info about ChatSystem.
-    aliases: csi
   csreload:
     description: Reloads the chat configuration.
     permissions: cs.admin
     usage: /csreload
-    aliases: csr
   cgreload:
     description: Reloads the chat games.
     permissions: cs.admin
     usage: /cgreload
-  cgreward:
-    description: Give yourself a chatgame reward.
-    permissions: cg.admin
-    aliases: cgr
   cgskip:
     description: Skip the current chat game.
     permissions: cg.admin
-    aliases: cgs
   cgforce:
     description: Forces the specified chat game to start.
     permissions: cg.admin
     usage: /cgf <name>
-    aliases: cgf
   cgenable:
     description: Enable a chat game.
     permissions: cg.admin
     usage: /cgenable <name>
-    aliases: cge
   cgdisable:
     description: Disable a chat game.
     permissions: cg.admin
     usage: /cgdisable <name>
-    aliases: cgd
   cgreaction:
     description: Reaction game command.
     permissions: cg.admin
     usage: /cgreaction <add/remove> <word>
-  cghangman:
-    description: Hangman game command.
-    permissions: cg.admin
-    usage: /cghangman <add/remove> <word>
