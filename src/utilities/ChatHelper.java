@@ -79,6 +79,9 @@ public abstract class ChatHelper {
 	public static void broadcastBoldMessage (String message) {
 		Bukkit.broadcastMessage(BOLD + message);
 	}
+	public static void broadcastWhiteMessage (String message) {
+		Bukkit.broadcastMessage(WHITE + message);
+	}
 	public static void sendGreenMessage (CommandSender sender, String message) {
 		sender.sendMessage(GREEN + message);
 	}
