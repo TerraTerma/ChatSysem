@@ -18,10 +18,11 @@ public class ReactionGameConfiguration extends ChatGameConfiguration {
 		WORDS.setKey("words");
 		WORDS.setValue(words);
 
-		setSection(WORDS);
+		setSection(WORDS, false);
 	}
 
 	void reload () {
 		super.reload(new KeyValuePair[] {WORDS});
 	}
+
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class ChatSystemConfiguration {
+public abstract class ChatSystemConfiguration {
 
     private File file;
     private YamlConfiguration configuration;
@@ -42,24 +42,25 @@ abstract class ChatSystemConfiguration {
         Arrays.stream(keyValuePairs).forEach(this::createSection);
     }
 
-    void setSection (KeyValuePair keyValuePair) {
+    public void setSection (KeyValuePair keyValuePair, boolean overwrite) {
         String key = keyValuePair.getKey();
         Object value = keyValuePair.getValue();
-        if (configuration.isSet(key)) return;
+        if (configuration.isSet(key) && !overwrite) return;
         configuration.set(key, value);
+        save();
     }
 
     void setSections (KeyValuePair[] keyValuePairs) {
-        Arrays.stream(keyValuePairs).forEach(this::setSection);
+        Arrays.stream(keyValuePairs).forEach(e -> setSection(e, false));
     }
 
     void setSections (List<KeyValuePair> keyValuePairList) {
-        keyValuePairList.forEach(this::setSection);
+        keyValuePairList.forEach(e -> setSection(e, false));
     }
 
     abstract void reload ();
 
-    public void reload (KeyValuePair keyValuePair) {
+    private void reload (KeyValuePair keyValuePair) {
         String key = keyValuePair.getKey();
         Object value = configuration.get(key);
         keyValuePair.setValue(value);
@@ -75,12 +76,16 @@ abstract class ChatSystemConfiguration {
         save();
     }
 
-    void save () {
+    private void save () {
         try {
             configuration.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public File getFile () {
+        return file;
     }
 
 }

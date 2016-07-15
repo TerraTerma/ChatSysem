@@ -12,7 +12,7 @@ public class ChatConfiguration extends ChatSystemConfiguration {
 			MENTION_SOUND
 	};
 
-	ChatConfiguration () {
+	public ChatConfiguration () {
 		super("config.yml");
 
 		MENTION_FORMAT.set("mention.format", "&b&o@");

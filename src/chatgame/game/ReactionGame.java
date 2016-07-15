@@ -23,9 +23,6 @@ public class ReactionGame extends ChatGame implements ReloadableChatGame {
 	
 	public ReactionGame() {
 		super("Reaction", 1, 30);
-
-		Object value = ReactionGameConfiguration.WORDS.getValue();
-		words = (List<String>) value;
 	}
 
 	@Override

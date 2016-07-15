@@ -11,8 +11,10 @@ public class GroupConfiguration extends ChatSystemConfiguration {
 
     private static List<KeyValuePair> groups = new ArrayList<>();
 
-    GroupConfiguration () {
+    public GroupConfiguration () {
         super("group-formats.yml");
+
+        final String defaultFormat = "(%world%) [%prefix%] %player% : %message%";
 
         Collection<String> groupNames =
                 PermissionsEx.getPermissionManager()
@@ -20,7 +22,7 @@ public class GroupConfiguration extends ChatSystemConfiguration {
 
         for (String groupName : groupNames) {
             KeyValuePair keyValuePair = new KeyValuePair(groupName);
-            keyValuePair.setValue("(%world%) [%prefix%] %player% : %message%");
+            keyValuePair.setValue(defaultFormat);
             groups.add(keyValuePair);
         }
 

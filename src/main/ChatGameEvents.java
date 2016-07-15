@@ -3,9 +3,8 @@ package main;
 import chatgame.ChatGame;
 import chatgame.event.ChatGameEndEvent;
 import chatgame.event.ChatGameEvent;
-import chatgame.event.ChatGameWinEvent;
 import chatgame.event.ChatGameListener;
-import chatgame.letter.LetterGame;
+import chatgame.event.ChatGameWinEvent;
 import utilities.ChatHelper;
 
 class ChatGameEvents implements ChatGameListener {
@@ -26,19 +25,8 @@ class ChatGameEvents implements ChatGameListener {
 
 		}
 
-		if (event instanceof ChatGameEndEvent) {
-
-			if (chatGame instanceof LetterGame) {
-				LetterGame letterGame = (LetterGame) chatGame;
-				int guesses = letterGame.getGuesses();
-				ChatHelper.broadcastYellowMessage(name + " has ended" +
-						" with a total of " + guesses + " guesses.");
-			}
-
-			ChatHelper.broadcastGoldMessage
-					(name + " has ended.");
-
-		}
+		if (event instanceof ChatGameEndEvent)
+			ChatHelper.broadcastGoldMessage(name + " has ended.");
 
 		event.getChatGame().stop();
 

@@ -1,7 +1,7 @@
 main: main.Main
 name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx]
-version: 0.8
+version: 0.9-dev
 commands:
   csinfo:
     description: View info about ChatSystem.
@@ -11,6 +11,10 @@ commands:
     permissions: cs.admin
     usage: /csreload
     aliases: csr
+  cgreload:
+    description: Reloads the chat games.
+    permissions: cs.admin
+    usage: /cgreload
   cgreward:
     description: Give yourself a chatgame reward.
     permissions: cg.admin
@@ -34,3 +38,11 @@ commands:
     permissions: cg.admin
     usage: /cgdisable <name>
     aliases: cgd
+  cgreaction:
+    description: Reaction game command.
+    permissions: cg.admin
+    usage: /cgreaction <add/remove> <word>
+  cghangman:
+    description: Hangman game command.
+    permissions: cg.admin
+    usage: /cghangman <add/remove> <word>

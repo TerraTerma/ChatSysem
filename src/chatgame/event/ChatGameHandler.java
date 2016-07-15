@@ -1,8 +1,5 @@
 package chatgame.event;
 
-import chatgame.event.ChatGameEvent;
-import chatgame.event.ChatGameListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +14,7 @@ public class ChatGameHandler {
 	public static void fireEvent
 			(ChatGameEvent event) {
 
-		listeners.stream().forEach(e -> e.onEventFire(event));
+		listeners.forEach(e -> e.onEventFire(event));
 
 	}
 

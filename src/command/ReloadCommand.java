@@ -1,5 +1,6 @@
 package command;
 
+import chatgame.ChatGameRegistry;
 import configuration.ConfigurationRegistry;
 import org.bukkit.command.CommandSender;
 

@@ -55,8 +55,8 @@ public class ChatGameRegistry {
     }
 
     public static void registerGame (ChatGame chatGame, ChatGameConfiguration configuration) {
-        registerGame(chatGame);
         ConfigurationRegistry.registerConfiguration(configuration);
+        registerGame(chatGame);
     }
 
     private static void registerEvents(Listener listener, JavaPlugin javaPlugin) {

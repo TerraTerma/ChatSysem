@@ -1,14 +1,8 @@
 package command;
 
 import main.Main;
-import net.minecraft.server.v1_10_R1.PacketPlayInFlying;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 import utilities.ChatHelper;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class InfoCommand extends ChatSystemCommand {
 
