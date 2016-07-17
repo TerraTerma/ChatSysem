@@ -65,7 +65,8 @@ public class Main extends JavaPlugin {
 				new EnableCommand(),
 				new DisableCommand(),
 				new ReactionGameCommand(),
-				new GameReloadCommand()
+				new GameReloadCommand(),
+				new ClearChatCommand(),
 		};
 
 		new CommandRegistry(this);
