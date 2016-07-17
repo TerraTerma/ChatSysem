@@ -14,7 +14,7 @@ import utilities.ChatHelper;
 
 import java.util.Optional;
 
-public class MentionEvent {
+public class MentionFormatter {
 
 	String formatMention(AsyncPlayerChatEvent event, String newFormat) {
 		
@@ -31,7 +31,9 @@ public class MentionEvent {
 		Location playerLoc = player.getLocation();
 		String soundName = (String) ChatConfiguration.MENTION_SOUND.getValue();
 		Sound sound = Sound.valueOf(soundName);
-		player.playSound(playerLoc, sound, 0.75f, 1f);
+		String mentionVolString = (String) ChatConfiguration.MENTION_SOUND_VOLUME.getValue();
+		float mentionVolume = Float.parseFloat(mentionVolString);
+		player.playSound(playerLoc, sound, mentionVolume, 1f);
 
 		String colorizedFormat = ChatHelper.colorText(newFormat);
 		String messageColor = ChatColor.getLastColors(colorizedFormat);

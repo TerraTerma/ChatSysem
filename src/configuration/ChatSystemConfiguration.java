@@ -54,13 +54,13 @@ public abstract class ChatSystemConfiguration {
         Arrays.stream(keyValuePairs).forEach(e -> setSection(e, false));
     }
 
-    void setSections (List<KeyValuePair> keyValuePairList) {
-        keyValuePairList.forEach(e -> setSection(e, false));
+    void setSections (List<KeyValuePair> keyValuePairList, boolean overwrite) {
+        keyValuePairList.forEach(e -> setSection(e, overwrite));
     }
 
     abstract void reload ();
 
-    private void reload (KeyValuePair keyValuePair) {
+    public void reload (KeyValuePair keyValuePair) {
         String key = keyValuePair.getKey();
         Object value = configuration.get(key);
         keyValuePair.setValue(value);

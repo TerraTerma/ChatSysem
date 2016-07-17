@@ -26,7 +26,7 @@ public class GroupConfiguration extends ChatSystemConfiguration {
             groups.add(keyValuePair);
         }
 
-        setSections(groups);
+        setSections(groups, false);
     }
 
     public static String getGroupFormat (String groupName) {

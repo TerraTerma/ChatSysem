@@ -17,15 +17,14 @@ import java.util.Optional;
 
 public class ChatEvent implements Listener {
 
-	private MentionEvent mentionEvent = new MentionEvent();
+	private MentionFormatter mentionEvent = new MentionFormatter();
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 
-		Player player = event.getPlayer();
-		String message = event.getMessage();
-
-		String worldName = player.getWorld().getName();
+		final Player player = event.getPlayer();
+		final String message = event.getMessage();
+		final String worldName = player.getWorld().getName();
 
 		//Get the specified group format
 		PermissionUser permissionUser = PermissionsEx.getUser(player);

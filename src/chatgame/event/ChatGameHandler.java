@@ -11,11 +11,8 @@ public class ChatGameHandler {
 		listeners.add(listener);
 	}
 
-	public static void fireEvent
-			(ChatGameEvent event) {
-
+	public static void fireEvent (ChatGameEvent event) {
 		listeners.forEach(e -> e.onEventFire(event));
-
 	}
 
 }
