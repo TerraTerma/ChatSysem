@@ -10,6 +10,7 @@ import configuration.ChatConfiguration;
 import configuration.ConfigurationRegistry;
 import configuration.GroupConfiguration;
 import configuration.ReactionGameConfiguration;
+import configuration.SwearConfiguration;
 import event.ChatEvent;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
@@ -38,10 +39,11 @@ public class Main extends JavaPlugin {
 
 		ChatConfiguration chatConfiguration = new ChatConfiguration();
 		GroupConfiguration groupConfiguration = new GroupConfiguration();
-
+		SwearConfiguration swearsConfiguration = new SwearConfiguration();
 		new ConfigurationRegistry();
 		ConfigurationRegistry.registerConfiguration(chatConfiguration);
 		ConfigurationRegistry.registerConfiguration(groupConfiguration);
+		ConfigurationRegistry.registerConfiguration(swearsConfiguration);
 
 		new ChatGameRegistry(this);
 		ChatGameRegistry.registerGame(new ReactionGame(), new ReactionGameConfiguration());
