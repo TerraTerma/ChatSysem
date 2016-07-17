@@ -1,7 +1,7 @@
 main: main.Main
 name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx]
-version: 1.0
+version: 0.9
 commands:
   csinfo:
     description: View info about ChatSystem.
@@ -38,3 +38,6 @@ commands:
     usage: /cgreaction <add/remove> <word>
   pcc:
     description: Clears your own chat.
+  clearchat:
+    description: Clears the general chat
+    permission: cs.admin
