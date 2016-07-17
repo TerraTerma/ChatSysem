@@ -61,7 +61,7 @@ public class Main extends JavaPlugin {
 				new SkipCommand(),
 				new ReloadCommand(),
 				new StaffChatCommand(),
-				new PersonalClearChatCommand(),
+				new PCCCommand(),
 				new EnableCommand(),
 				new DisableCommand(),
 				new ReactionGameCommand(),
