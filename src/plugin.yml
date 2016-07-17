@@ -1,7 +1,7 @@
 main: main.Main
 name: TTChatSystem
 depend: [Essentials, Multiverse-Core, PermissionsEx]
-version: 0.10
+version: 0.10-DEV-BUILD
 commands:
   csinfo:
     description: View info about ChatSystem.
@@ -9,6 +9,10 @@ commands:
     description: Reloads the chat configuration.
     permission: cs.admin
     usage: /csreload
+  csswears:
+    description: Swears Admin Command.
+    permission: cs.admin
+    usage: /csswears <add/remove> <swearword>
   cgreload:
     description: Reloads the chat games.
     permission: cs.admin
@@ -23,7 +27,7 @@ commands:
   cgforce:
     description: Forces the specified chat game to start.
     permission: cg.admin
-    usage: /cgf <name>
+    usage: /cgforce <name>
   cgenable:
     description: Enable a chat game.
     permission: cg.admin

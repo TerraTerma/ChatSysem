@@ -14,7 +14,10 @@ public class ReactionGameCommand extends ChatSystemCommand {
     @Override
     boolean run (CommandSender sender, Object... args) {
 
-        if (args.length != 2) return true;
+        if (args.length != 2){
+        	sender.sendMessage("/cgreaction <add/remove> <word>");
+        	return true;
+        }
 
         String operation = (String) args[0];
         String word = (String) args[1];

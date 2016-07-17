@@ -65,6 +65,7 @@ public class Main extends JavaPlugin {
 				new SCCommand(),
 				new PCCCommand(),
 				new EnableCommand(),
+				new SwearsCommand(),
 				new DisableCommand(),
 				new ReactionGameCommand(),
 				new GameReloadCommand(),
