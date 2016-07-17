@@ -60,7 +60,7 @@ public class Main extends JavaPlugin {
 				new ForceCommand(),
 				new SkipCommand(),
 				new ReloadCommand(),
-				new StaffChatCommand(),
+				new SCCommand(),
 				new PCCCommand(),
 				new EnableCommand(),
 				new DisableCommand(),
