@@ -23,7 +23,7 @@ public class ChatConfiguration extends ChatSystemConfiguration {
 		MENTION_AFK_FORMAT.set("mention.afk-format", "&3&o@");
 		MENTION_SOUND.set("mention.sound", "ENTITY_COW_HURT");
 		MENTION_SOUND_VOLUME.set("mention.volume", "0.75");
-		STAFF_CHAT_FORMAT.set("staff-chat.format", "&c&l%player% : &f&l%message%");
+		STAFF_CHAT_FORMAT.set("staff-chat.format", "&c&l[Staff] %player% : &f&l%message%");
 
 		setSections(keyValuePairs);
 	}
