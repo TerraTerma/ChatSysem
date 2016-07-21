@@ -6,15 +6,27 @@ import chatgame.ChatGame;
 
 public class ChatGameWinEvent extends ChatGameEvent {
 
-	private Player winner;
+	private Player player;
+    private String time;
 
-	public ChatGameWinEvent (ChatGame chatGame, Player winner) {
+	public ChatGameWinEvent (ChatGame chatGame) {
 		super (chatGame);
-		this.winner = winner;
 	}
 
-	public Player getWinner () {
-		return winner;
+	public Player getPlayer() {
+		return player;
 	}
-	
+
+	public void setPlayer(Player player) {
+	    this.player = player;
+    }
+
+    public String getTime () {
+        return time;
+    }
+
+    public void setTime (String time) {
+        this.time = time;
+    }
+
 }
