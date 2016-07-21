@@ -21,19 +21,6 @@ public class InfoCommand extends ChatSystemCommand {
 
         ChatHelper.sendYellowMessage(sender, name + " " + version);
 
-//        Player player = (Player) sender;
-
-//        /*
-//        For testing packets
-//         */
-//        for (Field field : PacketPlayInFlying.class.getFields()) {
-//            player.sendMessage("Field: " + field.getName());
-//        }
-//
-//        for (Method method : PacketPlayInFlying.class.getMethods()) {
-//            player.sendMessage("Method: " + method.getName());
-//        }
-
         return true;
     }
 }

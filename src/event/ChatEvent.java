@@ -1,6 +1,7 @@
 package event;
 
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
+import configuration.ChatConfiguration;
 import configuration.GroupConfiguration;
 import main.Hooker;
 import org.bukkit.Bukkit;
@@ -11,7 +12,12 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
+import utilities.FormatTemplate;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,14 +54,27 @@ public class ChatEvent implements Listener {
 		String prefix = PermissionsEx.getUser(player).getPrefix();
 		newFormat = newFormat.replace("%prefix%", prefix);
 
+		// Add the time-stamp to the chat
+        boolean timestamp = (boolean) ChatConfiguration.TIMESTAMP.getValue();
+        if (timestamp) {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:m:ss");
+            LocalTime localTime = LocalTime.now();
+            String formattedTime = localTime.format(dateTimeFormatter);
+            newFormat = newFormat.replaceAll("%time%", formattedTime);
+        }
+
 		//Check to see if there was a player that was mentioned.
 		Optional<? extends Player> mentionedPlayer = Bukkit.getOnlinePlayers()
 				.stream()
 				.filter(e -> message.contains(e.getName()))
 				.findAny();
 
-		if (mentionedPlayer.isPresent())
-			newFormat = mentionEvent.formatMention(event, newFormat);
+		if (mentionedPlayer.isPresent()) {
+			FormatTemplate formatTemplate = new FormatTemplate(newFormat);
+			formatTemplate.setMessage(message);
+			formatTemplate.setPlayer(player);
+			newFormat = mentionEvent.formatMention(formatTemplate);
+		}
 		else newFormat = newFormat.replace("%message%", message);
 
 		event.setFormat(ChatHelper.colorText(newFormat));

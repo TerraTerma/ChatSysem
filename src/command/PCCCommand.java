@@ -12,6 +12,7 @@ public class PCCCommand extends ChatSystemCommand{
 
     @Override
     boolean run (CommandSender sender, Object... args) {
+        
         for (int i = 0; i < 100; i++)
             sender.sendMessage("");
         sender.sendMessage(ChatHelper.colorText("&2You have cleared your chat."));

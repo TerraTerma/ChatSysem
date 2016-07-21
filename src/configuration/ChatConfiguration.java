@@ -7,12 +7,14 @@ public class ChatConfiguration extends ChatSystemConfiguration {
 	public static final KeyValuePair MENTION_SOUND = new KeyValuePair();
 	public static final KeyValuePair MENTION_SOUND_VOLUME = new KeyValuePair();
 	public static final KeyValuePair STAFF_CHAT_FORMAT = new KeyValuePair();
+	public static final KeyValuePair TIMESTAMP = new KeyValuePair();
 
 	private KeyValuePair[] keyValuePairs =  {
 			MENTION_FORMAT,
 			MENTION_AFK_FORMAT,
 			MENTION_SOUND,
 			MENTION_SOUND_VOLUME,
+            TIMESTAMP,
 			STAFF_CHAT_FORMAT
 	};
 
@@ -24,6 +26,7 @@ public class ChatConfiguration extends ChatSystemConfiguration {
 		MENTION_SOUND.set("mention.sound", "ENTITY_COW_HURT");
 		MENTION_SOUND_VOLUME.set("mention.volume", "0.75");
 		STAFF_CHAT_FORMAT.set("staff-chat.format", "&c&l[Staff] %player% : &f&l%message%");
+        TIMESTAMP.set("timestamp", true);
 
 		setSections(keyValuePairs);
 	}

@@ -11,14 +11,16 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import utilities.ChatHelper;
+import utilities.FormatTemplate;
 
 import java.util.Optional;
 
 public class MentionFormatter {
 
-	String formatMention(AsyncPlayerChatEvent event, String newFormat) {
-		
-		String message = event.getMessage();
+	public String formatMention(FormatTemplate formatTemplate) {
+
+		String newFormat = formatTemplate.getFormat();
+		String message = formatTemplate.getMessage();
 
 		Optional<? extends Player> mentionedPlayer = Bukkit.getOnlinePlayers().stream()
 				.filter(e -> message.contains(e.getName())).findAny();
