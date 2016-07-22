@@ -19,7 +19,7 @@ commands:
     usage: /cgreload
   sc:
     description: Staff chat command.
-    permission: cs.staffchat
+    permission: cs.admin
     usage: /sc <message>
   cgskip:
     description: Skip the current chat game.
