@@ -12,6 +12,7 @@ import configuration.GroupConfiguration;
 import configuration.ReactionGameConfiguration;
 import configuration.SwearConfiguration;
 import event.ChatEvent;
+
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -84,5 +85,5 @@ public class Main extends JavaPlugin {
 	public void onDisable () {
 		logger.info(name + " " + version + " disabled.");
 	}
-	
+
 }

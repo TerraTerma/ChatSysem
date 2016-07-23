@@ -24,7 +24,8 @@ public class SCCommand extends ChatSystemCommand{
     boolean run (CommandSender sender, Object... args) {
 		Player player = (Player) sender;
 		if (args.length == 0){
-			player.sendMessage(ChatHelper.colorText("&8[&6Staff-Chat&8] &2Please insert a staff-chat message."));
+			String insertFormat = (String) ChatConfiguration.STAFF_CHAT_INSERT_FORMAT.getValue();
+			player.sendMessage(ChatHelper.colorText(insertFormat));
 		}
 		if (args.length > 0) {
 			StringBuilder builder = new StringBuilder();
