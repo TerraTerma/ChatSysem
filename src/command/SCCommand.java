@@ -1,6 +1,7 @@
 package command;
 
 import configuration.ChatConfiguration;
+import configuration.MessageConfiguration;
 import utilities.FormatTemplate;
 import event.MentionFormatter;
 import event.StaffChatFormatter;
@@ -24,7 +25,7 @@ public class SCCommand extends ChatSystemCommand{
     boolean run (CommandSender sender, Object... args) {
 		Player player = (Player) sender;
 		if (args.length == 0){
-			String insertFormat = (String) ChatConfiguration.STAFF_CHAT_INSERT_FORMAT.getValue();
+			String insertFormat = (String) MessageConfiguration.STAFF_CHAT_INSERT_FORMAT.getValue();
 			player.sendMessage(ChatHelper.colorText(insertFormat));
 		}
 		if (args.length > 0) {

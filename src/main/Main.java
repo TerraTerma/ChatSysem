@@ -9,6 +9,7 @@ import command.*;
 import configuration.ChatConfiguration;
 import configuration.ConfigurationRegistry;
 import configuration.GroupConfiguration;
+import configuration.MessageConfiguration;
 import configuration.ReactionGameConfiguration;
 import configuration.SwearConfiguration;
 import event.ChatEvent;
@@ -41,10 +42,12 @@ public class Main extends JavaPlugin {
 		ChatConfiguration chatConfiguration = new ChatConfiguration();
 		GroupConfiguration groupConfiguration = new GroupConfiguration();
 		SwearConfiguration swearsConfiguration = new SwearConfiguration();
+		MessageConfiguration mConfiguration = new MessageConfiguration();
 		new ConfigurationRegistry();
 		ConfigurationRegistry.registerConfiguration(chatConfiguration);
 		ConfigurationRegistry.registerConfiguration(groupConfiguration);
 		ConfigurationRegistry.registerConfiguration(swearsConfiguration);
+		ConfigurationRegistry.registerConfiguration(mConfiguration);
 
 		new ChatGameRegistry(this);
 		ChatGameRegistry.registerGame(new ReactionGame(), new ReactionGameConfiguration());
