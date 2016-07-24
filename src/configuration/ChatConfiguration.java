@@ -1,5 +1,7 @@
 package configuration;
 
+import utilities.KeyValuePair;
+
 public class ChatConfiguration extends ChatSystemConfiguration {
 
 	public static final KeyValuePair MENTION_FORMAT = new KeyValuePair();

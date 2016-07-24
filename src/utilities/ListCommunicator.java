@@ -1,7 +1,6 @@
 package utilities;
 
 import configuration.ChatSystemConfiguration;
-import configuration.KeyValuePair;
 
 import java.util.List;
 

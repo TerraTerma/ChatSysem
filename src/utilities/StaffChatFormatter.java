@@ -1,4 +1,4 @@
-package event;
+package utilities;
 
 import org.bukkit.entity.Player;
 import utilities.FormatTemplate;

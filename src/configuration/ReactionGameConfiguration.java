@@ -1,5 +1,7 @@
 package configuration;
 
+import utilities.KeyValuePair;
+
 import java.util.ArrayList;
 import java.util.List;
 

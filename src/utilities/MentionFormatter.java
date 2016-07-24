@@ -1,4 +1,4 @@
-package event;
+package utilities;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;

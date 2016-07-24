@@ -1,5 +1,7 @@
 package configuration;
 
+import utilities.KeyValuePair;
+
 public class MessageConfiguration extends ChatSystemConfiguration {
 
 

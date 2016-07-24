@@ -3,8 +3,7 @@ package command;
 import configuration.ChatConfiguration;
 import configuration.MessageConfiguration;
 import utilities.FormatTemplate;
-import event.MentionFormatter;
-import event.StaffChatFormatter;
+import utilities.StaffChatFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -41,14 +40,13 @@ public class SCCommand extends ChatSystemCommand{
 			formatTemplate.setMessage(message);
 
             Collection<? extends Player> players = Bukkit.getOnlinePlayers();
-			for (Player p : players){
-				if (p.hasPermission("cs.staffchat")) {
-					String formattedText = staffChatFormatter.formatStaffChat(formatTemplate);
-					String coloredText = ChatHelper.colorText(formattedText);
-					p.sendMessage(coloredText);
-				}
-			}
-		}
-    	return true;
+            for (Player p : players){
+                if (!p.hasPermission("cs.staffchat")) continue;
+                String formattedText = staffChatFormatter.formatStaffChat(formatTemplate);
+                String coloredText = ChatHelper.colorText(formattedText);
+                p.sendMessage(coloredText);
+            }
+        }
+        return true;
     }
 }

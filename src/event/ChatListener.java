@@ -13,25 +13,26 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import utilities.ChatHelper;
 import utilities.FormatTemplate;
+import utilities.MentionFormatter;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-public class ChatEvent implements Listener {
+public class ChatListener implements Listener {
 
 	private MentionFormatter mentionEvent = new MentionFormatter();
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 
+	    event.setCancelled(true);
+	    
 		final Player player = event.getPlayer();
 		final String message = event.getMessage();
 		final String worldName = player.getWorld().getName();
-
+        
 		//Get the specified group format
 		PermissionUser permissionUser = PermissionsEx.getUser(player);
 		List<String> identifiers = permissionUser.getParentIdentifiers(worldName);

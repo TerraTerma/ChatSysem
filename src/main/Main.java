@@ -12,8 +12,7 @@ import configuration.GroupConfiguration;
 import configuration.MessageConfiguration;
 import configuration.ReactionGameConfiguration;
 import configuration.SwearConfiguration;
-import event.ChatEvent;
-
+import event.ChatListener;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,15 +38,10 @@ public class Main extends JavaPlugin {
 		new Hooker(server);
 		new ChatGameHelper(this);
 
-		ChatConfiguration chatConfiguration = new ChatConfiguration();
-		GroupConfiguration groupConfiguration = new GroupConfiguration();
-		SwearConfiguration swearsConfiguration = new SwearConfiguration();
-		MessageConfiguration mConfiguration = new MessageConfiguration();
 		new ConfigurationRegistry();
-		ConfigurationRegistry.registerConfiguration(chatConfiguration);
-		ConfigurationRegistry.registerConfiguration(groupConfiguration);
-		ConfigurationRegistry.registerConfiguration(swearsConfiguration);
-		ConfigurationRegistry.registerConfiguration(mConfiguration);
+		ConfigurationRegistry.registerConfiguration(new ChatConfiguration());
+		ConfigurationRegistry.registerConfiguration(new GroupConfiguration());
+		ConfigurationRegistry.registerConfiguration(new SwearConfiguration());
 
 		new ChatGameRegistry(this);
 		ChatGameRegistry.registerGame(new ReactionGame(), new ReactionGameConfiguration());
@@ -59,7 +53,7 @@ public class Main extends JavaPlugin {
 		ChatGameEvents events = new ChatGameEvents();
 		ChatGameHandler.addListener(events);
 		
-		pluginManager.registerEvents(new ChatEvent(), this);
+		pluginManager.registerEvents(new ChatListener(), this);
 
 		ChatSystemCommand[] commands = {
 				new InfoCommand(this),
@@ -73,8 +67,7 @@ public class Main extends JavaPlugin {
 				new DisableCommand(),
 				new ReactionGameCommand(),
 				new GameReloadCommand(),
-				new ClearChatCommand(),
-				new SiteCommand(),
+				new ClearChatCommand()
 		};
 
 		new CommandRegistry(this);

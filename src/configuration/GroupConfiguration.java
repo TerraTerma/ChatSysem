@@ -1,6 +1,7 @@
 package configuration;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
+import utilities.KeyValuePair;
 
 import java.util.ArrayList;
 import java.util.Collection;
