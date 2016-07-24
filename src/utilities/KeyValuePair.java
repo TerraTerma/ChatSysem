@@ -1,18 +1,18 @@
-package configuration;
+package utilities;
 
 public class KeyValuePair {
 
     private String key;
     private Object value;
 
-    KeyValuePair () {}
+    public KeyValuePair () {}
 
-    KeyValuePair (String key, Object value) {
+    public KeyValuePair (String key, Object value) {
         this.key = key;
         this.value = value;
     }
 
-    KeyValuePair (String key) {
+    public KeyValuePair (String key) {
         this.key = key;
     }
 

@@ -14,8 +14,6 @@ public class ConfigurationRegistry {
     public static void registerConfiguration (ChatSystemConfiguration configuration) {
         configurationList.add(configuration);
         reloadConfigurations();
-        System.out.println("Registered the configuration " +
-                configuration.getClass().getName());
     }
 
     public static void reloadConfigurations () {

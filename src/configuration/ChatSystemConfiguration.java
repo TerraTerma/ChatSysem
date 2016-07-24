@@ -2,6 +2,7 @@ package configuration;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import utilities.KeyValuePair;
 
 import java.io.File;
 import java.io.IOException;
