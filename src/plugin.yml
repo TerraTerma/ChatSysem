@@ -45,3 +45,5 @@ commands:
   clearchat:
     description: Clears the general chat
     permission: cs.admin
+  site:
+    description: Shows you the website link.
