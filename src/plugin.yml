@@ -1,48 +1,8 @@
 main: me.JustMaffie.TerraTerma.TTChatSystem.Main
 name: TTChatSystem
 depends: [Essentials, Multiverse-Core, PermissionsEx, TTCore]
-version: 0.11.0
+version: 0.1
+author: JustMaffie
 commands:
-  csinfo:
-    description: View info about ChatSystem.
-  csreload:
-    description: Reloads the chat configuration.
-    permission: cs.admin
-    usage: /csreload
-  csswears:
-    description: Swears Admin Command.
-    permission: cs.admin
-    usage: /csswears <add/remove> <swearword>
-  cgreload:
-    description: Reloads the chat games.
-    permission: cs.admin
-    usage: /cgreload
-  sc:
-    description: Staff chat command.
-    permission: cs.admin
-    usage: /sc <message>
-  cgskip:
-    description: Skip the current chat game.
-    permission: cg.admin
-  cgforce:
-    description: Forces the specified chat game to start.
-    permission: cg.admin
-    usage: /cgforce <name>
-  cgenable:
-    description: Enable a chat game.
-    permission: cg.admin
-    usage: /cgenable <name>
-  cgdisable:
-    description: Disable a chat game.
-    permission: cg.admin
-    usage: /cgdisable <name>
-  cgreaction:
-    description: Reaction game command.
-    permission: cg.admin
-    usage: /cgreaction <add/remove> <word>
-  pcc:
-    description: Clears your own chat.
-  clearchat:
-    description: Clears the general chat
-    permission: cs.admin
-    aliases: cc
+  setformat:
+    description: Set a format for your Chat/Staffchat format
