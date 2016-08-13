@@ -1,6 +1,6 @@
 main: me.JustMaffie.TerraTerma.TTChatSystem.Main
 name: TTChatSystem
-depend: [Essentials, Multiverse-Core, PermissionsEx]
+depends: [Essentials, Multiverse-Core, PermissionsEx, TTCore]
 version: 0.11.0
 commands:
   csinfo:

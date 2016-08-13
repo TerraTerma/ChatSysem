@@ -1,24 +1,13 @@
 package me.JustMaffie.TerraTerma.TTChatSystem;
 
-import chatgame.ChatGameQueue;
-import chatgame.ChatGameRegistry;
-import chatgame.event.ChatGameEvents;
-import chatgame.event.ChatGameHandler;
-import chatgame.game.ReactionGame;
-import command.*;
-import configuration.ChatConfiguration;
-import configuration.ConfigurationRegistry;
-import configuration.GroupConfiguration;
-import configuration.MessageConfiguration;
-import configuration.ReactionGameConfiguration;
-import configuration.SwearConfiguration;
-import event.ChatListener;
-import org.bukkit.Server;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-import utilities.ChatGameHelper;
-
+import java.io.File;
 import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import TTCore.Savers.Saver;
+import me.JustMaffie.TerraTerma.TTChatSystem.Listeners.ChatListener;
 
 public class Main extends JavaPlugin {
 
@@ -27,55 +16,16 @@ public class Main extends JavaPlugin {
 
 	private Logger logger = getLogger();
 
-	@Override
-	public void onEnable () {
-		Server server = getServer();
-		PluginManager pluginManager = server.getPluginManager();
+	public void onEnable(){
 
-		name = getName();
-		version = getDescription().getVersion();
-
-		new Hooker(server);
-		new ChatGameHelper(this);
-
-		new ConfigurationRegistry();
-		ConfigurationRegistry.registerConfiguration(new ChatConfiguration());
-		ConfigurationRegistry.registerConfiguration(new GroupConfiguration());
-		ConfigurationRegistry.registerConfiguration(new SwearConfiguration());
-
-		new ChatGameRegistry(this);
-		ChatGameRegistry.registerGame(new ReactionGame(), new ReactionGameConfiguration());
-
-		ChatGameRegistry.fillQueue();
-		ChatGameQueue.reloadGames();
-		ChatGameQueue.startQueue();
-
-		ChatGameEvents events = new ChatGameEvents();
-		ChatGameHandler.addListener(events);
+		Saver saver = new Saver(new File("plugins/TTChatSystem/ChatConfig.yml"));
+		saver.set("&5@", "Mention.AFK");
+		saver.set("&e@", "Mention.Format");
+		saver.save();
 		
-		pluginManager.registerEvents(new ChatListener(), this);
+		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 
-		ChatSystemCommand[] commands = {
-				new InfoCommand(this),
-				new ForceCommand(),
-				new SkipCommand(),
-				new ReloadCommand(),
-				new SCCommand(),
-				new PCCCommand(),
-				new EnableCommand(),
-				new SwearsCommand(),
-				new DisableCommand(),
-				new ReactionGameCommand(),
-				new GameReloadCommand(),
-				new ClearChatCommand()
-		};
-
-		new CommandRegistry(this);
-
-		for (ChatSystemCommand command : commands)
-			CommandRegistry.registerCommand(command);
-		
-		logger.info(name + " " + version + " enabled.");
+		Bukkit.getConsoleSender().sendMessage("&a" + name + " " + version + " by JustMaffie is now Enabeld");
 	}
 	
 	@Override

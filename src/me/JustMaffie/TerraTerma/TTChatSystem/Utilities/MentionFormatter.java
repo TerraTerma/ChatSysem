@@ -1,21 +1,24 @@
 package me.JustMaffie.TerraTerma.TTChatSystem.Utilities;
 
-import com.earth2me.essentials.Essentials;
-import com.earth2me.essentials.User;
-
-import me.JustMaffie.TerraTerma.TTChatSystem.Hooker;
+import java.io.File;
+import java.util.Optional;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import java.util.Optional;
+
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
+
+import TTCore.Savers.Saver;
+import me.JustMaffie.TerraTerma.TTChatSystem.Hooker;
 
 public class MentionFormatter {
 
 	public String formatMention(FormatTemplate formatTemplate) {
 
+		
+		Saver saver = new Saver(new File("plugins/TTChatSystem/ChatConfig.yml"));
 		String newFormat = formatTemplate.getFormat();
 		String message = formatTemplate.getMessage();
 
@@ -38,8 +41,8 @@ public class MentionFormatter {
 		User user = essentials.getUser(player);
 		
 		String mentionPrefix;
-		if (user.isAfk()) mentionPrefix = (String) ChatConfig."Evan put in code to get the string Mention.AFK";
-		else mentionPrefix = (String) ChatConfig."Evan put in code to get the string Mention.NotAFK";
+		if (user.isAfk()) mentionPrefix = (String) saver.get(String.class, "Mention.AFK");
+		else mentionPrefix = (String) saver.get(String.class, "Mention.Format");
 			
 		String newMessage = message.replace(playerName, mentionPrefix + playerName + messageColor);
 		newFormat = newFormat.replace("%message%", newMessage);
