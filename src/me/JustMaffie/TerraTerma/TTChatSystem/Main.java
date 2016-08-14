@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import TTCore.Mech.DataHandler;
 import TTCore.Savers.Saver;
+import me.JustMaffie.TerraTerma.TTChatSystem.Commands.ReportCMD;
 import me.JustMaffie.TerraTerma.TTChatSystem.Commands.SetFormatCMD;
 import me.JustMaffie.TerraTerma.TTChatSystem.Listeners.ChatListener;
 import me.JustMaffie.TerraTerma.TTChatSystem.Mechs.ReportsData;
@@ -25,16 +26,24 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		PLUGIN = this;
+		
+		// SAVERS
 		Saver saver = new Saver(new File("plugins/TTChatSystem/ChatConfig.yml"));
 		saver.set("&5@", "Mention.AFK");
 		saver.set("&e@", "Mention.Format");
 		saver.save();
 		
+		// MECHS
 		DataHandler.MECHS.add(ReportsData.class);
 		
+		// LISTENERS
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+		
+		// COMMANDS
 		getCommand("setformat").setExecutor(new SetFormatCMD());
+		getCommand("report").setExecutor(new ReportCMD());
 
+		// LOGGER
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + name + " " + version + " by JustMaffie is now Enabeld");
 	}
 

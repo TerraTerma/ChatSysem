@@ -26,6 +26,7 @@ public class SetFormatCMD implements CommandExecutor {
 						format = (format + " " + message);
 					}
 				}
+				
 				data.setStaffChatFormat(format);
 				return true;
 			} else if (args[0].equalsIgnoreCase("chat")) {

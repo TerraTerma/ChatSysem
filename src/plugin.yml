@@ -5,4 +5,7 @@ version: 0.1
 author: JustMaffie
 commands:
   setformat:
-    description: Set a format for your Chat/Staffchat format
+    description: Set a format for your Chat/Staffchat format.
+  report:
+    description: Report a player.
+  

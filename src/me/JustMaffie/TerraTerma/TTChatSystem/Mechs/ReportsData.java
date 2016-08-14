@@ -12,22 +12,24 @@ public class ReportsData implements PlayerData, SavableData {
 
 	List<Report> reports = new ArrayList<Report>();
 	List<String> list = new ArrayList<>();
-	
-	
+
 	@Override
 	public void save(Saver saver) {
 		reports.stream().forEach(r -> list.add(r.toString()));
-		saver.set(list);
+		saver.set(list, "Reports");
 	}
-	
 
 	@Override
 	public boolean load(Saver saver) {
-		list.stream().forEach(r -> reports.add(Report.fromString(r)));
+		List<String> list = saver.getList(String.class, "Reports");
+		if(list != null){
+			list.stream().forEach(r -> reports.add(Report.fromString(r)));
+
+		}
 		return true;
 	}
-	
-	public List<Report> getList(){
+
+	public List<Report> getList() {
 		return reports;
 	}
 
