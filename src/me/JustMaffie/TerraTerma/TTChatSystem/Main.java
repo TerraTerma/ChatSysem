@@ -8,9 +8,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import TTCore.Mech.DataHandler;
 import TTCore.Savers.Saver;
 import me.JustMaffie.TerraTerma.TTChatSystem.Commands.SetFormatCMD;
 import me.JustMaffie.TerraTerma.TTChatSystem.Listeners.ChatListener;
+import me.JustMaffie.TerraTerma.TTChatSystem.Mechs.ReportsData;
 
 public class Main extends JavaPlugin {
 
@@ -27,6 +29,8 @@ public class Main extends JavaPlugin {
 		saver.set("&5@", "Mention.AFK");
 		saver.set("&e@", "Mention.Format");
 		saver.save();
+		
+		DataHandler.MECHS.add(ReportsData.class);
 		
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		getCommand("setformat").setExecutor(new SetFormatCMD());
