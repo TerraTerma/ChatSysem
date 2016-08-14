@@ -8,11 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import TTCore.Mech.DataHandler;
 import TTCore.Savers.Saver;
 import me.JustMaffie.TerraTerma.TTChatSystem.Commands.SetFormatCMD;
 import me.JustMaffie.TerraTerma.TTChatSystem.Listeners.ChatListener;
-import me.JustMaffie.TerraTerma.TTChatSystem.Mechs.MessageFormatData;
 
 public class Main extends JavaPlugin {
 
@@ -22,7 +20,7 @@ public class Main extends JavaPlugin {
 
 	private Logger logger = getLogger();
 
-	public void onEnable(){
+	public void onEnable() {
 
 		PLUGIN = this;
 		Saver saver = new Saver(new File("plugins/TTChatSystem/ChatConfig.yml"));
@@ -30,15 +28,14 @@ public class Main extends JavaPlugin {
 		saver.set("&e@", "Mention.Format");
 		saver.save();
 		
-		DataHandler.MECHS.add(MessageFormatData.class);
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		getCommand("setformat").setExecutor(new SetFormatCMD());
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + name + " " + version + " by JustMaffie is now Enabeld");
 	}
-	
+
 	@Override
-	public void onDisable () {
+	public void onDisable() {
 		logger.info(name + " " + version + " disabled.");
 	}
 
