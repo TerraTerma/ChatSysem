@@ -14,7 +14,7 @@ public class ChatListener implements Listener {
 		TTPlayer ttPlayer = TTPlayer.getPlayer(e.getPlayer());
 		// Player bukkitPlayer = ttPlayer.getPlayer();
 		TTPlayer.getPlayers().stream().forEach(player -> {
-			((TTPlayer) player).sendMessageFromPlayer(ttPlayer, e.getMessage());
+			player.sendMessageFromPlayer(ttPlayer, e.getMessage());
 		});
 
 	}
